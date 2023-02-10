@@ -1,8 +1,8 @@
 <template>
     <div>
         <link rel="stylesheet" href="css/account.css?v=65">
-        <div v-show="isloading" class="loading" id="loading"> +
-            <img src="img/loading.gif"> +
+        <div v-show="isloading" class="loading" id="loading">
+            <img src="img/loading.gif">
         </div>
         <div class="account-container">
             <div class="left-text-container">

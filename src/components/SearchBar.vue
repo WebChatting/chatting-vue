@@ -1,7 +1,7 @@
 <template>
     <div id="searchbar">
-    <el-input class="search" type="text" size="mini" v-model="input" placeholder="搜索" prefix-icon="el-icon-search"></el-input>
-    <el-button class="searchBtn" size="mini"><i class="el-icon-circle-plus"></i></el-button>
+        <el-input class="search" type="text" size="mini" v-model="input" placeholder="搜索" prefix-icon="el-icon-search"></el-input>
+        <el-button class="searchBtn" size="mini"><i class="el-icon-circle-plus"></i></el-button>
     </div>
 </template>
 

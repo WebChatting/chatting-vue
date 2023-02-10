@@ -27,6 +27,6 @@
     height: 50px;
   }
   .titleName{
-    margin: 15px 30px;
+    margin: 15px 25px;
   }
 </style>

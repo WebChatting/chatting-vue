@@ -102,7 +102,7 @@
                 this.hideLoading()
                 this.classObj.disabled = false
                 if (response.data.status == 200) {
-                  window.location.href = "chatting";
+                  window.location.href = "#/chatting";
                 } else {
                   this.errorText = response.data.msg;
                 }

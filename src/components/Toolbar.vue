@@ -1,10 +1,9 @@
 <template>
     <div id="toolbar">
-        <el-image src="https://cdn.sxrekord.com/blog/logo.jpg" class="imgProfile">
-            <div slot="placeholder" class="image-slot">
-                加载中<span class="dot">...</span>
-            </div>
-        </el-image>
+        <el-avatar class="imgProfile" src="https://cdn.sxrekord.com/blog/logo.jpg"
+            @error="false" :size="45" alt="Avatar">
+            <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+        </el-avatar>
         <div id="btnBar">
             <div class="topBtnBar">
                 <el-tooltip  class="item" effect="dark" content="群聊" placement="right">
@@ -47,9 +46,7 @@
       justify-content: space-between;
     }
     .imgProfile {
-      width: 40px;
-      height: 40px;
-      margin: 25px 10px;
+      margin: 25px 8px;
     }
     .toolBtn {
       background-color: #2e3238;

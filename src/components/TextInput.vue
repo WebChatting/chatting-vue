@@ -3,7 +3,11 @@
     <div class="richtext">
         <el-popover placement="top-start" width="400" trigger="click" class="emoBox">
             <div class="emotionList">
-                <a href="javascript:void(0);" @click="getEmo(index)" v-for="(item,index) in faceList" :key="index" class="emotionItem">{{item}}</a>
+                <a href="javascript:void(0);" class="emotionItem"
+                    v-for="(item, index) in emojiList" :key="index"
+                    @click="addToMessage(item)">
+                    {{item}}
+                </a>
             </div>
             <el-button id="emojiBtn" class="emotionSelect" slot="reference">
                 <i class="el-icon-star-on"></i>
@@ -11,7 +15,7 @@
         </el-popover>
         <el-upload
                 class="upload-btn"
-                action="/ossFileUpload?module=group-chat"
+                action="/url"
                 :before-upload="beforeAvatarUpload"
                 :on-success="imgSuccess"
                 :on-error="imgError"
@@ -21,15 +25,37 @@
             <el-button id="uploadImgBtn" icon="el-icon-picture-outline-round"></el-button>
         </el-upload>
     </div>
-    <textarea id="textarea" placeholder="按 Ctrl + Enter 发送" v-model="content" v-on:keyup="addMessage">
+    <textarea id="textarea" placeholder="按 Ctrl + Enter 发送" v-model="content" ref="textarea">
     </textarea>
-    <el-button id="sendBtn" type="primary" size="mini" @click="addMessageByClick" >发送(S)</el-button>
-  </div>    
+    <el-button id="sendBtn" type="primary" size="mini">发送(S)</el-button>
+  </div>
 </template>
 
 <script>
+    const emojiData = require('../assets/emoji.json')
     export default {
         name: "TextInput",
+        data() {
+            return {
+                content: '',
+                emojiList: [],
+                emojiCounter: 40,
+            }
+        },
+        methods: {
+            addToMessage(item) {
+                this.$refs.textarea.value += item
+            },
+        },
+        mounted() {
+            // 加载指定数量的emoji
+            for (let i in emojiData) {
+                if (i == this.emojiCounter) {
+                    break;
+                }
+                this.emojiList.push(emojiData[i].char)
+            }
+        },
     }
 </script>
 
@@ -54,41 +80,41 @@
             outline: none;
             resize: none;//禁止拉伸
         }
-        #sendBtn{
+        #sendBtn {
             float: right;
             margin-right: 10px;
         }
-        #uploadImgBtn{
+        #uploadImgBtn {
             border: none;
             width: 40px;
             padding-bottom: 0px;
             padding-left: 5px;
         }
-        #uploadImgBtn:hover{
+        #uploadImgBtn:hover {
             background-color: white;
         }
-        #emojiBtn{
+        #emojiBtn {
             border: none;
             width: 40px;
             padding-bottom: 0px;
             margin-left: -8px;
         }
-        #emojiBtn:hover{
+        #emojiBtn:hover {
             background-color: white;
         }
-        .upload-btn{
+        .upload-btn {
             display: inline-block;
         }
     }
-    .emotionList{
+    .emotionList {
         display: flex;
         flex-wrap: wrap;
-        padding:5px;
+        padding: 5px;
     }
-    .emotionItem{
-        width:10%;
-        font-size:20px;
-        text-align:center;
+    .emotionItem {
+        width: 10%;
+        font-size: 20px;
+        text-align: center;
     }
     /*包含以下四种的链接*/
     .emotionItem {

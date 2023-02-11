@@ -47,6 +47,25 @@
             addToMessage(item) {
                 this.content += item
             },
+            sendMessage() {
+                if (this.content.trim().length <= 0) {
+                    console.log('发送信息不能为空')
+                    return
+                }
+                // 更新消息
+                this.$store.state.privateMessages.push({
+                    id: this.$store.state.privateMessages.length,
+                    style: {
+                        right: true
+                    },
+                    fromNickname: 'rekord',
+                    userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
+                    messageTypeId: 1,
+                    content: this.content,
+                })
+                // 清空输入框
+                this.content = ''
+            },
         },
         mounted() {
             // 加载指定数量的emoji

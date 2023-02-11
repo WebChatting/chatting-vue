@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" ref="app">
     <div class="toolbar">
       <Toolbar/>
     </div>
@@ -32,7 +32,19 @@
       Title,
       Display,
       TextInput,
-    }
+    },
+    methods: {
+      openChatPanel() {
+        this.$refs.app.style.width = 900 + 'px'
+      }
+    },
+    mounted() {
+      this.$bus.$on('openChatPanel', this.openChatPanel)
+    },
+    beforeDestroy() {
+      // 解绑自定义事件
+      this.$bus.$off('openChatPanel')
+    },
   }
 </script>
 
@@ -40,7 +52,7 @@
 <style lang="scss" scoped>
   #app {
     margin: 20px auto;
-    width: 900px;
+    width: 300px;
     height: 650px;
     overflow: hidden;
     border-radius: 10px;

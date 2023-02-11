@@ -3,7 +3,7 @@
         <p class="title" style="">用户列表</p>
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <ul>
-                <li v-for="item in users" :key="item.id">
+                <li v-for="item in users" :key="item.id" @dblclick="openChatPanel">
                     <div style="display: flex; justify-content: space-between">
                         <div>
                             <el-badge :is-dot="true">
@@ -65,6 +65,11 @@
                 ],
             };
         },
+        methods: {
+            openChatPanel() {
+                this.$bus.$emit("openChatPanel")
+            }
+        }
     };
 </script>
 

@@ -37,8 +37,8 @@
     #display {
         padding: 15px;
         padding-right: 3px;
-        height: 80%;
-        max-height: 80%;
+        height: 67%;
+        max-height: 67%;
         overflow-y: scroll;
         overflow-x: hidden;
         ul {

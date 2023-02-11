@@ -1,7 +1,7 @@
 # chatting-vue
 项目介绍请前往[后端仓库](https://github.com/WebChatting/chatting)。
 
-## components
+## Components
 - [Vue2](https://v2.cn.vuejs.org/v2/guide/)
 - [VueRouter3](https://v3.router.vuejs.org/zh/guide/)
 - [Vuex3](https://v3.vuex.vuejs.org/zh/)

@@ -55,40 +55,6 @@ li,
 input {
   margin: 0;
 }
-.msg-box {
-  position: fixed;
-  top: 50px;
-  left: 50%;
-  -webkit-transform: translateX(-50%);
-          transform: translateX(-50%);
-  text-align: center;
-  border: 0;
-  -webkit-box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15);
-          box-shadow: 0 3px 10px 0 rgba(0, 0, 0, 0.15);
-  background-color: white;
-  padding: 10px 20px;
-  min-width: 400px;
-  max-width: 900px;
-  font-size: 14px;
-}
-.msg-box .warning {
-  width: 24px;
-  height: 24px;
-  line-height: 24px;
-  background-color: #FE4066;
-  color: white;
-  font-size: 14px;
-  display: inline-block;
-  border-radius: 50%;
-  margin-top: 16px;
-}
-.msg-box a {
-  color: #fe4066;
-  cursor: pointer;
-}
-.msg-box a:hover {
-  text-decoration: underline;
-}
 body {
   background: url('../img/login_bg.jpg') no-repeat center;
   background-size: cover;

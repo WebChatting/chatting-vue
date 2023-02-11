@@ -16,7 +16,7 @@ const state = {
         {
             id: 1,
             style: {
-                left: 'left'
+                left: true
             },
             fromNickname: 'rekord',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
@@ -26,7 +26,7 @@ const state = {
         {
             id: 2,
             style: {
-                right: 'right'
+                right: true
             },
             fromNickname: 'rekord',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
@@ -36,7 +36,7 @@ const state = {
         {
             id: 3,
             style: {
-                left: 'left'
+                left: true
             },
             fromNickname: 'rekord',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',

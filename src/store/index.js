@@ -14,7 +14,7 @@ const mutations = {
 const state = {
     privateMessages: [
         {
-            id: 1,
+            id: 0,
             style: {
                 left: true
             },
@@ -24,7 +24,7 @@ const state = {
             content: 'hei',
         },
         {
-            id: 2,
+            id: 1,
             style: {
                 right: true
             },
@@ -34,7 +34,7 @@ const state = {
             content: '你好',
         },
         {
-            id: 3,
+            id: 2,
             style: {
                 left: true
             },

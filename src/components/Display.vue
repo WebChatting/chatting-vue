@@ -10,8 +10,11 @@
                         @error="false" shape="circle" :size="30" alt="Avatar">
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
-                    <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
-                    <img v-if="entry.messageTypeId == 2" :src="entry.content" class="img">
+                    <div class="message">
+                        <p v-if="!isSingle && entry.style.left" class="username">{{entry.fromNickname}}</p>
+                        <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
+                        <img v-if="entry.messageTypeId == 2" :src="entry.content" class="img">
+                    </div>
                 </div>
             </li>
         </ul>
@@ -23,6 +26,7 @@
         name: "Display",
         data() {
             return {
+                isSingle: false,
                 messages: [
                     {
                         id: 1,
@@ -93,21 +97,25 @@
             .avatar {
                 margin: 0;
             }
-            .text {
-                margin: 0px;
-                display: inline-block;
-                padding: 0 10px;
+            .message {
                 max-width: 80%;
-                background-color: #fafafa;
-                border-radius: 8px;
-                line-height: 30px;
+                .username {
+                    margin: 0px;
+                    padding: 0px;
+                    line-height: 15px;
+                    font-size: 10px;
+                    color: grey;
+                }
+                .text {
+                    margin: 0px;
+                    display: inline-block;
+                    padding: 0 10px;
+                    background-color: #fafafa;
+                    border-radius: 8px;
+                    line-height: 30px;
+                }
             }
-            .img {
-                display: inline-block;
-                height: 100px;
-                width: 100px;
-                margin-top: 15px;
-            }
+
         }
         .left {
             flex-direction: row;
@@ -119,6 +127,9 @@
             flex-direction: row-reverse;
             .avatar {
                 margin-left: 10px;
+            }
+            .username {
+                text-align: right;
             }
         }
     }

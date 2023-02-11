@@ -1,8 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Login from '../page/Login'
-import Chatting from '../page/Chatting'
+import Login from '../pages/Login'
+import Chatting from '../pages/Chatting'
 
 Vue.use(VueRouter)
 

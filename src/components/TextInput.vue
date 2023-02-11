@@ -25,7 +25,8 @@
             <el-button id="uploadImgBtn" icon="el-icon-picture-outline-round"></el-button>
         </el-upload>
     </div>
-    <textarea id="textarea" placeholder="按 Ctrl + Enter 发送" v-model="content">
+    <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
+        v-model="content" @keyup.ctrl.enter="sendMessage">
     </textarea>
     <el-button id="sendBtn" type="primary" size="mini"
         @click="sendMessage">发送(S)</el-button>

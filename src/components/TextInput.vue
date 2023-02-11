@@ -53,6 +53,7 @@
                     console.log('发送信息不能为空')
                     return
                 }
+
                 // 更新消息
                 this.$store.state.privateMessages.push({
                     id: this.$store.state.privateMessages.length,
@@ -64,8 +65,13 @@
                     messageTypeId: 1,
                     content: this.content,
                 })
+
                 // 清空输入框
                 this.content = ''
+                // 将滚动条滑动至底部
+                this.$nextTick(() => {
+                    this.$bus.$emit('scrollToBottom')
+                })
             },
         },
         mounted() {

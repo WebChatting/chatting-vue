@@ -1,5 +1,6 @@
 <template>
-    <div id="display">
+    <div id="display"
+        ref="display">
         <ul >
             <li v-for="entry in messages" :key="entry.id">
                 <p class="time">
@@ -30,6 +31,19 @@
                 messages: this.$store.state.privateMessages
             }
         },
+        methods: {
+            scrollToBottom() {
+                const display = this.$refs.display
+                display.scrollTop = display.scrollHeight - display.clientHeight
+            }
+        },
+        mounted() {
+            this.$bus.$on('scrollToBottom', this.scrollToBottom)
+        },
+        beforeDestroy() {
+            // 解绑自定义事件
+            this.$bus.$off('scrollToBottom')
+        }
     }
 </script>
 

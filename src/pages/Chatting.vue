@@ -36,14 +36,19 @@
     methods: {
       openChatPanel() {
         this.$refs.app.style.width = 900 + 'px'
-      }
+      },
+      closeChatPanel() {
+        this.$refs.app.style.width = 300 + 'px'
+      },
     },
     mounted() {
       this.$bus.$on('openChatPanel', this.openChatPanel)
+      this.$bus.$on('closeChatPanel', this.closeChatPanel)
     },
     beforeDestroy() {
       // 解绑自定义事件
       this.$bus.$off('openChatPanel')
+      this.$bus.$off('closeChatPanel')
     },
   }
 </script>

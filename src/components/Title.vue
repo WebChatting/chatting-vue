@@ -1,14 +1,19 @@
 <template>
     <div class="chatTitle">
         <span class="titleName">rekord</span>
-        <el-button class="moreBtn" size="small" icon="el-icon-more"></el-button>
+        <el-button class="moreBtn" size="small" icon="el-icon-error"
+          @click="closeChatPanel"></el-button>
     </div>
 </template>
 
 <script>
     export default {
         name: "Title",
-
+        methods: {
+          closeChatPanel() {
+            this.$bus.$emit('closeChatPanel')
+          }
+        }
     }
 </script>
 

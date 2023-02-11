@@ -27,38 +27,7 @@
         data() {
             return {
                 isSingle: false,
-                messages: [
-                    {
-                        id: 1,
-                        style: {
-                            left: 'left'
-                        },
-                        fromNickname: 'rekord',
-                        userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-                        messageTypeId: 1,
-                        content: 'hei',
-                    },
-                    {
-                        id: 2,
-                        style: {
-                            right: 'right'
-                        },
-                        fromNickname: 'rekord',
-                        userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-                        messageTypeId: 1,
-                        content: '你好',
-                    },
-                    {
-                        id: 3,
-                        style: {
-                            left: 'left'
-                        },
-                        fromNickname: 'rekord',
-                        userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-                        messageTypeId: 1,
-                        content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',
-                    }
-                ]
+                messages: this.$store.state.privateMessages
             }
         },
     }

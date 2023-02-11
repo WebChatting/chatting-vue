@@ -73,6 +73,15 @@
                     this.$bus.$emit('scrollToBottom')
                 })
             },
+            beforeAvatarUpload() {
+
+            },
+            imgSuccess() {
+
+            },
+            imgError() {
+
+            },
         },
         mounted() {
             // 加载指定数量的emoji

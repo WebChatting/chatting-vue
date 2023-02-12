@@ -2,7 +2,7 @@
     <div id="application">
         <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
             <li v-for="item in users" :key="item.id">
-                <el-card class="box-card" body-style="padding: 8px;">
+                <el-card class="box-card" body-style="padding: 4px 8px;">
                     <div class="card">
                         <div>
                             <el-image

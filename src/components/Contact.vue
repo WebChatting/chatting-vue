@@ -82,6 +82,12 @@
         .name {
             display: inline-block;
             margin: 0px 0px 0px 12px;
+            vertical-align: middle;
+            width: 100px;
+            height: 26px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
         .status-badge {
             padding-top: 6px;

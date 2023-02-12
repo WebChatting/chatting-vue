@@ -18,7 +18,7 @@ const state = {
             style: {
                 left: true
             },
-            fromNickname: 'rekord',
+            fromNickname: 'rekordrekordrekordrekordrekordrekord',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
             messageTypeId: 1,
             content: 'hei',
@@ -54,7 +54,7 @@ const state = {
         {
             id: 1,
             userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "rekord",
+            nickname: "rekordrekordrekordrekordrekordrekordrekordrekord",
             userStateId: 2,
         },
         {

@@ -8,9 +8,14 @@
       <List/>
     </div>
     <div class="main">
-      <Title/>
-      <Display/>
-      <TextInput/>
+      <div v-show="isChatPanel">
+        <Title/>
+        <Display/>
+        <TextInput/>
+      </div>
+      <div v-show="!isChatPanel">
+        <NavigationBar/>
+      </div>
     </div>
   </div>
 </template>
@@ -22,6 +27,7 @@
   import Title from "../components/Title"
   import Display from '../components/Display'
   import TextInput from '../components/TextInput'
+  import NavigationBar from '../components/NavigationBar'
   
   export default {
     name: 'Chatting',
@@ -32,6 +38,12 @@
       Title,
       Display,
       TextInput,
+      NavigationBar,
+    },
+    data() {
+      return {
+        isChatPanel: true,
+      }
     },
     methods: {
       openChatPanel() {

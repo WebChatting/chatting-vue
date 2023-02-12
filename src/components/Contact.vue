@@ -6,7 +6,7 @@
                     <div style="display: flex; justify-content: space-between">
                         <div>
                             <el-badge :is-dot="true" :value="2">
-                                <el-image
+                                <el-image :class="{grayscale: item.userStateId != 1}"
                                     class="avatar"
                                     :preview-src-list="[item.userProfile]"
                                     :src="item.userProfile"
@@ -18,15 +18,6 @@
                                 </el-image>
                             </el-badge>
                             <p class="name ellipsis">{{ item.nickname }}</p>
-                        </div>
-                        <div>
-                            <el-badge class="status-badge"
-                                :value="item.userStateId == 1 ? '在线' : '离线'"
-                                :type="
-                                    item.userStateId == 1 ? 'danger' : 'info'
-                                "
-                            >
-                            </el-badge>
                         </div>
                     </div>
                 </li>
@@ -83,9 +74,6 @@
             display: inline-block;
             margin: 0px 0px 0px 12px;
             width: 100px;
-        }
-        .status-badge {
-            padding-top: 6px;
         }
     }
 </style>

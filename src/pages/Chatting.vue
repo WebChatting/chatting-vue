@@ -106,4 +106,8 @@
     text-overflow: ellipsis;
     white-space: nowrap;
 }
+.grayscale {
+    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
+    filter: grayscale(100%);
+}
 </style>

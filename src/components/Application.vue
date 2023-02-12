@@ -2,7 +2,7 @@
     <div id="application">
         <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
             <li v-for="item in users" :key="item.id">
-                <el-card class="box-card" body-style="padding: 10px;">
+                <el-card class="box-card" body-style="padding: 8px;">
                     <div class="card">
                         <div>
                             <el-image
@@ -22,6 +22,9 @@
                             <el-button size="mini" class="button">拒绝</el-button>
                         </el-button-group>
                     </div>
+                    <p class="time">
+                        <span>2023 22:58:43</span>
+                    </p>
                 </el-card>
             </li>
         </ul>
@@ -69,6 +72,17 @@ export default {
                     padding: 0px;
                     width: 42px;
                     height: 30px;
+                }
+            }
+            .time {
+                margin: 0;
+                > span {
+                    display: inline-block;
+                    padding: 0 10px;
+                    font-size: 12px;
+                    color: #FFF;
+                    background-color: #9c9c9c;
+                    border-radius: 3px;
                 }
             }
         }

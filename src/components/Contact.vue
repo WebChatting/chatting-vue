@@ -3,27 +3,32 @@
         v-model="activeName" @tab-click="handleClick">
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-custom"></i> {{firstLabelName}}</span>
-            <List/>
+            <List v-show="isContact"/>
+            <Application v-show="!isContact"/>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-comment"></i> {{secondLabelName}}</span>
-            <List/>
+            <List v-show="isContact"/>
+            <Application v-show="!isContact"/>
         </el-tab-pane>
     </el-tabs>
 </template>
 
 <script>
     import List from './List'
+    import Application from './Application'
     export default {
         name: "Contact",
         components: {
             List,
+            Application,
         },
         data() {
             return {
                 activeName: '',
                 firstLabelName: '好友',
                 secondLabelName: '群聊',
+                isContact: true,
             }
         },
         methods: {
@@ -33,10 +38,12 @@
             loadContact() {
                 this.firstLabelName = '好友'
                 this.secondLabelName = '群聊'
+                this.isContact = true
             },
             loadVerification() {
                 this.firstLabelName = '好友验证'
                 this.secondLabelName = '群组验证'
+                this.isContact = false
             },
         },
         mounted() {

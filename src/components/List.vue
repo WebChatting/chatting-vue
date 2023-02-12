@@ -1,6 +1,5 @@
 <template>
     <div id="list">
-        <p class="title" style="">用户列表</p>
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <ul>
                 <li v-for="item in users" :key="item.id" @dblclick="openChatPanel">
@@ -21,7 +20,7 @@
                             <p class="name">{{ item.nickname }}</p>
                         </div>
                         <div>
-                            <el-badge
+                            <el-badge class="status-badge"
                                 :value="item.userStateId == 1 ? '在线' : '离线'"
                                 :type="
                                     item.userStateId == 1 ? 'danger' : 'info'
@@ -68,25 +67,19 @@
         methods: {
             openChatPanel() {
                 this.$bus.$emit("openChatPanel")
-            }
+            },
         }
     };
 </script>
 
 <style lang="scss" scoped>
     #list {
-        .title {
-            margin: 0px;
-            padding: 2px 4px;
-            height: 20px;
-            text-align: center;
-        }
         .user-list {
             max-height: 570px;
         }
         ul {
             padding: 0px;
-            margin-left: 4px;
+            margin: 0 2px 16px 4px;
         }
         li {
             padding: 12px 0px;
@@ -108,6 +101,9 @@
         .name {
             display: inline-block;
             margin: 0px 0px 0px 12px;
+        }
+        .status-badge {
+            padding-top: 6px;
         }
     }
 </style>

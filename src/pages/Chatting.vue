@@ -5,7 +5,7 @@
     </div>
     <div class="sidebar">
       <SearchBar/>
-      <List/>
+      <Contact/>
     </div>
     <div class="main">
       <Title/>
@@ -16,19 +16,19 @@
 </template>
 
 <script>
-  import Toolbar from "../components/Toolbar";
+  import Toolbar from "../components/Toolbar"
   import SearchBar from '../components/SearchBar'
-  import List from '../components/List'
+  import Contact from '../components/Contact'
   import Title from "../components/Title"
   import Display from '../components/Display'
   import TextInput from '../components/TextInput'
   
   export default {
     name: 'Chatting',
-    components:{
+    components: {
       Toolbar,
       SearchBar,
-      List,
+      Contact,
       Title,
       Display,
       TextInput,

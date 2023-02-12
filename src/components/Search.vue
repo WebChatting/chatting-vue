@@ -8,6 +8,10 @@
                 type="primary">
                 查找
             </el-button>
+            <el-button class="search-button" size="medium"
+                type="danger" @click="closeRightPanel">
+                关闭
+            </el-button>
         </div>
         <el-divider></el-divider>
         <div class="search-result">
@@ -31,6 +35,11 @@ export default {
             searchResults: this.$store.state.friendList,
         }
     },
+    methods: {
+        closeRightPanel() {
+            this.$bus.$emit('closeRightPanel')
+        }
+    },
 }
 </script>
 
@@ -38,8 +47,8 @@ export default {
 .main {
     .search {
         .search-input {
-            margin-left: 40px;
-            width: 430px;
+            margin-left: 30px;
+            width: 380px;
         }
         .search-button {
             margin-left: 20px;

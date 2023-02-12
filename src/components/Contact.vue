@@ -2,7 +2,7 @@
     <div id="list">
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <ul>
-                <li v-for="item in users" :key="item.id" @dblclick="openChatPanel">
+                <li v-for="item in users" :key="item.id" @dblclick="openRightPanel">
                     <div style="display: flex; justify-content: space-between">
                         <div>
                             <el-badge :is-dot="true" :value="2">
@@ -46,8 +46,8 @@
             };
         },
         methods: {
-            openChatPanel() {
-                this.$bus.$emit("openChatPanel")
+            openRightPanel() {
+                this.$bus.$emit("openRightPanel")
             },
         }
     };

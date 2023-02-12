@@ -2,7 +2,7 @@
     <div class="chatTitle">
         <span class="titleName">rekord</span>
         <el-button class="moreBtn" size="small" icon="el-icon-error"
-          @click="closeChatPanel"></el-button>
+          @click="closeRightPanel"></el-button>
     </div>
 </template>
 
@@ -10,8 +10,8 @@
     export default {
         name: "Title",
         methods: {
-          closeChatPanel() {
-            this.$bus.$emit('closeChatPanel')
+          closeRightPanel() {
+            this.$bus.$emit('closeRightPanel')
           }
         }
     }

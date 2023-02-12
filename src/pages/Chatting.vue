@@ -46,21 +46,22 @@
       }
     },
     methods: {
-      openChatPanel() {
+      openRightPanel(isChatPanel = true) {
+        this.isChatPanel = isChatPanel
         this.$refs.app.style.width = 900 + 'px'
       },
-      closeChatPanel() {
+      closeRightPanel() {
         this.$refs.app.style.width = 300 + 'px'
       },
     },
     mounted() {
-      this.$bus.$on('openChatPanel', this.openChatPanel)
-      this.$bus.$on('closeChatPanel', this.closeChatPanel)
+      this.$bus.$on('openRightPanel', this.openRightPanel)
+      this.$bus.$on('closeRightPanel', this.closeRightPanel)
     },
     beforeDestroy() {
       // 解绑自定义事件
-      this.$bus.$off('openChatPanel')
-      this.$bus.$off('closeChatPanel')
+      this.$bus.$off('openRightPanel')
+      this.$bus.$off('closeRightPanel')
     },
   }
 </script>

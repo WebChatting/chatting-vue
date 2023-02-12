@@ -1,7 +1,7 @@
 <template>
     <div id="display"
         ref="display">
-        <ul >
+        <ul>
             <li v-for="entry in messages" :key="entry.id">
                 <p class="time">
                     <span>{{new Date()}}</span>

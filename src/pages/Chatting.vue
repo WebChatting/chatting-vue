@@ -5,7 +5,7 @@
     </div>
     <div class="sidebar">
       <SearchBar/>
-      <Contact/>
+      <List/>
     </div>
     <div class="main">
       <Title/>
@@ -18,7 +18,7 @@
 <script>
   import Toolbar from "../components/Toolbar"
   import SearchBar from '../components/SearchBar'
-  import Contact from '../components/Contact'
+  import List from '../components/List'
   import Title from "../components/Title"
   import Display from '../components/Display'
   import TextInput from '../components/TextInput'
@@ -28,7 +28,7 @@
     components: {
       Toolbar,
       SearchBar,
-      Contact,
+      List,
       Title,
       Display,
       TextInput,

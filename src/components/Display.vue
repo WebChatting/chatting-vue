@@ -51,8 +51,7 @@
     #display {
         padding: 15px;
         padding-right: 3px;
-        height: 67%;
-        max-height: 67%;
+        max-height: 438px;
         overflow-y: scroll;
         overflow-x: hidden;
         ul {

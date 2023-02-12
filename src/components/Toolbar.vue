@@ -6,19 +6,19 @@
         </el-avatar>
         <div id="btnBar">
             <div class="topBtnBar">
-                <el-tooltip class="item" effect="dark" content="联系人" placement="right">
+                <el-tooltip class="item" effect="dark" content="联系人" placement="left">
                     <el-button class="toolBtn" size="medium"
                         @click="loadContact">
                         <i class="el-icon-user-solid"></i>
                     </el-button>
                 </el-tooltip>
-                <el-tooltip class="item" effect="dark" content="验证" placement="right">
+                <el-tooltip class="item" effect="dark" content="验证" placement="left">
                     <el-button class="toolBtn" size="medium"
                         @click="loadVerification">
                         <i class="el-icon-message-solid"></i>
                     </el-button>
                 </el-tooltip>
-                <el-tooltip class="item" effect="dark" content="与机器人聊天" placement="right">
+                <el-tooltip class="item" effect="dark" content="ChatGPT" placement="left">
                     <el-button class="toolBtn" size="medium"><i class="el-icon-s-platform"></i></el-button>
                 </el-tooltip>
             </div>

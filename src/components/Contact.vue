@@ -19,6 +19,7 @@
                             </el-badge>
                             <p class="name ellipsis">{{ item.nickname }}</p>
                         </div>
+                        <div class="delete-button" @click="deleteContact"><i class="el-icon-delete"></i></div>
                     </div>
                 </li>
             </ul>
@@ -40,7 +41,24 @@
             openRightPanel() {
                 this.$bus.$emit("openRightPanel")
             },
-        }
+            deleteContact() {
+                this.$confirm('此操作将永久删除该好友/群组, 是否继续?', '提示', {
+                    confirmButtonText: '确定',
+                    cancelButtonText: '取消',
+                    type: 'warning'
+                }).then(() => {
+                    this.$message({
+                    type: 'success',
+                    message: '删除成功!'
+                    });
+                }).catch(() => {
+                    this.$message({
+                    type: 'info',
+                    message: '已取消删除'
+                    });
+                });
+            },
+        },
     };
 </script>
 
@@ -74,6 +92,13 @@
             display: inline-block;
             margin: 0px 0px 0px 12px;
             width: 100px;
+        }
+        .delete-button {
+            padding: 0px;
+            margin: 2px 5px 0px 0px;
+            :hover {
+                color: #f78989;
+            }
         }
     }
 </style>

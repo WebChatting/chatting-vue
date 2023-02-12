@@ -18,7 +18,7 @@
             <div v-for="item in searchResults" :key="item.id" class="single-result">
                 <el-avatar shape="circle" :size="70" :src="item.userProfile"></el-avatar>
                 <div class="info">
-                    <p class="add-name">{{ item.nickname }}</p>
+                    <p class="add-name ellipsis">{{ item.nickname }}</p>
                     <el-button type="primary" icon="el-icon-circle-plus" class="add-button">好友</el-button>
                 </div>
             </div>
@@ -69,8 +69,8 @@ export default {
                 display: inline-block;
                 padding-left: 5px;
                 .add-name {
-                    margin: 5px auto;
-                    padding-bottom: 5px;
+                    margin: 5px 0;
+                    width: 65px;
                 }
                 .add-button {
                     padding: 8px 10px;

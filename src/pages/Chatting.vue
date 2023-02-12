@@ -97,3 +97,13 @@
     }
   }
 </style>
+
+<style>
+.ellipsis {
+    vertical-align: middle;
+    height: 26px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+</style>

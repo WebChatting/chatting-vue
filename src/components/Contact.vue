@@ -17,7 +17,7 @@
                                     </div>
                                 </el-image>
                             </el-badge>
-                            <p class="name">{{ item.nickname }}</p>
+                            <p class="name ellipsis">{{ item.nickname }}</p>
                         </div>
                         <div>
                             <el-badge class="status-badge"
@@ -82,12 +82,7 @@
         .name {
             display: inline-block;
             margin: 0px 0px 0px 12px;
-            vertical-align: middle;
             width: 100px;
-            height: 26px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
         }
         .status-badge {
             padding-top: 6px;

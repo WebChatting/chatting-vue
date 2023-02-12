@@ -15,7 +15,7 @@
                                     <i class="el-icon-picture-outline"></i>
                                 </div>
                             </el-image>
-                            <p class="name">{{ item.nickname }}</p>
+                            <p class="name ellipsis">{{ item.nickname }}</p>
                         </div>
                         <el-button-group>
                             <el-button size="mini" class="button">同意</el-button>
@@ -63,6 +63,7 @@ export default {
                 .name {
                     display: inline-block;
                     margin: 0px 0px 0px 8px;
+                    width: 80px;
                 }
                 .button {
                     padding: 0px;

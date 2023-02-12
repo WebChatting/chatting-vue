@@ -42,26 +42,7 @@
         name: "Contact",
         data() {
             return {
-                users: [
-                    {
-                        id: 0,
-                        userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-                        nickname: "rekord",
-                        userStateId: 1,
-                    },
-                    {
-                        id: 1,
-                        userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-                        nickname: "rekord",
-                        userStateId: 2,
-                    },
-                    {
-                        id: 2,
-                        userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-                        nickname: "rekord",
-                        userStateId: 1,
-                    },
-                ],
+                users: this.$store.state.friendList,
             };
         },
         methods: {

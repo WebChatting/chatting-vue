@@ -43,7 +43,27 @@ const state = {
             messageTypeId: 1,
             content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',
         }
-    ]
+    ],
+    friendList: [
+        {
+            id: 0,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "rekord",
+            userStateId: 1,
+        },
+        {
+            id: 1,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "rekord",
+            userStateId: 2,
+        },
+        {
+            id: 2,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "rekord",
+            userStateId: 1,
+        },
+    ],
 }
 
 export default new Vuex.Store({

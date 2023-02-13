@@ -2,7 +2,7 @@
     <div id="list">
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <ul>
-                <li v-for="item in users" :key="item.id" @dblclick="openRightPanel">
+                <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel">
                     <div style="display: flex; justify-content: space-between">
                         <div>
                             <el-badge :is-dot="true" :value="2">
@@ -19,7 +19,7 @@
                             </el-badge>
                             <p class="name ellipsis">{{ item.nickname }}</p>
                         </div>
-                        <div class="delete-button" @click="deleteContact"><i class="el-icon-delete"></i></div>
+                        <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
                     </div>
                 </li>
             </ul>
@@ -41,7 +41,8 @@
             openRightPanel() {
                 this.$bus.$emit("openRightPanel")
             },
-            deleteContact() {
+            deleteContact(id) {
+                this.$store.state.friendList.splice(id, 1)
                 this.$confirm('此操作将永久删除该好友/群组, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',

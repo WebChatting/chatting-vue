@@ -19,7 +19,7 @@
                             v-if="entry.messageTypeId == 2"
                             style="width: 150px; height: 150px"
                             :src="entry.content"
-                            :preview-src-list="entry.content">
+                            :preview-src-list="[entry.content]">
                         </el-image>
                     </div>
                 </div>

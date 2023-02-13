@@ -28,7 +28,7 @@ const state = {
             style: {
                 right: true
             },
-            fromNickname: 'rekord',
+            fromNickname: 'hello',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
             messageTypeId: 1,
             content: '你好',
@@ -38,7 +38,7 @@ const state = {
             style: {
                 left: true
             },
-            fromNickname: 'rekord',
+            fromNickname: 'bot',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
             messageTypeId: 1,
             content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',
@@ -48,7 +48,7 @@ const state = {
         {
             id: 0,
             userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "rekord",
+            nickname: "robot",
             userStateId: 1,
         },
         {
@@ -60,7 +60,7 @@ const state = {
         {
             id: 2,
             userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "rekord",
+            nickname: "stone",
             userStateId: 1,
         },
     ],

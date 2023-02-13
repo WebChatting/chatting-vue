@@ -13,7 +13,7 @@
                     </el-avatar>
                     <div class="message">
                         <p v-if="!isSingle && entry.style.left" class="username"
-                            @click="dialogVisible = true">{{entry.fromNickname}}</p>
+                            @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</p>
                         <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
                         <img v-if="entry.messageTypeId == 2" :src="entry.content" class="img">
                     </div>
@@ -27,9 +27,9 @@
             <div class="priview">
                 <el-image
                     class="priview-avatar"
-                    src="https://cdn.sxrekord.com/blog/logo.jpg"
+                    :src="dialogAvatar"
                 ></el-image>
-                <div class="priview-username">Rekord</div>
+                <div class="priview-username">{{dialogNickName}}</div>
             </div>
             <el-button type="primary" round class="priview-button">加好友</el-button>
         </el-dialog>
@@ -44,12 +44,25 @@
                 isSingle: false,
                 messages: this.$store.state.privateMessages,
                 dialogVisible: false,
+                dialogUserId: 0,
             }
+        },
+        computed: {
+            dialogAvatar() {
+                return this.$store.state.privateMessages[this.dialogUserId].userProfile
+            },
+            dialogNickName() {
+                return this.$store.state.privateMessages[this.dialogUserId].fromNickname
+            },
         },
         methods: {
             scrollToBottom() {
                 const display = this.$refs.display
                 display.scrollTop = display.scrollHeight - display.clientHeight
+            },
+            openInfoDialog(id) {
+                this.dialogVisible = true
+                this.dialogUserId = id
             },
         },
         mounted() {

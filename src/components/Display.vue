@@ -15,7 +15,12 @@
                         <div><p v-if="!isSingle && entry.style.left" class="username"
                             @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</p></div>
                         <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
-                        <img v-if="entry.messageTypeId == 2" :src="entry.content" class="img">
+                        <el-image
+                            v-if="entry.messageTypeId == 2"
+                            style="width: 150px; height: 150px"
+                            :src="entry.content"
+                            :preview-src-list="entry.content">
+                        </el-image>
                     </div>
                 </div>
             </li>

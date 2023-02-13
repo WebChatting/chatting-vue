@@ -40,9 +40,29 @@ const state = {
             },
             fromNickname: 'botbotbo',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
+            messageTypeId: 2,
+            content: 'https://cdn.sxrekord.com/blog/logo.jpg',
+        },
+        {
+            id: 3,
+            style: {
+                right: true
+            },
+            fromNickname: 'botbotbo',
+            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
+            messageTypeId: 2,
+            content: 'https://cdn.sxrekord.com/blog/logo.jpg',
+        },
+        {
+            id: 4,
+            style: {
+                left: true
+            },
+            fromNickname: 'botbotbo',
+            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
             messageTypeId: 1,
             content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',
-        }
+        },
     ],
     friendList: [
         {

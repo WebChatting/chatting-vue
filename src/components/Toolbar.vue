@@ -27,7 +27,8 @@
                     <el-button class="toolBtn" size="medium"><i class="el-icon-s-tools"></i></el-button>
                 </el-tooltip>
                 <el-tooltip class="item" effect="dark" content="退出" placement="right">
-                    <el-button class="toolBtn" size="medium"><i class="el-icon-s-fold"></i></el-button>
+                    <el-button class="toolBtn" size="medium"
+                        @click="exitSystem"><i class="el-icon-s-fold"></i></el-button>
                 </el-tooltip>
             </div>
         </div>
@@ -43,6 +44,9 @@
             },
             loadVerification() {
                 this.$bus.$emit('loadVerification')
+            },
+            exitSystem() {
+                window.location.href = "/"
             },
         },
     }

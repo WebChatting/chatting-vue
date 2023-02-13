@@ -49,6 +49,7 @@
       openRightPanel(isChatPanel = true) {
         this.isChatPanel = isChatPanel
         this.$refs.app.style.width = 900 + 'px'
+        this.$bus.$emit('scrollToBottom')
       },
       closeRightPanel() {
         this.$refs.app.style.width = 300 + 'px'

@@ -23,13 +23,13 @@
         <el-dialog
         title="基本信息"
         :visible.sync="dialogVisible"
-        width="250px">
+        width="300px">
             <div class="priview">
                 <el-image
                     class="priview-avatar"
                     :src="dialogAvatar"
                 ></el-image>
-                <div class="priview-username">{{dialogNickName}}</div>
+                <div class="priview-username ellipsis">{{dialogNickName}}</div>
             </div>
             <el-button type="primary" round class="priview-button">加好友</el-button>
         </el-dialog>
@@ -155,6 +155,7 @@
                 font-size: 30px;
                 height: 100px;
                 line-height: 100px;
+                width: 140px;
             }
         }
         .priview-button {

@@ -38,7 +38,7 @@ const state = {
             style: {
                 left: true
             },
-            fromNickname: 'bot',
+            fromNickname: 'botbotbo',
             userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
             messageTypeId: 1,
             content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',

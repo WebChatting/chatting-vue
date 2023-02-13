@@ -33,6 +33,7 @@
                 >
             <el-button class="extend-button" icon="el-icon-upload"></el-button>
         </el-upload>
+        <el-button class="extend-button" icon="el-icon-more"></el-button>
     </div>
     <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
         v-model="content" @keyup.ctrl.enter="sendMessage(1)">

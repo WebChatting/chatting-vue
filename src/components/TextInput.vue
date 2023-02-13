@@ -15,10 +15,10 @@
         </el-popover>
         <el-upload
                 class="upload-btn"
-                action="/url"
+                action="https://jsonplaceholder.typicode.com/posts/"
                 :before-upload="beforeAvatarUpload"
-                :on-success="imgSuccess"
-                :on-error="imgError"
+                :on-success="uploadImageSuccess"
+                :on-error="uploadImageError"
                 :show-file-list="false"
                 accept=".jpg,.jpeg,.png,.JPG,JPEG,.PNG,.gif,.GIF"
                 >
@@ -26,10 +26,10 @@
         </el-upload>
     </div>
     <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
-        v-model="content" @keyup.ctrl.enter="sendMessage">
+        v-model="content" @keyup.ctrl.enter="sendMessage(1)">
     </textarea>
     <el-button id="sendBtn" type="primary" size="mini"
-        @click="sendMessage">发送(S)</el-button>
+        @click="sendMessage(1)">发送(S)</el-button>
   </div>
 </template>
 
@@ -48,9 +48,9 @@
             addToMessage(item) {
                 this.content += item
             },
-            sendMessage() {
-                if (this.content.trim().length <= 0) {
-                    console.log('发送信息不能为空')
+            sendMessage(type, url) {
+                if (type == 1 && this.content.trim().length <= 0) {
+                    this.$message.error('发送信息不能为空')
                     return
                 }
 
@@ -62,25 +62,32 @@
                     },
                     fromNickname: 'rekord',
                     userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-                    messageTypeId: 1,
-                    content: this.content,
+                    messageTypeId: type,
+                    content: type == 1 ? this.content : url,
                 })
 
                 // 清空输入框
-                this.content = ''
+                if (type == 1) {
+                    this.content = ''
+                }
                 // 将滚动条滑动至底部
                 this.$nextTick(() => {
                     this.$bus.$emit('scrollToBottom')
                 })
             },
-            beforeAvatarUpload() {
-
+            beforeAvatarUpload(file) {
+                const isLt2M = file.size / 1024 / 1024 < 2;
+                if (!isLt2M) {
+                    this.$message.error('上传图片大小不能超过 2MB!');
+                }
             },
-            imgSuccess() {
-
+            uploadImageSuccess(res, file) {
+                this.$message.success('上传图片成功!')
+                this.sendMessage(2, 'https://cdn.sxrekord.com/blog/logo.jpg')
+                console.log('success', res, file)
             },
-            imgError() {
-
+            uploadImageError(res, file) {
+                this.$message.error('上传图片失败!')
             },
         },
         mounted() {

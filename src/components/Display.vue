@@ -6,38 +6,40 @@
                 <p class="time">
                     <span>{{new Date()}}</span>
                 </p>
-                <div class="main" :class="{left: entry.style.left, right: entry.style.right}">
+                <div class="message-structure" :class="{right: entry.style.right}">
                     <el-avatar class="avatar" :src="entry.userProfile"
                         @error="false" shape="circle" :size="30" alt="Avatar">
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
-                    <div class="message">
-                        <div><p v-if="!isSingle && entry.style.left" class="username"
-                            @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</p></div>
-                        <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
-                        <el-image
-                            v-if="entry.messageTypeId == 2"
-                            style="width: 150px; height: 150px"
-                            :src="entry.content"
-                            :preview-src-list="[entry.content]">
-                        </el-image>
-                        <div class="file"
-                            v-if="entry.messageTypeId == 3"
-                            @click="downloadFile(entry.id)">
-                            <div class="file-icon">
-                                <i class="el-icon-folder"></i>
+                    <div class="message-body">
+                        <div><div v-if="!isSingle && entry.style.left" class="name"
+                            @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</div></div>
+                        <div class="message">
+                            <div v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</div>
+                            <el-image
+                                v-if="entry.messageTypeId == 2"
+                                class="image"
+                                :src="entry.content"
+                                :preview-src-list="[entry.content]">
+                            </el-image>
+                            <div class="file"
+                                v-if="entry.messageTypeId == 3"
+                                @click="downloadFile(entry.id)">
+                                <div class="file-icon">
+                                    <i class="el-icon-folder"></i>
+                                </div>
+                                <div class="file-info ellipsis">{{entry.content}}</div>
                             </div>
-                            <div class="file-info ellipsis">{{entry.content}}</div>
                         </div>
                     </div>
                 </div>
             </li>
         </ul>
         <el-dialog
-        title="基本信息"
-        :visible.sync="dialogVisible"
-        width="300px">
-            <div class="priview">
+            title="基本信息"
+            :visible.sync="dialogVisible"
+            width="300px">
+            <div class="priview-info">
                 <el-image
                     class="priview-avatar"
                     :src="dialogAvatar"
@@ -93,91 +95,88 @@
 
 <style lang="scss" scoped>
     #display {
-        padding: 15px;
-        padding-right: 3px;
-        max-height: 438px;
-        overflow-y: scroll;
-        overflow-x: hidden;
+        padding:5px 0px 10px 8px;
+        max-height: 448px;
+        overflow: hidden scroll;
         ul {
             list-style-type: none;
 		    padding-left: 0px;
             li {
                 margin-bottom: 10px;
-            }
-        }
-        .time {
-            text-align: center;
-            margin: 3px 0px;
-            > span {
-                display: inline-block;
-                padding: 0 18px;
-                font-size: 12px;
-                color: #FFF;
-                background-color: #dcdcdc;
-                border-radius: 3px;
-            }
-        }
-        .main {
-            display: -webkit-flex; /* Safari */
-            display: flex;
-            .avatar {
-                margin: 0;
-            }
-            .message {
-                max-width: 80%;
-                .username {
-                    margin: 0px;
-                    padding: 0px;
-                    line-height: 15px;
-                    font-size: 10px;
-                    color: grey;
-                    cursor: pointer;
-                    display: inline-block;
+                .time {
+                    text-align: center;
+                    margin: 0;
+                    > span {
+                        display: inline-block;
+                        padding: 0 18px;
+                        font-size: 12px;
+                        color: #FFF;
+                        background-color: #dcdcdc;
+                        border-radius: 3px;
+                    }
                 }
-                .text {
-                    margin: 0px;
-                    display: inline-block;
-                    padding: 0 10px;
-                    background-color: #fafafa;
-                    border-radius: 8px;
-                    line-height: 30px;
-                }
-                .file {
-                    width: 180px;
-                    height: 60px;
+                .message-structure {
+                    display: -webkit-flex; /* Safari */
                     display: flex;
-                    line-height: 60px;
-                    border: solid #b4b4b4;
-                    border-radius: 5px;
-                    cursor: pointer;
-                    .file-icon {
-                        font-size: 300%;
-                        margin: 0px 5px;
+                    .avatar {
+                        margin: 3px 10px;
                     }
-                    .file-info {
-                        width: 120px;
-                        height: 60px;
+                    .message-body {
+                        max-width: 80%;
+                        .name {
+                            margin: 0px;
+                            padding: 0px;
+                            line-height: 15px;
+                            height: 15px;
+                            font-size: 10px;
+                            color: grey;
+                            cursor: pointer;
+                            display: inline-block;
+                        }
+                        .message {
+                            .text {
+                                margin: 0px;
+                                display: inline-block;
+                                padding: 0 10px;
+                                background-color: #fafafa;
+                                border-radius: 8px;
+                                line-height: 30px;
+                            }
+                            .image {
+                                width: 150px;
+                                height: 150px;
+                                border-radius: 8px;
+                            }
+                            .file {
+                                width: 180px;
+                                height: 60px;
+                                display: flex;
+                                line-height: 60px;
+                                border: solid #b4b4b4;
+                                border-radius: 5px;
+                                cursor: pointer;
+                                .file-icon {
+                                    font-size: 300%;
+                                    margin: 0px 5px;
+                                }
+                                .file-info {
+                                    width: 120px;
+                                    height: 60px;
+                                }
+                            }
+                        }
+
                     }
                 }
-            }
-
-        }
-        .left {
-            flex-direction: row;
-            .avatar {
-                margin-right: 10px;
             }
         }
         .right {
             flex-direction: row-reverse;
-            .avatar {
-                margin-left: 10px;
-            }
-            .username {
-                text-align: right;
+            .message {
+                margin-top: 3px;
             }
         }
-        .priview {
+        .priview-info {
             display: flex;
             justify-content: space-around;
             .priview-avatar {

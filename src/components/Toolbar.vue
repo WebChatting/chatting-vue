@@ -27,7 +27,6 @@
             <div class="bottom-bar">
                 <el-popover
                     placement="left"
-                    width="100"
                     trigger="hover">
                     <el-switch
                         v-model="mode"
@@ -37,7 +36,7 @@
                     </el-switch>
                     <el-button class="tool-button" slot="reference"><i class="el-icon-s-tools"></i></el-button>
                 </el-popover>
-                <el-tooltip effect="dark" content="退出" placement="right">
+                <el-tooltip effect="dark" content="退出" placement="left">
                     <el-button class="tool-button" @click="exitSystem"><i class="el-icon-s-fold"></i></el-button>
                 </el-tooltip>
             </div>

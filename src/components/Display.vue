@@ -26,7 +26,7 @@
                             <div class="file-icon">
                                 <i class="el-icon-folder"></i>
                             </div>
-                            <div class="file-info">file info</div>
+                            <div class="file-info ellipsis">{{entry.content}}</div>
                         </div>
                     </div>
                 </div>
@@ -148,6 +148,10 @@
                     .file-icon {
                         font-size: 300%;
                         margin: 0px 5px;
+                    }
+                    .file-info {
+                        width: 120px;
+                        height: 60px;
                     }
                 }
             }

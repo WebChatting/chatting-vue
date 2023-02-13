@@ -23,6 +23,16 @@
                 >
             <el-button class="extend-button" icon="el-icon-picture-outline-round"></el-button>
         </el-upload>
+        <el-upload
+                action="https://jsonplaceholder.typicode.com/posts/"
+                :before-upload="beforeFileUpload"
+                :on-success="uploadFileSuccess"
+                :on-error="uploadFileError"
+                :show-file-list="false"
+                :multiple="false"
+                >
+            <el-button class="extend-button" icon="el-icon-upload"></el-button>
+        </el-upload>
     </div>
     <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
         v-model="content" @keyup.ctrl.enter="sendMessage(1)">
@@ -87,6 +97,17 @@
             },
             uploadImageError(res, file) {
                 this.$message.error('上传图片失败!')
+            },
+            beforeFileUpload(file) {
+
+            },
+            uploadFileSuccess(res, file) {
+                this.$message.success('上传文件成功!')
+                this.sendMessage(3, 'vue.min.js')
+                console.log('success', res, file)
+            },
+            uploadFileError(res, file) {
+                this.$message.error('上传文件失败!')
             },
         },
         mounted() {

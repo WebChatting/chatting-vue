@@ -21,6 +21,13 @@
                             :src="entry.content"
                             :preview-src-list="[entry.content]">
                         </el-image>
+                        <div class="file"
+                            v-if="entry.messageTypeId == 3">
+                            <div class="file-icon">
+                                <i class="el-icon-folder"></i>
+                            </div>
+                            <div class="file-info">file info</div>
+                        </div>
                     </div>
                 </div>
             </li>
@@ -130,6 +137,18 @@
                     background-color: #fafafa;
                     border-radius: 8px;
                     line-height: 30px;
+                }
+                .file {
+                    width: 180px;
+                    height: 60px;
+                    display: flex;
+                    line-height: 60px;
+                    border: solid #b4b4b4;
+                    border-radius: 5px;
+                    .file-icon {
+                        font-size: 300%;
+                        margin: 0px 5px;
+                    }
                 }
             }
 

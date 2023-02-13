@@ -12,13 +12,27 @@
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
                     <div class="message">
-                        <p v-if="!isSingle && entry.style.left" class="username">{{entry.fromNickname}}</p>
+                        <p v-if="!isSingle && entry.style.left" class="username"
+                            @click="dialogVisible = true">{{entry.fromNickname}}</p>
                         <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
                         <img v-if="entry.messageTypeId == 2" :src="entry.content" class="img">
                     </div>
                 </div>
             </li>
         </ul>
+        <el-dialog
+        title="基本信息"
+        :visible.sync="dialogVisible"
+        width="250px">
+            <div class="priview">
+                <el-image
+                    class="priview-avatar"
+                    src="https://cdn.sxrekord.com/blog/logo.jpg"
+                ></el-image>
+                <div class="priview-username">Rekord</div>
+            </div>
+            <el-button type="primary" round class="priview-button">加好友</el-button>
+        </el-dialog>
     </div>
 </template>
 
@@ -28,14 +42,15 @@
         data() {
             return {
                 isSingle: false,
-                messages: this.$store.state.privateMessages
+                messages: this.$store.state.privateMessages,
+                dialogVisible: false,
             }
         },
         methods: {
             scrollToBottom() {
                 const display = this.$refs.display
                 display.scrollTop = display.scrollHeight - display.clientHeight
-            }
+            },
         },
         mounted() {
             this.$bus.$on('scrollToBottom', this.scrollToBottom)
@@ -87,6 +102,7 @@
                     line-height: 15px;
                     font-size: 10px;
                     color: grey;
+                    cursor: pointer;
                 }
                 .text {
                     margin: 0px;
@@ -113,6 +129,24 @@
             .username {
                 text-align: right;
             }
+        }
+        .priview {
+            display: flex;
+            justify-content: space-around;
+            .priview-avatar {
+                width: 100px;
+                border-radius: 50px;
+            }
+            .priview-username {
+                font-size: 30px;
+                height: 100px;
+                line-height: 100px;
+            }
+        }
+        .priview-button {
+            width: 100%;
+            margin-top: 12px;
+            margin-bottom: -12px;
         }
     }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div id="textinput">
     <div class="richtext">
-        <el-popover placement="top-start" width="400" trigger="click" class="emoBox">
+        <el-popover placement="top-start" width="400" trigger="click">
             <div class="emotionList">
                 <a href="javascript:void(0);" class="emotionItem"
                     v-for="(item, index) in emojiList" :key="index"
@@ -9,12 +9,11 @@
                     {{item}}
                 </a>
             </div>
-            <el-button id="emojiBtn" class="emotionSelect" slot="reference">
+            <el-button class="extend-button" slot="reference">
                 <i class="el-icon-star-on"></i>
             </el-button>
         </el-popover>
         <el-upload
-                class="upload-btn"
                 action="https://jsonplaceholder.typicode.com/posts/"
                 :before-upload="beforeAvatarUpload"
                 :on-success="uploadImageSuccess"
@@ -22,7 +21,7 @@
                 :show-file-list="false"
                 accept=".jpg,.jpeg,.png,.JPG,JPEG,.PNG,.gif,.GIF"
                 >
-            <el-button id="uploadImgBtn" icon="el-icon-picture-outline-round"></el-button>
+            <el-button class="extend-button" icon="el-icon-picture-outline-round"></el-button>
         </el-upload>
     </div>
     <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
@@ -114,6 +113,11 @@
         .richtext {
             display: -webkit-flex; /* Safari */
             display: flex;
+            .extend-button {
+                padding: 8px 10px 0;
+                border: none;
+                background-color: white;
+            }
         }
         > textarea {
             padding: 10px;
@@ -121,32 +125,11 @@
             height: 30%;
             border: none;
             outline: none;
-            resize: none;//禁止拉伸
+            resize: none; // 禁止拉伸
         }
         #sendBtn {
             float: right;
             margin-right: 10px;
-        }
-        #uploadImgBtn {
-            border: none;
-            width: 40px;
-            padding-bottom: 0px;
-            padding-left: 5px;
-        }
-        #uploadImgBtn:hover {
-            background-color: white;
-        }
-        #emojiBtn {
-            border: none;
-            width: 40px;
-            padding-bottom: 0px;
-            margin-left: -8px;
-        }
-        #emojiBtn:hover {
-            background-color: white;
-        }
-        .upload-btn {
-            display: inline-block;
         }
     }
     .emotionList {
@@ -158,9 +141,6 @@
         width: 10%;
         font-size: 20px;
         text-align: center;
-    }
-    /*包含以下四种的链接*/
-    .emotionItem {
         text-decoration: none;
     }
     /*正常的未被访问过的链接*/

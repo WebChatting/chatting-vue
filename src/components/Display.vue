@@ -12,8 +12,8 @@
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
                     <div class="message">
-                        <p v-if="!isSingle && entry.style.left" class="username"
-                            @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</p>
+                        <div><p v-if="!isSingle && entry.style.left" class="username"
+                            @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</p></div>
                         <p v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</p>
                         <img v-if="entry.messageTypeId == 2" :src="entry.content" class="img">
                     </div>
@@ -116,6 +116,7 @@
                     font-size: 10px;
                     color: grey;
                     cursor: pointer;
+                    display: inline-block;
                 }
                 .text {
                     margin: 0px;

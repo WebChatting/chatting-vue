@@ -22,7 +22,8 @@
                             :preview-src-list="[entry.content]">
                         </el-image>
                         <div class="file"
-                            v-if="entry.messageTypeId == 3">
+                            v-if="entry.messageTypeId == 3"
+                            @click="downloadFile(entry.id)">
                             <div class="file-icon">
                                 <i class="el-icon-folder"></i>
                             </div>
@@ -75,6 +76,9 @@
             openInfoDialog(id) {
                 this.dialogVisible = true
                 this.dialogUserId = id
+            },
+            downloadFile(id) {
+                window.open("https://cdn.sxrekord.com/blog/Netty%20in%20Action.pdf")
             },
         },
         mounted() {
@@ -145,6 +149,7 @@
                     line-height: 60px;
                     border: solid #b4b4b4;
                     border-radius: 5px;
+                    cursor: pointer;
                     .file-icon {
                         font-size: 300%;
                         margin: 0px 5px;

@@ -104,6 +104,43 @@ const state = {
             userStateId: 1,
         },
     ],
+    applicationList: [
+        {
+            id: 10,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "a-robot",
+            userStateId: 1,
+            status: 0,
+        },
+        {
+            id: 11,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "applicationRekordrekordrekordrekordrekordrekordrekordrekord",
+            userStateId: 2,
+            status: 0,
+        },
+        {
+            id: 12,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "a-stone",
+            userStateId: 1,
+            status: 0,
+        },
+        {
+            id: 13,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "agree",
+            userStateId: 1,
+            status: 1,
+        },
+        {
+            id: 14,
+            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
+            nickname: "refuse",
+            userStateId: 1,
+            status: 2,
+        },
+    ]
 }
 
 export default new Vuex.Store({

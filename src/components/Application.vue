@@ -1,7 +1,7 @@
 <template>
     <div id="application">
         <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
-            <li v-for="item in users" :key="item.id">
+            <li v-for="(item, index) in users" :key="item.id">
                 <el-card class="box-card" body-style="padding: 4px 8px;">
                     <div class="card">
                         <div>
@@ -17,10 +17,13 @@
                             </el-image>
                             <p class="name ellipsis">{{ item.nickname }}</p>
                         </div>
-                        <el-button-group>
-                            <el-button size="mini" class="button">同意</el-button>
-                            <el-button size="mini" class="button">拒绝</el-button>
+                        <el-button-group v-if="item.status == 0">
+                            <el-button size="mini" class="button"
+                                @click="agreeApplication(index)">同意</el-button>
+                            <el-button size="mini" class="button"
+                                @click="refuseApplication(index)">拒绝</el-button>
                         </el-button-group>
+                        <div class="result" v-else>{{item.status == 1 ? '已同意' : '已拒绝'}}</div>
                     </div>
                     <p class="time">
                         <span>2023 22:58:43</span>
@@ -36,12 +39,19 @@ export default {
     name: "Application",
     data() {
         return {
-            users: this.$store.state.friendList,
+            users: this.$store.state.applicationList,
         };
     },
     methods: {
         load() {
 
+        },
+        agreeApplication(id) {
+            this.$store.state.friendList.push(this.users[id])
+            this.users[id].status = 1
+        },
+        refuseApplication(id) {
+            this.users[id].status = 2
         },
     },
 }
@@ -67,6 +77,9 @@ export default {
                     display: inline-block;
                     margin: 0px 0px 0px 8px;
                     width: 80px;
+                }
+                .result {
+                    margin: auto 0;
                 }
                 .button {
                     padding: 0px;

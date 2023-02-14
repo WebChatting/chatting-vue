@@ -1,6 +1,6 @@
 <template>
     <div id="application">
-        <ul class="infinite-list" v-infinite-scroll="load" style="overflow:auto">
+        <ul class="infinite-list" v-infinite-scroll="load">
             <li v-for="(item, index) in users" :key="item.id">
                 <el-card class="box-card" body-style="padding: 4px 8px;">
                     <div class="card">
@@ -31,6 +31,9 @@
                 </el-card>
             </li>
         </ul>
+        <div class="bottom-bar">
+            <el-button class="bottom-button"><i class="el-icon-delete"></i></el-button>
+        </div>
     </div>
 </template>
 
@@ -60,6 +63,8 @@ export default {
 <style lang="scss" scoped>
 #application {
     ul {
+        max-height: 520px;
+        overflow-y: scroll;
         padding: 0px;
         margin: 0px;
         li {
@@ -98,6 +103,18 @@ export default {
                     border-radius: 3px;
                 }
             }
+        }
+    }
+    .bottom-bar {
+        text-align: right;
+        margin-right: 20px;
+        .bottom-button {
+            padding: 0;
+            background-color: #eceae8;
+            border: none;
+        }
+        .bottom-button:hover {
+            color: #f78989
         }
     }
 }

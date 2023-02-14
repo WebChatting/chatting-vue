@@ -33,6 +33,8 @@
                 >
             <el-button class="extend-button" icon="el-icon-upload"></el-button>
         </el-upload>
+        <el-button class="extend-button" icon="el-icon-time"
+            @click="loadFormerData"></el-button>
         <el-button class="extend-button" icon="el-icon-more"></el-button>
     </div>
     <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
@@ -55,6 +57,9 @@
             }
         },
         methods: {
+            loadFormerData() {
+                this.$bus.$emit('loadFormerData')
+            },
             addToMessage(item) {
                 this.content += item
             },

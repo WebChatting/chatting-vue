@@ -1,6 +1,6 @@
 <template>
     <div id="display"
-        ref="display">
+        ref="display" @scroll="scrollPanel">
         <ul>
             <li v-for="entry in messages" :key="entry.id">
                 <p class="time">
@@ -12,7 +12,7 @@
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
                     <div class="message-body">
-                        <div><div v-if="isGroup && entry.style.left" class="name"
+                        <div><div v-if="isGroup && entry.style.left === true" class="name"
                             @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</div></div>
                         <div class="message">
                             <div v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</div>
@@ -73,6 +73,11 @@
             },
         },
         methods: {
+            scrollPanel() {
+                if (this.$refs.display.scrollTop == 0) {
+                    this.loadFormerData()
+                }
+            },
             scrollToBottom() {
                 const display = this.$refs.display
                 display.scrollTop = display.scrollHeight - display.clientHeight
@@ -84,13 +89,31 @@
             downloadFile(id) {
                 window.open("https://cdn.sxrekord.com/blog/Netty%20in%20Action.pdf")
             },
+            loadFormerData() {
+                // 加载五条新数据
+                for (let i = 0; i < 5; i++) {
+                    this.messages.unshift({
+                        id: this.messages.length,
+                        style: {
+                            left: this.messages.length % 2 == 0 ? true : false,
+                            right: this.messages.length % 2 == 1 ? true : false,
+                        },
+                        fromNickname: 'id' + this.messages.length,
+                        userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
+                        messageTypeId: 1,
+                        content: 'formerData' + this.messages.length,
+                    })
+                }
+            }
         },
         mounted() {
             this.$bus.$on('scrollToBottom', this.scrollToBottom)
+            this.$bus.$on('loadFormerData', this.loadFormerData)
         },
         beforeDestroy() {
             // 解绑自定义事件
             this.$bus.$off('scrollToBottom')
+            this.$bus.$off('loadFormerData')
         }
     }
 </script>

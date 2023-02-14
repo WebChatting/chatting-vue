@@ -12,7 +12,7 @@
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
                     <div class="message-body">
-                        <div><div v-if="!isSingle && entry.style.left" class="name"
+                        <div><div v-if="isGroup && entry.style.left" class="name"
                             @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</div></div>
                         <div class="message">
                             <div v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</div>
@@ -56,11 +56,13 @@
         name: "Display",
         data() {
             return {
-                isSingle: false,
                 messages: this.$store.state.privateMessages,
                 dialogVisible: false,
                 dialogUserId: 0,
             }
+        },
+        props: {
+            'isGroup': Boolean,
         },
         computed: {
             dialogAvatar() {

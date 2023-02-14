@@ -3,12 +3,12 @@
         v-model="activeName" @tab-click="handleClick">
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-custom"></i> {{firstLabelName}}</span>
-            <Contact v-show="isContact"/>
+            <Contact v-show="isContact" :isGroup="false"/>
             <Application v-show="!isContact"/>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-comment"></i> {{secondLabelName}}</span>
-            <Contact v-show="isContact"/>
+            <Contact v-show="isContact" :isGroup="true"/>
             <Application v-show="!isContact"/>
         </el-tab-pane>
     </el-tabs>

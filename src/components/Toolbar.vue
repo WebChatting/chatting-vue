@@ -112,7 +112,6 @@
                 this.$bus.$emit('closeRightPanel')
                 // 打开左侧抽屉
                 this.drawerSwitch = true
-
             },
             beforeCloseDrawer(done) {
                 if (this.loading) {
@@ -128,6 +127,8 @@
                         this.loading = false;
                         }, 400);
                     }, 2000);
+                    }, _ => {
+                        this.cancelForm()
                     })
                     .catch(_ => {});
             },

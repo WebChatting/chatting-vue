@@ -120,13 +120,13 @@
                 .message-structure {
                     display: -webkit-flex; /* Safari */
                     display: flex;
+                    padding-top: 3px;
                     .avatar {
-                        margin: 3px 10px;
+                        margin: 0px 10px 3px;
                     }
                     .message-body {
                         max-width: 80%;
                         .name {
-                            margin: 0px;
                             padding: 0px;
                             line-height: 15px;
                             height: 15px;
@@ -174,9 +174,6 @@
         }
         .right {
             flex-direction: row-reverse;
-            .message {
-                margin-top: 3px;
-            }
         }
         .priview-info {
             display: flex;

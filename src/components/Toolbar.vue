@@ -57,6 +57,17 @@
                 <div class="drawer-body">
                     <el-form :model="userInfo">
                         <!-- 头像 -->
+                        <el-form-item label="头像：" label-width="60px">
+                            <el-upload
+                                class="avatar-uploader"
+                                action="https://jsonplaceholder.typicode.com/posts/"
+                                :show-file-list="false"
+                                :on-success="handleAvatarSuccess"
+                                :before-upload="beforeAvatarUpload">
+                                <img v-if="imageUrl" :src="imageUrl" class="drawer-avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
 
                         <el-form-item label="账号：" label-width="60px">
                             <el-input v-model="userInfo.name" autocomplete="off"></el-input>
@@ -82,13 +93,14 @@
         data() {
             return {
                 mode: false,
-                drawerSwitch: true,
+                drawerSwitch: false,
                 userInfo: {
                     name: '',
                     password: '',
                 },
                 loading: false,
                 timer: null,
+                imageUrl: '',
             }
         },
         computed: {
@@ -137,6 +149,12 @@
                 this.drawerSwitch = false;
                 clearTimeout(this.timer);
             },
+            handleAvatarSuccess(res, file) {
+                this.imageUrl = URL.createObjectURL(file.raw);
+            },
+            beforeAvatarUpload(file) {
+                console.log('before avatar upload')
+            },
         },
     }
 </script>
@@ -178,6 +196,30 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 20px;
+    .drawer-body {
+        .avatar-uploader {
+            width: 178px;
+            height: 178px;
+            border: 1px dashed #d9d9d9;
+            border-radius: 6px;
+            cursor: pointer;
+            .drawer-avatar {
+                width: 178px;
+                height: 178px;
+            }
+            .avatar-uploader-icon {
+                font-size: 28px;
+                color: #8c939d;
+                width: 178px;
+                height: 178px;
+                line-height: 178px;
+                text-align: center;
+            }
+        }
+        .avatar-uploader:hover {
+            border-color: #409EFF;
+        }
+    }
     .drawer-footer {
         text-align: center;
         width: 90%;

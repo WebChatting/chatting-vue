@@ -81,9 +81,13 @@ export default {
 
 <style lang="scss" scoped>
 #application {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 540px;
     ul {
         max-height: 520px;
-        overflow-y: scroll;
+        overflow-y: auto;
         padding: 0px;
         margin: 0px;
         li {
@@ -126,7 +130,8 @@ export default {
     }
     .bottom-bar {
         text-align: right;
-        margin-right: 20px;
+        padding-right: 20px;
+        border-top: 1px solid #a09f9f;
         div {
             display: inline;
             cursor: pointer;

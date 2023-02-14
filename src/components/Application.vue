@@ -32,7 +32,7 @@
             </li>
         </ul>
         <div class="bottom-bar">
-            <el-button class="bottom-button"><i class="el-icon-delete"></i></el-button>
+            <div @click="clearProcessed"><i class="el-icon-delete"></i></div>
         </div>
     </div>
 </template>
@@ -55,6 +55,25 @@ export default {
         },
         refuseApplication(id) {
             this.users[id].status = 2
+        },
+        clearProcessed() {
+            this.$confirm('此操作将清理所有已处理的好友或群组申请记录, 是否继续?', '提示', {
+                confirmButtonText: '确定',
+                cancelButtonText: '取消',
+                type: 'warning'
+            }).then(() => {
+                // 移除已处理的申请记录
+                this.users = this.users.filter(item => item.status == 0)
+                this.$message({
+                    type: 'success',
+                    message: '清理成功!'
+                });
+            }).catch(() => {
+                this.$message({
+                    type: 'info',
+                    message: '已取消清理'
+                });
+            });
         },
     },
 }
@@ -108,12 +127,11 @@ export default {
     .bottom-bar {
         text-align: right;
         margin-right: 20px;
-        .bottom-button {
-            padding: 0;
-            background-color: #eceae8;
-            border: none;
+        div {
+            display: inline;
+            cursor: pointer;
         }
-        .bottom-button:hover {
+        div:hover {
             color: #f78989
         }
     }

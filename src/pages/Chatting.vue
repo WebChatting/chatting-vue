@@ -9,7 +9,7 @@
     </div>
     <div class="main">
       <div v-show="isChatPanel">
-        <Title/>
+        <Title :chatObject="this.chatObject"/>
         <Display :isGroup="this.isGroup"/>
         <TextInput/>
       </div>
@@ -44,12 +44,14 @@
       return {
         isChatPanel: true,
         isGroup: false,
+        chatObject: '',
       }
     },
     methods: {
-      openRightPanel(isChatPanel = true, isGroup) {
+      openRightPanel(isChatPanel = true, isGroup, chatObject) {
         this.isChatPanel = isChatPanel
         this.isGroup = isGroup
+        this.chatObject = chatObject
         this.$refs.app.style.width = 900 + 'px'
         this.$bus.$emit('scrollToBottom')
       },

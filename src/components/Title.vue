@@ -1,6 +1,6 @@
 <template>
     <div class="chatTitle">
-        <span class="titleName">rekord</span>
+        <span class="titleName ellipsis">{{chatObject}}</span>
         <el-button class="moreBtn" size="small" icon="el-icon-error"
           @click="closeRightPanel"></el-button>
     </div>
@@ -13,7 +13,10 @@
           closeRightPanel() {
             this.$bus.$emit('closeRightPanel')
           }
-        }
+        },
+        props: [
+          'chatObject'
+        ],
     }
 </script>
 

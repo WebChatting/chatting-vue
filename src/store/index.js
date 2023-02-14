@@ -94,7 +94,7 @@ const state = {
         {
             id: 1,
             userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "rekordrekordrekordrekordrekordrekordrekordrekord",
+            nickname: "rekordrekordrekordrekordrekordrekordrekordrekordrekordrekord",
             userStateId: 2,
         },
         {

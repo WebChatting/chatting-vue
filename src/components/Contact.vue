@@ -2,7 +2,7 @@
     <div id="list">
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <ul>
-                <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel">
+                <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
                     <div style="display: flex; justify-content: space-between">
                         <div>
                             <el-badge :is-dot="true" :value="2">
@@ -41,8 +41,8 @@
             'isGroup': Boolean,
         },
         methods: {
-            openRightPanel() {
-                this.$bus.$emit("openRightPanel", true, this.isGroup)
+            openRightPanel(chatObject) {
+                this.$bus.$emit("openRightPanel", true, this.isGroup, chatObject)
             },
             deleteContact(id) {
                 this.$confirm('此操作将永久删除该好友/群组, 是否继续?', '提示', {

@@ -37,6 +37,8 @@
                         </el-switch>
                         <div><el-button icon="el-icon-edit" class="pop-button"
                             @click="openDrawer"></el-button></div>
+                        <div><el-button icon="el-icon-s-opportunity" class="pop-button"
+                            @click="createGroup"></el-button></div>
                     </div>
                     <el-button class="tool-button" slot="reference"><i class="el-icon-s-tools"></i></el-button>
                 </el-popover>
@@ -46,7 +48,7 @@
             </div>
         </div>
 
-        <!-- 抽屉结构 -->
+        <!-- 个人信息抽屉结构 -->
         <el-drawer
             title="个人信息"
             :before-close="beforeCloseDrawer"
@@ -124,6 +126,9 @@
                 this.$bus.$emit('closeRightPanel')
                 // 打开左侧抽屉
                 this.drawerSwitch = true
+            },
+            createGroup() {
+                console.log('create group')
             },
             beforeCloseDrawer(done) {
                 if (this.loading) {

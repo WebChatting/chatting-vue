@@ -125,7 +125,8 @@
 <style lang="scss" scoped>
     #list {
         .user-list {
-            max-height: 570px;
+            max-height: 540px;
+            height: 540px;
         }
         ul {
             padding: 0px;

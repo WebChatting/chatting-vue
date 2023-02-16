@@ -1,7 +1,7 @@
 <template>
     <div id="list">
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
-            <ul>
+            <ul v-if="!isGroup">
                 <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
                     <div style="display: flex; justify-content: space-between">
                         <div>
@@ -23,6 +23,62 @@
                     </div>
                 </li>
             </ul>
+            <el-collapse v-else class="collapse-item">
+                <el-collapse-item>
+                    <template slot="title">
+                        <div class="title">我创建的群聊</div>
+                    </template>
+                    <ul>
+                        <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
+                            <div style="display: flex; justify-content: space-between">
+                                <div>
+                                    <el-badge :is-dot="true" :value="2">
+                                        <el-image :class="{grayscale: item.userStateId != 1}"
+                                            class="avatar"
+                                            :preview-src-list="[item.userProfile]"
+                                            :src="item.userProfile"
+                                            :alt="item.nickname"
+                                        >
+                                            <div slot="error" class="image-slot">
+                                                <i class="el-icon-picture-outline"></i>
+                                            </div>
+                                        </el-image>
+                                    </el-badge>
+                                    <p class="name ellipsis">{{ item.nickname }}</p>
+                                </div>
+                                <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
+                            </div>
+                        </li>
+                    </ul>
+                </el-collapse-item>
+                <el-collapse-item>
+                    <template slot="title">
+                        <div class="title">我加入的群聊</div>
+                    </template>
+                    <ul>
+                        <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
+                            <div style="display: flex; justify-content: space-between">
+                                <div>
+                                    <el-badge :is-dot="true" :value="2">
+                                        <el-image :class="{grayscale: item.userStateId != 1}"
+                                            class="avatar"
+                                            :preview-src-list="[item.userProfile]"
+                                            :src="item.userProfile"
+                                            :alt="item.nickname"
+                                        >
+                                            <div slot="error" class="image-slot">
+                                                <i class="el-icon-picture-outline"></i>
+                                            </div>
+                                        </el-image>
+                                    </el-badge>
+                                    <p class="name ellipsis">{{ item.nickname }}</p>
+                                </div>
+                                <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
+                            </div>
+                        </li>
+                    </ul>
+                </el-collapse-item>
+            </el-collapse>
             <p v-if="false">加载中...</p>
             <p v-if="false">没有更多了</p>
         </div>
@@ -103,6 +159,15 @@
             height: 18px;
             :hover {
                 color: #f78989;
+            }
+        }
+
+        .collapse-item {
+            .title {
+                padding-left: 5px;
+            }
+            ul {
+                margin-bottom: 0px;
             }
         }
     }

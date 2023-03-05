@@ -42,7 +42,7 @@
                             <div class="submit">
                                 <div class="error-text">{{errorText}}</div>
                                 <div class="button" id="normal-login"
-                                @click="login" :class="classObj">{{loginText}}</div>
+                                @click="submit" :class="classObj">{{loginText}}</div>
                             </div>
                         </div>
                     </div>
@@ -113,12 +113,25 @@
                     this.isloading = false;
                 }, 500);
             },
-            login() {
+            submit() {
               if (this.classObj.disabled) {
                 return
               }
               this.showLoading()
               this.classObj.disabled = true
+
+              if (this.isLogin) {
+                this.login()
+              } else {
+                this.register()
+              }
+            },
+            restore(text) {
+              this.loginText = text
+              this.hideLoading()
+              this.classObj.disabled = false
+            },
+            login() {
               this.loginText = "登录中..."
 
               // 发送后端请求
@@ -131,13 +144,38 @@
                 },
                 responseType: 'json',
               }).then((response) => {
-                this.loginText = "登录"
-                this.hideLoading()
-                this.classObj.disabled = false
+                this.restore("登录")
                 if (response.data.status == 200) {
                   this.$router.replace("chatting")
                 } else {
                   this.errorText = response.data.msg;
+                }
+              })
+            },
+            register() {
+              this.loginText = "注册中..."
+
+              // 发送后端请求
+              axios({
+                method: 'post',
+                url: '/chatting/register',
+                params: {
+                  username: this.$refs.accountInput.value.trim(),
+                  password: this.$refs.passwordInput.value.trim(),
+                },
+                responseType: 'json',
+              }).then((response) => {
+                this.restore("注册")
+                if (response.data.status == 200) {
+                  this.$notify({
+                    title: '成功',
+                    message: '注册成功',
+                    type: 'success'
+                  });
+                  this.errorText = ''
+                  this.toggle()
+                } else {
+                  this.errorText = response.data.msg
                 }
               })
             },

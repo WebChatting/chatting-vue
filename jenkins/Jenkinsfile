@@ -1,0 +1,24 @@
+pipeline {
+	agent {
+		label 'fx50j-arch'
+	}
+
+	stages {
+		stage('NPM Install') {
+			steps {
+				sh 'npm install'
+			}
+		}
+		stage('Build') {
+			steps {
+				sh 'npm run build'
+			}
+		}
+		stage('Deploy') {
+			steps {
+				sh 'rsync -r --delete dist/ /srv/http/chatting'
+			}
+		}
+	}
+}
+

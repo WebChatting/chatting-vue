@@ -197,7 +197,6 @@ input {
           box-shadow: none !important;
   outline: 0 !important;
   border: 0;
-  -webkit-appearance: none;
 }
 input::-webkit-input-placeholder {
   /* WebKit browsers */

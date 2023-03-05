@@ -135,7 +135,7 @@
                 this.hideLoading()
                 this.classObj.disabled = false
                 if (response.data.status == 200) {
-                  window.location.href = "#/chatting";
+                  this.$router.replace("chatting")
                 } else {
                   this.errorText = response.data.msg;
                 }

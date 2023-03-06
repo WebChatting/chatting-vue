@@ -189,6 +189,7 @@ export default {
         }
     }
     .collapse-item {
+        overflow-y: hidden;
         .title {
             padding-left: 5px;
         }

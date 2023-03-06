@@ -86,6 +86,42 @@
                 </div>
             </div>
         </el-drawer>
+
+        <!-- 创建群组抽屉结构 -->
+        <el-drawer
+            title="创建群组"
+            :before-close="beforeCloseDrawer"
+            :visible.sync="groupDrawerSwitch"
+            direction="ltr"
+            ref="groupDrawer">
+            <div class="drawer-content">
+                <div class="drawer-body">
+                    <el-form :model="userInfo">
+                        <!-- 头像 -->
+                        <el-form-item label="头像：" label-width="60px">
+                            <el-upload
+                                class="avatar-uploader"
+                                action="https://jsonplaceholder.typicode.com/posts/"
+                                :show-file-list="false"
+                                :on-success="handleAvatarSuccess"
+                                :before-upload="beforeAvatarUpload">
+                                <img v-if="imageUrl" :src="imageUrl" class="drawer-avatar">
+                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                            </el-upload>
+                        </el-form-item>
+
+                        <el-form-item label="名称：" label-width="60px">
+                            <el-input v-model="userInfo.name" autocomplete="off"></el-input>
+                        </el-form-item>
+                    </el-form>
+                </div>
+                <div class="drawer-footer">
+                    <el-button @click="cancelForm" class="drawer-button">取 消</el-button>
+                    <el-button type="primary" @click="$refs.groupDrawer.closeDrawer()" :loading="loading"
+                        class="drawer-button">{{ loading ? '创建中 ...' : '创 建' }}</el-button>
+                </div>
+            </div>
+        </el-drawer>
     </div>
 </template>
 
@@ -96,6 +132,7 @@
             return {
                 mode: false,
                 drawerSwitch: false,
+                groupDrawerSwitch: false,
                 userInfo: {
                     name: '',
                     password: '',
@@ -128,7 +165,10 @@
                 this.drawerSwitch = true
             },
             createGroup() {
-                console.log('create group')
+                // 关闭右侧面板
+                this.$bus.$emit('closeRightPanel')
+                // 打开左侧抽屉
+                this.groupDrawerSwitch = true
             },
             beforeCloseDrawer(done) {
                 if (this.loading) {
@@ -152,6 +192,7 @@
             cancelForm() {
                 this.loading = false;
                 this.drawerSwitch = false;
+                this.groupDrawerSwitch = false;
                 clearTimeout(this.timer);
             },
             handleAvatarSuccess(res, file) {

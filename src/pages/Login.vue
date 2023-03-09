@@ -137,7 +137,7 @@
               // 发送后端请求
               axios({
                 method: 'post',
-                url: '/chatting/login',
+                url: '/chatting/user/login',
                 params: {
                   username: this.$refs.accountInput.value.trim(),
                   password: this.$refs.passwordInput.value.trim()
@@ -158,7 +158,7 @@
               // 发送后端请求
               axios({
                 method: 'post',
-                url: '/chatting/register',
+                url: '/chatting/user/register',
                 params: {
                   username: this.$refs.accountInput.value.trim(),
                   password: this.$refs.passwordInput.value.trim(),

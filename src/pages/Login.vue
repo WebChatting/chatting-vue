@@ -146,6 +146,7 @@
               }).then((response) => {
                 this.restore("登录")
                 if (response.data.status == 200) {
+                  window.sessionStorage.setItem("user", JSON.stringify(response.data.data));
                   this.$router.replace("chatting")
                 } else {
                   this.errorText = response.data.msg;

@@ -1,9 +1,9 @@
 <template>
     <div id="toolbar">
         <div class="avatar">
-            <el-avatar src="https://cdn.sxrekord.com/blog/logo.jpg"
+            <el-avatar :src="user.avatarPath"
                 @error="false" :size="45" alt="Avatar">
-                <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
+                <img src="https://cdn.sxrekord.com/blog/logo.jpg"/>
             </el-avatar>
         </div>
         <div class="bar">
@@ -141,6 +141,7 @@
                 loading: false,
                 timer: null,
                 imageUrl: '',
+                user: JSON.parse(window.sessionStorage.getItem("user")),
             }
         },
         computed: {

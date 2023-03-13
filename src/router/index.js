@@ -14,7 +14,17 @@ const routes = [
     },
     {
         path: '/chatting',
+        name: 'chatting',
         component: Chatting,
+        beforeEnter: (to, from, next) => {
+            if (window.sessionStorage.getItem("user") == null) {
+                next({
+                    path: '/',
+                })
+            } else {
+                next()
+            }
+        },
     },
 ]
 

@@ -39,6 +39,7 @@
                             @click="openDrawer"></el-button></div>
                         <div><el-button icon="el-icon-s-opportunity" class="pop-button"
                             @click="createGroup"></el-button></div>
+                        <div><el-button icon="el-icon-question" class="pop-button"></el-button></div>
                     </div>
                     <el-button class="tool-button" slot="reference"><i class="el-icon-s-tools"></i></el-button>
                 </el-popover>

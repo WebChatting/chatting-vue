@@ -95,9 +95,9 @@ const state = {
         },
         {
             id: 14,
-            type: 0,
+            type: 1,
             name: "refuse",
-            avatarPath: "avatar/default_user_avatar.jpg",
+            avatarPath: "avatar/default_group_avatar.jpg",
             status: 2,
             online: false,
         },

@@ -4,7 +4,7 @@
       <Toolbar/>
     </div>
     <div class="sidebar">
-      <SearchBar/>
+      <TopSearchBar/>
       <NavigationZone/>
     </div>
     <div class="main">
@@ -22,7 +22,7 @@
 
 <script>
   import Toolbar from "../components/Toolbar"
-  import SearchBar from '../components/SearchBar'
+  import TopSearchBar from '../components/TopSearchBar'
   import NavigationZone from '../components/NavigationZone'
   import Title from "../components/Title"
   import MessageArea from '../components/MessageArea'
@@ -33,7 +33,7 @@
     name: 'Chatting',
     components: {
       Toolbar,
-      SearchBar,
+      TopSearchBar,
       NavigationZone,
       Title,
       MessageArea,

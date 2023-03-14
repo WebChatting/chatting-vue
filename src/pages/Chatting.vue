@@ -4,17 +4,17 @@
       <Toolbar/>
     </div>
     <div class="sidebar">
-      <SearchBar/>
-      <List/>
+      <NavigationTopSearchBar/>
+      <NavigationZone/>
     </div>
     <div class="main">
       <div v-show="isChatPanel">
-        <Title :chatObject="this.chatObject"/>
-        <Display :isGroup="this.isGroup"/>
-        <TextInput/>
+        <MessageTopTitle :chatObject="this.chatObject"/>
+        <MessageArea :isGroup="this.isGroup"/>
+        <MessageBottomInputArea/>
       </div>
       <div v-show="!isChatPanel">
-        <NavigationBar/>
+        <SearchArea/>
       </div>
     </div>
   </div>
@@ -22,23 +22,23 @@
 
 <script>
   import Toolbar from "../components/Toolbar"
-  import SearchBar from '../components/SearchBar'
-  import List from '../components/List'
-  import Title from "../components/Title"
-  import Display from '../components/Display'
-  import TextInput from '../components/TextInput'
-  import NavigationBar from '../components/NavigationBar'
+  import NavigationTopSearchBar from '../components/NavigationTopSearchBar'
+  import NavigationZone from '../components/NavigationZone'
+  import MessageTopTitle from "../components/MessageTopTitle"
+  import MessageArea from '../components/MessageArea'
+  import MessageBottomInputArea from '../components/MessageBottomInputArea'
+  import SearchArea from '../components/SearchArea'
   
   export default {
     name: 'Chatting',
     components: {
       Toolbar,
-      SearchBar,
-      List,
-      Title,
-      Display,
-      TextInput,
-      NavigationBar,
+      NavigationTopSearchBar,
+      NavigationZone,
+      MessageTopTitle,
+      MessageArea,
+      MessageBottomInputArea,
+      SearchArea,
     },
     data() {
       return {

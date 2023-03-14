@@ -2,21 +2,21 @@
     <el-tabs :stretch="true" type="card">
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-custom"></i> 找人</span>
-            <Search/>
+            <SearchAreaBody/>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-comment"></i> 找群</span>
-            <Search/>
+            <SearchAreaBody/>
         </el-tab-pane>
     </el-tabs>
 </template>
 
 <script>
-import Search from './Search'
+import SearchAreaBody from './SearchAreaBody'
 export default {
-    name: 'NavigationBar',
+    name: 'SearchArea',
     components: {
-        Search,
+        SearchAreaBody,
     },
 }
 </script>

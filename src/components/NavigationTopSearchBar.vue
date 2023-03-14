@@ -7,7 +7,7 @@
 
 <script>
     export default {
-        name: "TopSearchBar",
+        name: "NavigationTopSearchBar",
         data() {
             return {
                 input: '',

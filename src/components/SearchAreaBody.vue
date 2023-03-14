@@ -28,7 +28,7 @@
 
 <script>
 export default {
-    name: 'Search',
+    name: 'SearchAreaBody',
     data() {
         return {
             input: '',

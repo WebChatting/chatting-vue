@@ -6,24 +6,24 @@
                 <p class="time">
                     <span>{{new Date()}}</span>
                 </p>
-                <div class="message-structure" :class="{right: entry.style.right}">
-                    <el-avatar class="avatar" :src="entry.userProfile"
+                <div class="message-structure" :class="{right: entry.fromId === user.id}">
+                    <el-avatar class="avatar" :src="entry.avatarPath"
                         @error="false" shape="circle" :size="30" alt="Avatar">
                         <img src="https://cube.elemecdn.com/e/fd/0fc7d20532fdaf769a25683617711png.png"/>
                     </el-avatar>
                     <div class="message-body">
-                        <div><div v-if="isGroup && entry.style.left === true" class="name"
-                            @click="openInfoDialog(entry.id)">{{entry.fromNickname}}</div></div>
+                        <div><div v-if="isGroup && entry.fromId !== user.id" class="name"
+                            @click="openInfoDialog(entry.id)">{{entry.name}}</div></div>
                         <div class="message">
-                            <div v-if="entry.messageTypeId == 1" class="text">{{entry.content}}</div>
+                            <div v-if="entry.contentType == 1" class="text">{{entry.content}}</div>
                             <el-image
-                                v-if="entry.messageTypeId == 2"
+                                v-if="entry.contentType == 2"
                                 class="image"
                                 :src="entry.content"
                                 :preview-src-list="[entry.content]">
                             </el-image>
                             <div class="file"
-                                v-if="entry.messageTypeId == 3"
+                                v-if="entry.contentType == 3"
                                 @click="downloadFile(entry.id)">
                                 <div class="file-icon">
                                     <i class="el-icon-folder"></i>
@@ -44,7 +44,7 @@
                     class="priview-avatar"
                     :src="dialogAvatar"
                 ></el-image>
-                <div class="priview-username ellipsis">{{dialogNickName}}</div>
+                <div class="priview-username ellipsis">{{dialogname}}</div>
             </div>
             <el-button type="primary" round class="priview-button">加好友</el-button>
         </el-dialog>
@@ -59,6 +59,7 @@
                 messages: this.$store.state.privateMessages,
                 dialogVisible: false,
                 dialogUserId: 0,
+                user: JSON.parse(window.sessionStorage.getItem("user")),
             }
         },
         props: {
@@ -68,8 +69,8 @@
             dialogAvatar() {
                 return this.$store.state.privateMessages[this.dialogUserId].userProfile
             },
-            dialogNickName() {
-                return this.$store.state.privateMessages[this.dialogUserId].fromNickname
+            dialogname() {
+                return this.$store.state.privateMessages[this.dialogUserId].fromname
             },
         },
         methods: {
@@ -94,13 +95,10 @@
                 for (let i = 0; i < 5; i++) {
                     this.messages.unshift({
                         id: this.messages.length,
-                        style: {
-                            left: this.messages.length % 2 == 0 ? true : false,
-                            right: this.messages.length % 2 == 1 ? true : false,
-                        },
-                        fromNickname: 'id' + this.messages.length,
-                        userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-                        messageTypeId: 1,
+                        name: 'id' + this.messages.length,
+                        fromId: this.messages.length % 2 == 0 ? 501 : 502,
+                        avatarPath: 'avatar/default_user_avatar.jpg',
+                        contentType: 1,
                         content: 'formerData' + this.messages.length,
                     })
                 }

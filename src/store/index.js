@@ -18,9 +18,10 @@ const state = {
             style: {
                 left: true
             },
-            fromNickname: 'rekordrekordrekordrekordrekordrekord',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 1,
+            fromId: 502,
+            name: 'rekordrekordrekordrekordrekordrekord',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 1,
             content: 'hei',
         },
         {
@@ -28,9 +29,10 @@ const state = {
             style: {
                 right: true
             },
-            fromNickname: 'hello',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 1,
+            fromId: 501,
+            name: 'hello',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 1,
             content: '你好',
         },
         {
@@ -38,29 +40,32 @@ const state = {
             style: {
                 left: true
             },
-            fromNickname: 'botbotbo',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 2,
-            content: 'https://cdn.sxrekord.com/blog/logo.jpg',
+            fromId: 502,
+            name: 'botbotbo',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 2,
+            content: 'avatar/default_user_avatar.jpg',
         },
         {
             id: 3,
             style: {
                 right: true
             },
-            fromNickname: 'botbotbo',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 2,
-            content: 'https://cdn.sxrekord.com/blog/logo.jpg',
+            fromId: 501,
+            name: 'botbotbo',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 2,
+            content: 'avatar/default_user_avatar.jpg',
         },
         {
             id: 4,
             style: {
                 left: true
             },
-            fromNickname: 'botbotbo',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 1,
+            fromId: 502,
+            name: 'botbotbo',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 1,
             content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',
         },
         {
@@ -68,9 +73,10 @@ const state = {
             style: {
                 left: true
             },
-            fromNickname: 'botbotbo',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 3,
+            fromId: 502,
+            name: 'botbotbo',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 3,
             content: 'vue.js',
         },
         {
@@ -78,9 +84,10 @@ const state = {
             style: {
                 right: true
             },
-            fromNickname: 'botbotbo',
-            userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-            messageTypeId: 3,
+            fromId: 501,
+            name: 'botbotbo',
+            avatarPath: 'avatar/default_user_avatar.jpg',
+            contentType: 3,
             content: '这是一个很长名字的文件',
         },
     ],

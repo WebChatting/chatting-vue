@@ -10,7 +10,7 @@
     <div class="main">
       <div v-show="isChatPanel">
         <Title :chatObject="this.chatObject"/>
-        <Display :isGroup="this.isGroup"/>
+        <MessageArea :isGroup="this.isGroup"/>
         <TextInput/>
       </div>
       <div v-show="!isChatPanel">
@@ -25,7 +25,7 @@
   import SearchBar from '../components/SearchBar'
   import NavigationZone from '../components/NavigationZone'
   import Title from "../components/Title"
-  import Display from '../components/Display'
+  import MessageArea from '../components/MessageArea'
   import TextInput from '../components/TextInput'
   import NavigationBar from '../components/NavigationBar'
   
@@ -36,7 +36,7 @@
       SearchBar,
       NavigationZone,
       Title,
-      Display,
+      MessageArea,
       TextInput,
       NavigationBar,
     },

@@ -53,7 +53,7 @@
 
 <script>
     export default {
-        name: "Display",
+        name: "MessageArea",
         data() {
             return {
                 messages: this.$store.state.privateMessages,

@@ -18,7 +18,7 @@
     import Contact from './Contact'
     import Application from './Application'
     export default {
-        name: "List",
+        name: "NavigationZone",
         components: {
             Contact,
             Application,

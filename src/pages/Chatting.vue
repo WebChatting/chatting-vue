@@ -5,7 +5,7 @@
     </div>
     <div class="sidebar">
       <SearchBar/>
-      <List/>
+      <NavigationZone/>
     </div>
     <div class="main">
       <div v-show="isChatPanel">
@@ -23,7 +23,7 @@
 <script>
   import Toolbar from "../components/Toolbar"
   import SearchBar from '../components/SearchBar'
-  import List from '../components/List'
+  import NavigationZone from '../components/NavigationZone'
   import Title from "../components/Title"
   import Display from '../components/Display'
   import TextInput from '../components/TextInput'
@@ -34,7 +34,7 @@
     components: {
       Toolbar,
       SearchBar,
-      List,
+      NavigationZone,
       Title,
       Display,
       TextInput,

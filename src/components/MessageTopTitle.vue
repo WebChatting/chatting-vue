@@ -8,7 +8,7 @@
 
 <script>
     export default {
-        name: "Title",
+        name: "MessageTopTitle",
         methods: {
           closeRightPanel() {
             this.$bus.$emit('closeRightPanel')

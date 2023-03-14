@@ -9,7 +9,7 @@
     </div>
     <div class="main">
       <div v-show="isChatPanel">
-        <Title :chatObject="this.chatObject"/>
+        <MessageTopTitle :chatObject="this.chatObject"/>
         <MessageArea :isGroup="this.isGroup"/>
         <TextInput/>
       </div>
@@ -24,7 +24,7 @@
   import Toolbar from "../components/Toolbar"
   import TopSearchBar from '../components/TopSearchBar'
   import NavigationZone from '../components/NavigationZone'
-  import Title from "../components/Title"
+  import MessageTopTitle from "../components/MessageTopTitle"
   import MessageArea from '../components/MessageArea'
   import TextInput from '../components/TextInput'
   import SearchArea from '../components/SearchArea'
@@ -35,7 +35,7 @@
       Toolbar,
       TopSearchBar,
       NavigationZone,
-      Title,
+      MessageTopTitle,
       MessageArea,
       TextInput,
       SearchArea,

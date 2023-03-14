@@ -14,7 +14,7 @@
         <TextInput/>
       </div>
       <div v-show="!isChatPanel">
-        <NavigationBar/>
+        <SearchArea/>
       </div>
     </div>
   </div>
@@ -27,7 +27,7 @@
   import Title from "../components/Title"
   import MessageArea from '../components/MessageArea'
   import TextInput from '../components/TextInput'
-  import NavigationBar from '../components/NavigationBar'
+  import SearchArea from '../components/SearchArea'
   
   export default {
     name: 'Chatting',
@@ -38,7 +38,7 @@
       Title,
       MessageArea,
       TextInput,
-      NavigationBar,
+      SearchArea,
     },
     data() {
       return {

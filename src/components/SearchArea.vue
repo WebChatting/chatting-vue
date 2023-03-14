@@ -14,7 +14,7 @@
 <script>
 import Search from './Search'
 export default {
-    name: 'NavigationBar',
+    name: 'SearchArea',
     components: {
         Search,
     },

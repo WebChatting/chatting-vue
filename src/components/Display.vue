@@ -24,7 +24,7 @@
                             </el-image>
                             <div class="file"
                                 v-if="entry.contentType == 3"
-                                @click="downloadFile(entry.id)">
+                                @click="downloadFile(entry.path)">
                                 <div class="file-icon">
                                     <i class="el-icon-folder"></i>
                                 </div>
@@ -87,8 +87,8 @@
                 this.dialogVisible = true
                 this.dialogUserId = id
             },
-            downloadFile(id) {
-                window.open("https://cdn.sxrekord.com/blog/Netty%20in%20Action.pdf")
+            downloadFile(path) {
+                window.open(path)
             },
             loadFormerData() {
                 // 加载五条新数据

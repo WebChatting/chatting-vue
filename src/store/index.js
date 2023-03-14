@@ -15,9 +15,6 @@ const state = {
     privateMessages: [
         {
             id: 0,
-            style: {
-                left: true
-            },
             fromId: 502,
             name: 'rekordrekordrekordrekordrekordrekord',
             avatarPath: 'avatar/default_user_avatar.jpg',
@@ -26,9 +23,6 @@ const state = {
         },
         {
             id: 1,
-            style: {
-                right: true
-            },
             fromId: 501,
             name: 'hello',
             avatarPath: 'avatar/default_user_avatar.jpg',
@@ -37,9 +31,6 @@ const state = {
         },
         {
             id: 2,
-            style: {
-                left: true
-            },
             fromId: 502,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
@@ -48,9 +39,6 @@ const state = {
         },
         {
             id: 3,
-            style: {
-                right: true
-            },
             fromId: 501,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
@@ -59,9 +47,6 @@ const state = {
         },
         {
             id: 4,
-            style: {
-                left: true
-            },
             fromId: 502,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
@@ -70,25 +55,21 @@ const state = {
         },
         {
             id: 5,
-            style: {
-                left: true
-            },
             fromId: 502,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
             contentType: 3,
             content: 'vue.js',
+            path: 'upload/82a7f2f80e364f17a2ef85e7c7128214.apk',
         },
         {
             id: 6,
-            style: {
-                right: true
-            },
             fromId: 501,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
             contentType: 3,
             content: '这是一个很长名字的文件',
+            path: 'upload/9841ab1951c44ea7a6850b552f2b7f18.png',
         },
     ],
     relations: [

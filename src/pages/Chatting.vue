@@ -11,7 +11,7 @@
       <div v-show="isChatPanel">
         <MessageTopTitle :chatObject="this.chatObject"/>
         <MessageArea :isGroup="this.isGroup"/>
-        <TextInput/>
+        <MessageBottomInputArea/>
       </div>
       <div v-show="!isChatPanel">
         <SearchArea/>
@@ -26,7 +26,7 @@
   import NavigationZone from '../components/NavigationZone'
   import MessageTopTitle from "../components/MessageTopTitle"
   import MessageArea from '../components/MessageArea'
-  import TextInput from '../components/TextInput'
+  import MessageBottomInputArea from '../components/MessageBottomInputArea'
   import SearchArea from '../components/SearchArea'
   
   export default {
@@ -37,7 +37,7 @@
       NavigationZone,
       MessageTopTitle,
       MessageArea,
-      TextInput,
+      MessageBottomInputArea,
       SearchArea,
     },
     data() {

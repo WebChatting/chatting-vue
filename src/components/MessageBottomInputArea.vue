@@ -48,7 +48,7 @@
 <script>
     const emojiData = require('../assets/emoji.json')
     export default {
-        name: "TextInput",
+        name: "MessageBottomInputArea",
         data() {
             return {
                 content: '',

@@ -84,63 +84,24 @@ const state = {
             content: '这是一个很长名字的文件',
         },
     ],
-    friendList: [
-        {
-            id: 0,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "robot",
-            userStateId: 1,
-        },
-        {
-            id: 1,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "rekordrekordrekordrekordrekordrekordrekordrekordrekordrekord",
-            userStateId: 2,
-        },
-        {
-            id: 2,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "stone",
-            userStateId: 1,
-        },
-    ],
-    applicationList: [
-        {
-            id: 10,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "a-robot",
-            userStateId: 1,
-            status: 0,
-        },
-        {
-            id: 11,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "applicationRekordrekordrekordrekordrekordrekordrekordrekord",
-            userStateId: 2,
-            status: 0,
-        },
-        {
-            id: 12,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "a-stone",
-            userStateId: 1,
-            status: 0,
-        },
+    relations: [
         {
             id: 13,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "agree",
-            userStateId: 1,
+            type: 0,
+            name: "agree",
+            avatarPath: "avatar/default_user_avatar.jpg",
             status: 1,
+            online: true,
         },
         {
             id: 14,
-            userProfile: "https://cdn.sxrekord.com/blog/logo.jpg",
-            nickname: "refuse",
-            userStateId: 1,
+            type: 0,
+            name: "refuse",
+            avatarPath: "avatar/default_user_avatar.jpg",
             status: 2,
+            online: false,
         },
-    ]
+    ],
 }
 
 export default new Vuex.Store({

@@ -2,22 +2,22 @@
     <div id="list">
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <ul v-if="!isGroup">
-                <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
+                <li v-for="(item, index) in relations" :key="item.id" @dblclick="openRightPanel(item.name)">
                     <div style="display: flex; justify-content: space-between">
                         <div>
                             <el-badge :is-dot="true" :value="2">
-                                <el-image :class="{grayscale: item.userStateId != 1}"
+                                <el-image :class="{grayscale: !item.online}"
                                     class="avatar"
-                                    :preview-src-list="[item.userProfile]"
-                                    :src="item.userProfile"
-                                    :alt="item.nickname"
+                                    :preview-src-list="[item.avatarPath]"
+                                    :src="item.avatarPath"
+                                    :alt="item.name"
                                 >
                                     <div slot="error" class="image-slot">
                                         <i class="el-icon-picture-outline"></i>
                                     </div>
                                 </el-image>
                             </el-badge>
-                            <p class="name ellipsis">{{ item.nickname }}</p>
+                            <p class="name ellipsis">{{ item.name }}</p>
                         </div>
                         <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
                     </div>
@@ -29,22 +29,22 @@
                         <div class="title">我创建的群聊</div>
                     </template>
                     <ul>
-                        <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
+                        <li v-for="(item, index) in relations" :key="item.id" @dblclick="openRightPanel(item.name)">
                             <div style="display: flex; justify-content: space-between">
                                 <div>
                                     <el-badge :is-dot="true" :value="2">
-                                        <el-image :class="{grayscale: item.userStateId != 1}"
+                                        <el-image :class="{grayscale: !item.online}"
                                             class="avatar"
-                                            :preview-src-list="[item.userProfile]"
-                                            :src="item.userProfile"
-                                            :alt="item.nickname"
+                                            :preview-src-list="[item.avatar]"
+                                            :src="item.avatarPath"
+                                            :alt="item.name"
                                         >
                                             <div slot="error" class="image-slot">
                                                 <i class="el-icon-picture-outline"></i>
                                             </div>
                                         </el-image>
                                     </el-badge>
-                                    <p class="name ellipsis">{{ item.nickname }}</p>
+                                    <p class="name ellipsis">{{ item.name }}</p>
                                 </div>
                                 <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
                             </div>
@@ -56,22 +56,22 @@
                         <div class="title">我加入的群聊</div>
                     </template>
                     <ul>
-                        <li v-for="(item, index) in users" :key="item.id" @dblclick="openRightPanel(item.nickname)">
+                        <li v-for="(item, index) in relations" :key="item.id" @dblclick="openRightPanel(item.name)">
                             <div style="display: flex; justify-content: space-between">
                                 <div>
                                     <el-badge :is-dot="true" :value="2">
-                                        <el-image :class="{grayscale: item.userStateId != 1}"
+                                        <el-image :class="{grayscale: !item.online}"
                                             class="avatar"
-                                            :preview-src-list="[item.userProfile]"
-                                            :src="item.userProfile"
-                                            :alt="item.nickname"
+                                            :preview-src-list="[item.avatarPath]"
+                                            :src="item.avatarPath"
+                                            :alt="item.name"
                                         >
                                             <div slot="error" class="image-slot">
                                                 <i class="el-icon-picture-outline"></i>
                                             </div>
                                         </el-image>
                                     </el-badge>
-                                    <p class="name ellipsis">{{ item.nickname }}</p>
+                                    <p class="name ellipsis">{{ item.name }}</p>
                                 </div>
                                 <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
                             </div>
@@ -90,7 +90,7 @@
         name: "Contact",
         data() {
             return {
-                users: this.$store.state.friendList,
+                relations: this.$store.state.relations,
             };
         },
         props: {

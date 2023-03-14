@@ -7,21 +7,21 @@
                         <div class="title">我发起的</div>
                     </template>
                     <ul class="infinite-list" v-infinite-scroll="load">
-                        <li v-for="(item, index) in users" :key="item.id">
+                        <li v-for="(item, index) in applications" :key="item.id">
                             <el-card class="box-card" body-style="padding: 4px 8px;">
                                 <div class="card">
                                     <div>
                                         <el-image
                                             class="avatar"
-                                            :preview-src-list="[item.userProfile]"
-                                            :src="item.userProfile"
-                                            :alt="item.nickname"
+                                            :preview-src-list="[item.avatarPath]"
+                                            :src="item.avatarPath"
+                                            :alt="item.name"
                                         >
                                             <div slot="error" class="image-slot">
                                                 <i class="el-icon-picture-outline"></i>
                                             </div>
                                         </el-image>
-                                        <p class="name ellipsis">{{ item.nickname }}</p>
+                                        <p class="name ellipsis">{{ item.name }}</p>
                                     </div>
                                     <el-button-group v-if="item.status == 0">
                                         <el-button size="mini" class="button"
@@ -43,21 +43,21 @@
                         <div class="title">我收到的</div>
                     </template>
                     <ul class="infinite-list" v-infinite-scroll="load">
-                        <li v-for="(item, index) in users" :key="item.id">
+                        <li v-for="(item, index) in applications" :key="item.id">
                             <el-card class="box-card" body-style="padding: 4px 8px;">
                                 <div class="card">
                                     <div>
                                         <el-image
                                             class="avatar"
-                                            :preview-src-list="[item.userProfile]"
-                                            :src="item.userProfile"
-                                            :alt="item.nickname"
+                                            :preview-src-list="[item.avatarPath]"
+                                            :src="item.avatarPath"
+                                            :alt="item.name"
                                         >
                                             <div slot="error" class="image-slot">
                                                 <i class="el-icon-picture-outline"></i>
                                             </div>
                                         </el-image>
-                                        <p class="name ellipsis">{{ item.nickname }}</p>
+                                        <p class="name ellipsis">{{ item.name }}</p>
                                     </div>
                                     <el-button-group v-if="item.status == 0">
                                         <el-button size="mini" class="button"
@@ -88,7 +88,7 @@ export default {
     name: "Application",
     data() {
         return {
-            users: this.$store.state.applicationList,
+            applications: this.$store.state.relations,
         };
     },
     methods: {

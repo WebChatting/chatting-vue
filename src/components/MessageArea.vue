@@ -67,7 +67,7 @@
         },
         computed: {
             dialogAvatar() {
-                return this.$store.state.privateMessages[this.dialogUserId].userProfile
+                return this.$store.state.privateMessages[this.dialogUserId].avatarPath
             },
             dialogname() {
                 return this.$store.state.privateMessages[this.dialogUserId].fromname

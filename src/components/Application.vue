@@ -6,13 +6,13 @@
                     <template slot="title">
                         <div class="title">我发起的</div>
                     </template>
-                    <ApplicationList/>
+                    <ApplicationList :isGroup="isGroup"/>
                 </el-collapse-item>
                 <el-collapse-item>
                     <template slot="title">
                         <div class="title">我收到的</div>
                     </template>
-                    <ApplicationList/>
+                    <ApplicationList :isGroup="isGroup" :isRequest="false"/>
                 </el-collapse-item>
             </el-collapse>
         </div>
@@ -29,6 +29,9 @@ export default {
     name: "Application",
     components: {
         ApplicationList,
+    },
+    props: {
+        'isGroup': Boolean,
     },
     methods: {
         clearProcessed() {

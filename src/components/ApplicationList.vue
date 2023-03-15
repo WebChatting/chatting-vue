@@ -35,10 +35,33 @@
 <script>
 export default {
     name: "ApplicationList",
-    data() {
-        return {
-            applications: this.$store.state.relations,
-        };
+    props: {
+        'isGroup': {
+            type: Boolean,
+            required: true,
+        },
+        'isRequest': {
+            type: Boolean,
+            required: false,
+            default: true,
+        },
+    },
+    computed: {
+        applications: function() {
+            if (this.isGroup) {
+                if (this.isRequest) {
+                    return this.$store.state.requestGroupApplications;
+                } else {
+                    return this.$store.state.acceptGroupApplications;
+                }
+            } else {
+                if (this.isRequest) {
+                    return this.$store.state.requestFriendApplications;
+                } else {
+                    return this.$store.state.acceptFriendApplications;
+                }
+            }
+        }
     },
     methods: {
         load() {

@@ -93,6 +93,10 @@ const state = {
     friends: [],
     createGroups: [],
     joinGroups: [],
+    requestFriendApplications: [],
+    acceptFriendApplications: [],
+    requestGroupApplications: [],
+    acceptGroupApplications: [],
 }
 
 export default new Vuex.Store({

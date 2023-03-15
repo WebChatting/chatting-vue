@@ -17,6 +17,7 @@
 <script>
     import Contact from './Contact'
     import Application from './Application'
+    import axios from 'axios'
     export default {
         name: "NavigationZone",
         components: {
@@ -45,10 +46,55 @@
                 this.secondLabelName = '群组验证'
                 this.isContact = false
             },
+            loadRelation(type, direction) {
+                axios({
+                    method: 'get',
+                    url: '/chatting/relation/list',
+                    params: {
+                        type: type,
+                        status: 1,
+                        direction: direction,
+                    },
+                    responseType: 'json',
+                }).then((response) => {
+                    if (response.data.status == 200) {
+                        if (response.data.data !== undefined) {
+                            console.log(response.data.data.relations)
+                            if (direction == -1) {
+                                // 好友关系
+                                this.$store.state.friends = response.data.data.relations;
+                            } else if (direction == 0) {
+                                // 加入群组关系
+                                this.$store.state.joinGroups = response.data.data.relations;
+                            }
+                        }
+                    } else {
+                        console.log("request error")
+                    }
+                })
+            },
         },
         mounted() {
             this.$bus.$on('loadContact', this.loadContact);
             this.$bus.$on('loadVerification', this.loadVerification);
+
+            // 加载好友与加入的群组
+            this.loadRelation(0, -1);
+            this.loadRelation(1, 0);
+
+            console.log("Contact mount")
+            // 加载创建的群组
+            axios({
+                method: 'get',
+                url: '/chatting/group/list',
+                responseType: 'json',
+            }).then((response) => {
+                if (response.data.status == 200) {
+                    this.$store.state.createGroups = response.data.data.relations;
+                } else {
+                    console.log("request error")
+                }
+            })
         },
         beforeDestroy() {
             // 解绑自定义事件

@@ -26,10 +26,30 @@
 <script>
     export default {
         name: "RelationList",
-        data() {
-            return {
-                relations: this.$store.state.relations,
-            };
+        props: {
+            'isGroup': {
+                type: Boolean,
+                required: false,
+                default: true,
+            },
+            'isCreated': {
+                type: Boolean,
+                required: false,
+                default: false,
+            },
+        },
+        computed: {
+            relations: function() {
+                if (!this.isGroup) {
+                    return this.$store.state.friends;
+                } else {
+                    if (this.isCreated) {
+                        return this.$store.state.createGroups;
+                    } else {
+                        return this.$store.state.joinGroups;
+                    }
+                }
+            }
         },
         methods: {
             openRightPanel(chatObject) {

@@ -90,6 +90,9 @@ const state = {
             online: false,
         },
     ],
+    friends: [],
+    createGroups: [],
+    joinGroups: [],
 }
 
 export default new Vuex.Store({

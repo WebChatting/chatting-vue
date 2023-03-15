@@ -2,14 +2,14 @@
     <div id="list">
         <div class="infinite-list-wrapper user-list" style="overflow: auto">
             <div v-if="!isGroup">
-                <RelationList/>
+                <RelationList :isGroup="false"/>
             </div>
             <el-collapse v-else class="collapse-item">
                 <el-collapse-item>
                     <template slot="title">
                         <div class="title">我创建的群聊</div>
                     </template>
-                    <RelationList/>
+                    <RelationList :isCreated="true"/>
 
                 </el-collapse-item>
                 <el-collapse-item>

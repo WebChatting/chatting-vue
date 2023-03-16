@@ -10,7 +10,7 @@
     <div class="main">
       <div v-show="isChatPanel">
         <MessageTopTitle :chatObject="this.chatObject.name"/>
-        <MessageArea :isGroup="this.isGroup"/>
+        <MessageArea :isGroup="this.isGroup" :toId="this.chatObject.id"/>
         <MessageBottomInputArea/>
       </div>
       <div v-show="!isChatPanel">
@@ -44,7 +44,9 @@
       return {
         isChatPanel: true,
         isGroup: false,
-        chatObject: '',
+        chatObject: {
+          id: 0,
+        },
       }
     },
     methods: {

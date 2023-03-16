@@ -60,15 +60,18 @@
                 dialogVisible: false,
                 dialogUserId: 0,
                 user: JSON.parse(window.sessionStorage.getItem("user")),
+                toId: -1,
             }
         },
         props: {
             'isGroup': Boolean,
-            'toId': Number,
         },
         computed: {
             messages() {
-                return this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId]
+                return this.$store.state.messages[this.messageKey]
+            },
+            messageKey() {
+                return (this.isGroup ? "group" : "user") + this.toId
             },
             dialogAvatar() {
                 return this.$store.state.privateMessages[this.dialogUserId].avatarPath
@@ -96,48 +99,45 @@
             },
             loadFormerData() {
                 // 加载五条新数据
-                for (let i = 0; i < 5; i++) {
-                    this.messages.unshift({
-                        id: this.messages.length,
-                        name: 'id' + this.messages.length,
-                        fromId: this.messages.length % 2 == 0 ? 501 : 502,
-                        avatarPath: 'avatar/default_user_avatar.jpg',
-                        contentType: 1,
-                        content: 'formerData' + this.messages.length,
+                // for (let i = 0; i < 5; i++) {
+                //     this.messages.unshift({
+                //         id: this.messages.length,
+                //         name: 'id' + this.messages.length,
+                //         fromId: this.messages.length % 2 == 0 ? 501 : 502,
+                //         avatarPath: 'avatar/default_user_avatar.jpg',
+                //         contentType: 1,
+                //         content: 'formerData' + this.messages.length,
+                //     })
+                // }
+            },
+            loadInitialData(toId, count, updateTime) {
+                this.toId = toId;
+                if (this.$store.state.messages[this.messageKey]) {
+                } else {
+                    axios({
+                        method: 'post',
+                        url: '/chatting/message/load',
+                        params: {
+                            type: this.isGroup ? 1 : 0,
+                            count: count,
+                            toId: toId,
+                            updateTime: '2023-03-18 20:01:19',
+                        },
+                        responseType: 'json',
+                    }).then((response) => {
+                        if (response.data.status == 200) {
+                                this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages);
+                        } else {
+                            console.log("request error")
+                        }
                     })
                 }
-            },
-            loadInitialData(count, updateTime) {
-                axios({
-                    method: 'post',
-                    url: '/chatting/message/load',
-                    params: {
-                        type: this.isGroup ? 1 : 0,
-                        count: count,
-                        toId: this.toId,
-                        updateTime: '2023-03-18 20:01:19',
-                    },
-                    responseType: 'json',
-                }).then((response) => {
-                    if (response.data.status == 200) {
-                        console.log(response.data.data.messages)
-                        if (this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId] == undefined) {
-                            console.log('首次加载')
-                            this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId] = response.data.data.messages;
-                        } else {
-                            console.log('不再加载')
-                        }
-                    } else {
-                        console.log("request error")
-                    }
-                })
             },
         },
         mounted() {
             this.$bus.$on('scrollToBottom', this.scrollToBottom)
             this.$bus.$on('loadFormerData', this.loadFormerData)
             this.$bus.$on('loadInitialData', this.loadInitialData)
-
             // 加载初始消息
 
         },
@@ -145,7 +145,7 @@
             // 解绑自定义事件
             this.$bus.$off('scrollToBottom')
             this.$bus.$off('loadFormerData')
-            this.$bus.$off('loadInitialData', this.loadInitialData)
+            this.$bus.$off('loadInitialData')
         }
     }
 </script>

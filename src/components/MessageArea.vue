@@ -15,16 +15,16 @@
                         <div><div v-if="isGroup && entry.fromId !== user.id" class="name"
                             @click="openInfoDialog(entry.id)">{{entry.name}}</div></div>
                         <div class="message">
-                            <div v-if="entry.contentType == 1" class="text">{{entry.content}}</div>
+                            <div v-if="entry.contentType == 0" class="text">{{entry.content}}</div>
                             <el-image
-                                v-if="entry.contentType == 2"
+                                v-if="entry.contentType == 1"
                                 class="image"
                                 :src="entry.content"
                                 :preview-src-list="[entry.content]">
                             </el-image>
                             <div class="file"
-                                v-if="entry.contentType == 3"
-                                @click="downloadFile(entry.path)">
+                                v-if="entry.contentType == 2"
+                                @click="downloadFile(entry.url)">
                                 <div class="file-icon">
                                     <i class="el-icon-folder"></i>
                                 </div>
@@ -52,11 +52,11 @@
 </template>
 
 <script>
+    import axios from 'axios';
     export default {
         name: "MessageArea",
         data() {
             return {
-                messages: this.$store.state.privateMessages,
                 dialogVisible: false,
                 dialogUserId: 0,
                 user: JSON.parse(window.sessionStorage.getItem("user")),
@@ -64,8 +64,12 @@
         },
         props: {
             'isGroup': Boolean,
+            'toId': Number,
         },
         computed: {
+            messages() {
+                return this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId]
+            },
             dialogAvatar() {
                 return this.$store.state.privateMessages[this.dialogUserId].avatarPath
             },
@@ -102,16 +106,46 @@
                         content: 'formerData' + this.messages.length,
                     })
                 }
-            }
+            },
+            loadInitialData(count, updateTime) {
+                axios({
+                    method: 'post',
+                    url: '/chatting/message/load',
+                    params: {
+                        type: this.isGroup ? 1 : 0,
+                        count: count,
+                        toId: this.toId,
+                        updateTime: '2023-03-18 20:01:19',
+                    },
+                    responseType: 'json',
+                }).then((response) => {
+                    if (response.data.status == 200) {
+                        console.log(response.data.data.messages)
+                        if (this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId] == undefined) {
+                            console.log('首次加载')
+                            this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId] = response.data.data.messages;
+                        } else {
+                            console.log('不再加载')
+                        }
+                    } else {
+                        console.log("request error")
+                    }
+                })
+            },
         },
         mounted() {
             this.$bus.$on('scrollToBottom', this.scrollToBottom)
             this.$bus.$on('loadFormerData', this.loadFormerData)
+            this.$bus.$on('loadInitialData', this.loadInitialData)
+
+            // 加载初始消息
+
         },
         beforeDestroy() {
             // 解绑自定义事件
             this.$bus.$off('scrollToBottom')
             this.$bus.$off('loadFormerData')
+            this.$bus.$off('loadInitialData', this.loadInitialData)
         }
     }
 </script>

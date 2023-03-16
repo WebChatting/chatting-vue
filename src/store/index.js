@@ -19,7 +19,7 @@ const state = {
             fromId: 502,
             name: 'rekordrekordrekordrekordrekordrekord',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 1,
+            contentType: 0,
             content: 'hei',
         },
         {
@@ -27,7 +27,7 @@ const state = {
             fromId: 501,
             name: 'hello',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 1,
+            contentType: 0,
             content: '你好',
         },
         {
@@ -35,7 +35,7 @@ const state = {
             fromId: 502,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 2,
+            contentType: 1,
             content: 'avatar/default_user_avatar.jpg',
         },
         {
@@ -43,7 +43,7 @@ const state = {
             fromId: 501,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 2,
+            contentType: 1,
             content: 'avatar/default_user_avatar.jpg',
         },
         {
@@ -51,7 +51,7 @@ const state = {
             fromId: 502,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 1,
+            contentType: 0,
             content: '长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长长',
         },
         {
@@ -59,7 +59,7 @@ const state = {
             fromId: 502,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 3,
+            contentType: 2,
             content: 'vue.js',
             url: 'upload/82a7f2f80e364f17a2ef85e7c7128214.apk',
         },
@@ -68,7 +68,7 @@ const state = {
             fromId: 501,
             name: 'botbotbo',
             avatarPath: 'avatar/default_user_avatar.jpg',
-            contentType: 3,
+            contentType: 2,
             content: '这是一个很长名字的文件',
             url: 'upload/9841ab1951c44ea7a6850b552f2b7f18.png',
         },

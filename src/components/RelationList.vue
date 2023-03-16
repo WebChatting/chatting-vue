@@ -1,6 +1,6 @@
 <template>
     <ul>
-        <li v-for="(item, index) in relations" :key="item.id" @dblclick="openRightPanel(item.name)">
+        <li v-for="(item, index) in relations" :key="item.id" @dblclick="openRightPanel(item)">
             <div style="display: flex; justify-content: space-between">
                 <div>
                     <el-badge :is-dot="true" :value="2">

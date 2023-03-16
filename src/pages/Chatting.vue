@@ -9,7 +9,7 @@
     </div>
     <div class="main">
       <div v-show="isChatPanel">
-        <MessageTopTitle :chatObject="this.chatObject"/>
+        <MessageTopTitle :chatObject="this.chatObject.name"/>
         <MessageArea :isGroup="this.isGroup"/>
         <MessageBottomInputArea/>
       </div>

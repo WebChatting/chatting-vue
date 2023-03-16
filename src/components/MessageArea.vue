@@ -68,7 +68,10 @@
         },
         computed: {
             messages() {
-                return this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId]
+                return this.$store.state.messages[this.messageKey]
+            },
+            messageKey() {
+                return (this.isGroup ? "group" : "user") + this.toId
             },
             dialogAvatar() {
                 return this.$store.state.privateMessages[this.dialogUserId].avatarPath
@@ -121,9 +124,9 @@
                 }).then((response) => {
                     if (response.data.status == 200) {
                         console.log(response.data.data.messages)
-                        if (this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId] == undefined) {
-                            console.log('首次加载')
-                            this.$store.state.messages[(this.isGroup ? "group" : "user") + this.toId] = response.data.data.messages;
+                        if (this.$store.state.messages[this.messageKey] == undefined) {
+                            console.log('首次加载' + this.messageKey)
+                            this.$store.state.messages[this.messageKey] = response.data.data.messages;
                         } else {
                             console.log('不再加载')
                         }

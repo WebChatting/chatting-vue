@@ -112,26 +112,29 @@
             },
             loadInitialData(toId, count, updateTime) {
                 this.toId = toId;
-                if (this.$store.state.messages[this.messageKey]) {
-                } else {
-                    axios({
-                        method: 'post',
-                        url: '/chatting/message/load',
-                        params: {
-                            type: this.isGroup ? 1 : 0,
-                            count: count,
-                            toId: toId,
-                            updateTime: '2023-03-18 20:01:19',
-                        },
-                        responseType: 'json',
-                    }).then((response) => {
-                        if (response.data.status == 200) {
-                                this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages);
-                        } else {
-                            console.log("request error")
-                        }
-                    })
-                }
+                this.$nextTick(() => {
+                    console.log(this.messageKey)
+                    if (this.$store.state.messages[this.messageKey]) {
+                    } else {
+                        axios({
+                            method: 'post',
+                            url: '/chatting/message/load',
+                            params: {
+                                type: this.isGroup ? 1 : 0,
+                                count: count,
+                                toId: toId,
+                                updateTime: '2023-03-18 20:01:19',
+                            },
+                            responseType: 'json',
+                        }).then((response) => {
+                            if (response.data.status == 200) {
+                                    this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages);
+                            } else {
+                                console.log("request error")
+                            }
+                        })
+                    }
+                })
             },
         },
         mounted() {

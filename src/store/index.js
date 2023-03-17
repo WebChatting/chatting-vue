@@ -1,3 +1,4 @@
+import { socket } from '@/utils/socket'
 import Vue from 'vue'
 import  Vuex from 'vuex'
 
@@ -98,6 +99,7 @@ const state = {
     acceptFriendApplications: [],
     requestGroupApplications: [],
     acceptGroupApplications: [],
+    socket: socket,
 }
 
 export default new Vuex.Store({

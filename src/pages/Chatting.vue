@@ -28,6 +28,8 @@
   import MessageArea from '../components/MessageArea'
   import MessageBottomInputArea from '../components/MessageBottomInputArea'
   import SearchArea from '../components/SearchArea'
+
+  import {socket} from '../utils/socket'
   
   export default {
     name: 'Chatting',
@@ -64,6 +66,9 @@
     mounted() {
       this.$bus.$on('openRightPanel', this.openRightPanel)
       this.$bus.$on('closeRightPanel', this.closeRightPanel)
+
+      // 连接ws
+      socket.init()
     },
     beforeDestroy() {
       // 解绑自定义事件

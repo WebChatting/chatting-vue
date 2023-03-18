@@ -4,7 +4,7 @@
         <ul>
             <li v-for="entry in messages" :key="entry.id">
                 <p class="time">
-                    <span>{{new Date()}}</span>
+                    <span>{{entry.updateTime | timeFormater}}</span>
                 </p>
                 <div class="message-structure" :class="{right: entry.fromId === user.id}">
                     <el-avatar class="avatar" :src="entry.avatarPath"
@@ -137,12 +137,15 @@
                 })
             },
         },
+        filters: {
+            timeFormater(time) {
+                return date.convertTime(time)
+            },
+        },
         mounted() {
             this.$bus.$on('scrollToBottom', this.scrollToBottom)
             this.$bus.$on('loadFormerData', this.loadFormerData)
             this.$bus.$on('loadInitialData', this.loadInitialData)
-            // 加载初始消息
-
         },
         beforeDestroy() {
             // 解绑自定义事件

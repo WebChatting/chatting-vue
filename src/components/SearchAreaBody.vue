@@ -5,7 +5,8 @@
                 autocomplete autofocus
                 v-model="input" show-word-limit></el-input>
             <el-button class="search-button" size="medium"
-                type="primary">
+                type="primary"
+                @click="search">
                 查找
             </el-button>
             <el-button class="search-button" size="medium"
@@ -16,9 +17,9 @@
         <el-divider></el-divider>
         <div class="search-result">
             <div v-for="item in searchResults" :key="item.id" class="single-result">
-                <el-avatar shape="circle" :size="70" :src="item.userProfile"></el-avatar>
+                <el-avatar shape="circle" :size="70" :src="item.avatarPath"></el-avatar>
                 <div class="info">
-                    <p class="add-name ellipsis">{{ item.nickname }}</p>
+                    <p class="add-name ellipsis">{{ item.name }}</p>
                     <el-button type="primary" icon="el-icon-circle-plus" class="add-button">好友</el-button>
                 </div>
             </div>
@@ -27,18 +28,38 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: 'SearchAreaBody',
     data() {
         return {
             input: '',
-            searchResults: this.$store.state.friendList,
+            searchResults: [],
         }
+    },
+    props: {
+        isGroup: Boolean,
     },
     methods: {
         closeRightPanel() {
             this.$bus.$emit('closeRightPanel')
-        }
+        },
+        search() {
+            axios({
+                methods: 'get',
+                url: '/chatting/' + (this.isGroup ? 'group' : 'user') + '/search',
+                params: {
+                    name: this.input,
+                },
+                responseType: 'json',
+            }).then((resp) => {
+                if (resp.data.status == 200) {
+                    this.searchResults = resp.data.data[(this.isGroup ? 'group' : 'user') + 's']
+                } else {
+                    console.log("request error")
+                }
+            })
+        },
     },
 }
 </script>

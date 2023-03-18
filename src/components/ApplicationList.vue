@@ -16,13 +16,13 @@
                         </el-image>
                         <p class="name ellipsis">{{ item.name }}</p>
                     </div>
-                    <el-button-group v-if="item.status == 0">
+                    <el-button-group v-if="!isRequest && item.status == 0">
                         <el-button size="mini" class="button"
                             @click="agreeApplication(index)">同意</el-button>
                         <el-button size="mini" class="button"
                             @click="refuseApplication(index)">拒绝</el-button>
                     </el-button-group>
-                    <div class="result" v-else>{{item.status == 1 ? '已同意' : '已拒绝'}}</div>
+                    <div class="result" v-else>{{item.status == 0 ? '等待回应' : (item.status == 1 ?'已同意' : '已拒绝')}}</div>
                 </div>
                 <p class="time">
                     <span>2023 22:58:43</span>
@@ -69,7 +69,10 @@ export default {
         },
         agreeApplication(id) {
             this.applications[id].status = 1
-            this.$store.state.friends.push(this.applications[id])
+            // 同意群组验证不加入好友列表
+            if (!this.isGroup) {
+                this.$store.state.friends.push(this.applications[id])
+            }
         },
         refuseApplication(id) {
             this.applications[id].status = 2

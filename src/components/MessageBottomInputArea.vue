@@ -95,7 +95,7 @@
                 this.$store.state.socket.send({
                     fromId: this.user.id,
                     toId: this.$store.state.toId,
-                    ws_type: contentType + 3 + this.isGroup,
+                    ws_type: contentType * 2 + 3 + this.isGroup,
                     content: this.content,
                     size: size,
                 })

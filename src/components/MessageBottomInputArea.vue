@@ -55,10 +55,8 @@
                 emojiList: [],
                 emojiCounter: 40,
                 user: JSON.parse(window.sessionStorage.getItem("user")),
+                isGroup: false,
             }
-        },
-        props: {
-            'isGroup': Boolean,
         },
         computed: {
             messageKey() {
@@ -78,6 +76,7 @@
                     return
                 }
 
+                this.isGroup = this.$store.state.isGroup
                 // 更新消息
                 this.$nextTick(() => {
                     this.$store.state.messages[this.messageKey].push({

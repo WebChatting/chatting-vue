@@ -102,9 +102,7 @@
 
                 this.$nextTick(() => {
                     // 清空输入框
-                    if (contentType == 0) {
-                        this.content = ''
-                    }
+                    this.content = ''
                     // 将滚动条滑动至底部
                     this.$bus.$emit('scrollToBottom')
                 })

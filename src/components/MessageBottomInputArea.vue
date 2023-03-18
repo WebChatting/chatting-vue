@@ -46,7 +46,6 @@
 </template>
 
 <script>
-    import axios from 'axios'
     const emojiData = require('../assets/emoji.json')
     export default {
         name: "MessageBottomInputArea",
@@ -93,10 +92,13 @@
                 })
 
 
-                // // 发送消息至后端
-                // axios({
-
-                // })
+                // 发送消息至后端
+                this.$store.state.socket.send({
+                    fromId: this.user.id,
+                    toId: this.$store.state.toId,
+                    ws_type: contentType + 3 + this.isGroup,
+                    content: this.content,
+                })
 
                 // 清空输入框
                 if (contentType == 1) {

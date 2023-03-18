@@ -14,7 +14,7 @@
             </el-button>
         </el-popover>
         <el-upload
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="/chatting/upload"
                 :before-upload="beforeAvatarUpload"
                 :on-success="uploadImageSuccess"
                 :on-error="uploadImageError"
@@ -73,7 +73,7 @@
                 this.content += item
             },
             sendMessage(contentType, url) {
-                if (contentType == 1 && this.content.trim().length <= 0) {
+                if (contentType == 0 && this.content.trim().length <= 0) {
                     this.$message.error('发送信息不能为空')
                     return
                 }
@@ -117,8 +117,9 @@
             },
             uploadImageSuccess(res, file) {
                 this.$message.success('上传图片成功!')
-                this.sendMessage(2, 'https://cdn.sxrekord.com/blog/logo.jpg')
                 console.log('success', res, file)
+                this.content = res.data.fileUrl
+                this.sendMessage(1)
             },
             uploadImageError(res, file) {
                 this.$message.error('上传图片失败!')

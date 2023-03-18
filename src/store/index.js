@@ -23,6 +23,7 @@ const state = {
     acceptGroupApplications: [],
     socket: socket,
     toId: -1,
+    isGroup: false,
 }
 
 export default new Vuex.Store({

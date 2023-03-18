@@ -53,8 +53,9 @@
         },
         methods: {
             openRightPanel(chatObject) {
-                this.$bus.$emit("openRightPanel", true, this.isGroup, chatObject)
-                this.$bus.$emit("loadInitialData", chatObject.id, 5)
+                this.$store.state.isGroup = this.isGroup;
+                this.$bus.$emit("openRightPanel", true, chatObject)
+                this.$bus.$emit("loadInitialData", this.isGroup, chatObject.id, 5)
             },
             deleteContact(id) {
                 this.$confirm('此操作将永久删除该好友/群组, 是否继续?', '提示', {

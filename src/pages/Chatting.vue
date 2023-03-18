@@ -10,8 +10,8 @@
     <div class="main">
       <div v-show="isChatPanel">
         <MessageTopTitle :chatObject="this.chatObject.name"/>
-        <MessageArea :isGroup="this.isGroup" :toId="this.chatObject.id"/>
-        <MessageBottomInputArea :isGroup="this.isGroup"/>
+        <MessageArea/>
+        <MessageBottomInputArea/>
       </div>
       <div v-show="!isChatPanel">
         <SearchArea/>
@@ -43,16 +43,14 @@
     data() {
       return {
         isChatPanel: true,
-        isGroup: false,
         chatObject: {
-          id: 0,
+          id: -1,
         },
       }
     },
     methods: {
-      openRightPanel(isChatPanel = true, isGroup, chatObject) {
+      openRightPanel(isChatPanel = true, chatObject) {
         this.isChatPanel = isChatPanel
-        this.isGroup = isGroup
         this.$store.state.toId = chatObject.id;
         this.chatObject = chatObject
         this.$refs.app.style.width = 900 + 'px'
@@ -77,7 +75,6 @@
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang="scss" scoped>
   #app {
     margin: 20px auto;

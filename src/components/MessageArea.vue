@@ -60,11 +60,9 @@
                 dialogVisible: false,
                 dialogUserId: 0,
                 user: JSON.parse(window.sessionStorage.getItem("user")),
+                isGroup: false,
                 toId: -1,
             }
-        },
-        props: {
-            'isGroup': Boolean,
         },
         computed: {
             messages() {
@@ -110,7 +108,8 @@
                 //     })
                 // }
             },
-            loadInitialData(toId, count, updateTime) {
+            loadInitialData(isGroup, toId, count, updateTime) {
+                this.isGroup = isGroup;
                 this.toId = toId;
                 this.$nextTick(() => {
                     console.log(this.messageKey)
@@ -122,7 +121,7 @@
                             params: {
                                 type: this.isGroup ? 1 : 0,
                                 count: count,
-                                toId: toId,
+                                toId: this.toId,
                                 updateTime: '2023-03-28 20:01:19',
                             },
                             responseType: 'json',

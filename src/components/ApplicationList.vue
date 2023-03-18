@@ -68,11 +68,11 @@ export default {
 
         },
         agreeApplication(id) {
-            this.$store.state.friendList.push(this.users[id])
-            this.users[id].status = 1
+            this.applications[id].status = 1
+            this.$store.state.friends.push(this.applications[id])
         },
         refuseApplication(id) {
-            this.users[id].status = 2
+            this.applications[id].status = 2
         },
     }
 }

@@ -97,6 +97,7 @@
                     toId: this.$store.state.toId,
                     ws_type: contentType * 2 + 3 + this.isGroup,
                     content: this.content,
+                    url: url,
                     size: size,
                 })
 

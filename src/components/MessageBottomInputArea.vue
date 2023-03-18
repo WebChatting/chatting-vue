@@ -81,7 +81,7 @@
                 // 更新消息
                 this.$nextTick(() => {
                     this.$store.state.messages[this.messageKey].push({
-                        id: this.$store.state.messages[this.messageKey].length + 1,
+                        id: 10000 + this.$store.state.messages[this.messageKey].length + 1,
                         fromId: this.user.id,
                         name: 'rekord',
                         avatarPath: 'https://cdn.sxrekord.com/blog/logo.jpg',
@@ -100,12 +100,12 @@
                     content: this.content,
                 })
 
-                // 清空输入框
-                if (contentType == 1) {
-                    this.content = ''
-                }
-                // 将滚动条滑动至底部
                 this.$nextTick(() => {
+                    // 清空输入框
+                    if (contentType == 0) {
+                        this.content = ''
+                    }
+                    // 将滚动条滑动至底部
                     this.$bus.$emit('scrollToBottom')
                 })
             },

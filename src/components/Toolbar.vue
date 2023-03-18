@@ -36,9 +36,9 @@
                             :active-text="currentMode">
                         </el-switch>
                         <div><el-button icon="el-icon-edit" class="pop-button"
-                            @click="openDrawer"></el-button></div>
+                            @click="openEditInfo"></el-button></div>
                         <div><el-button icon="el-icon-s-opportunity" class="pop-button"
-                            @click="createGroup"></el-button></div>
+                            @click="openCreateGroup"></el-button></div>
                         <div><el-button icon="el-icon-question" class="pop-button"></el-button></div>
                     </div>
                     <el-button class="tool-button" slot="reference"><i class="el-icon-s-tools"></i></el-button>
@@ -52,7 +52,7 @@
         <!-- 个人信息抽屉结构 -->
         <el-drawer
             title="个人信息"
-            :before-close="beforeCloseDrawer"
+            :before-close="beforeCloseEditInfo"
             :visible.sync="drawerSwitch"
             direction="ltr"
             ref="drawer">
@@ -63,7 +63,7 @@
                         <el-form-item label="头像：" label-width="60px">
                             <el-upload
                                 class="avatar-uploader"
-                                action="https://jsonplaceholder.typicode.com/posts/"
+                                action="/chatting/upload"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload">
@@ -91,7 +91,7 @@
         <!-- 创建群组抽屉结构 -->
         <el-drawer
             title="创建群组"
-            :before-close="beforeCloseDrawer"
+            :before-close="beforeCloseCreateGroup"
             :visible.sync="groupDrawerSwitch"
             direction="ltr"
             ref="groupDrawer">
@@ -102,7 +102,7 @@
                         <el-form-item label="头像：" label-width="60px">
                             <el-upload
                                 class="avatar-uploader"
-                                action="https://jsonplaceholder.typicode.com/posts/"
+                                action="/chatting/upload"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload">
@@ -127,6 +127,7 @@
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: 'Toolbar',
         data() {
@@ -160,36 +161,59 @@
             exitSystem() {
                 window.location.href = "/"
             },
-            openDrawer() {
+            openEditInfo() {
                 // 关闭右侧面板
                 this.$bus.$emit('closeRightPanel')
                 // 打开左侧抽屉
                 this.drawerSwitch = true
             },
-            createGroup() {
+            openCreateGroup() {
                 // 关闭右侧面板
                 this.$bus.$emit('closeRightPanel')
                 // 打开左侧抽屉
                 this.groupDrawerSwitch = true
             },
-            beforeCloseDrawer(done) {
+            beforeCloseEditInfo(done) {
+                this.beforeCloseDrawer(done, '/chatting/user/update')
+            },
+            beforeCloseCreateGroup(done) {
+                this.beforeCloseDrawer(done, '/chatting/group/add')
+            },
+            beforeCloseDrawer(done, url) {
                 if (this.loading) {
                     return;
                 }
-                this.$confirm('确定要提交表单吗？')
-                    .then(_ => {
+                this.$confirm('确定要提交表单吗？').then(_ => {
                     this.loading = true;
+                    console.log('before submit form')
+                    // 提交表单
+                    axios({
+                        method: 'post',
+                        url: url,
+                        params: {
+                            name: this.userInfo.name,
+                            password: this.userInfo.password,
+                            avatarPath: this.imageUrl,
+                        },
+                        responseType: 'json',
+                    }).then((resp) => {
+                        if (resp.data.status == 200) {
+                            console.log(resp.data)
+                        } else {
+                            console.log("request error")
+                        }
+                    })
+
                     this.timer = setTimeout(() => {
                         done();
                         // 动画关闭需要一定的时间
                         setTimeout(() => {
                         this.loading = false;
                         }, 400);
-                    }, 2000);
-                    }, _ => {
-                        this.cancelForm()
-                    })
-                    .catch(_ => {});
+                        }, 2000);
+                }, _ => {
+                    this.cancelForm()
+                }).catch(_ => {console.log(_)});
             },
             cancelForm() {
                 this.loading = false;
@@ -197,8 +221,10 @@
                 this.groupDrawerSwitch = false;
                 clearTimeout(this.timer);
             },
+
             handleAvatarSuccess(res, file) {
-                this.imageUrl = URL.createObjectURL(file.raw);
+                console.log(res, file)
+                this.imageUrl = res.data.fileUrl
             },
             beforeAvatarUpload(file) {
                 console.log('before avatar upload')

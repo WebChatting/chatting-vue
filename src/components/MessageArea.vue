@@ -74,10 +74,10 @@
                 return (this.isGroup ? "group" : "user") + this.toId
             },
             dialogAvatar() {
-                return this.$store.state.privateMessages[this.dialogUserId].avatarPath
+                // return this.$store.state.privateMessages[this.dialogUserId].avatarPath
             },
             dialogname() {
-                return this.$store.state.privateMessages[this.dialogUserId].fromname
+                // return this.$store.state.privateMessages[this.dialogUserId].fromname
             },
         },
         methods: {
@@ -123,12 +123,12 @@
                                 type: this.isGroup ? 1 : 0,
                                 count: count,
                                 toId: toId,
-                                updateTime: '2023-03-18 20:01:19',
+                                updateTime: '2023-03-28 20:01:19',
                             },
                             responseType: 'json',
                         }).then((response) => {
                             if (response.data.status == 200) {
-                                    this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages);
+                                this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages);
                             } else {
                                 console.log("request error")
                             }

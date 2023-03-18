@@ -34,7 +34,7 @@
         },
         methods: {
             handleClick(tab, event) {
-                console.log(tab, event);
+                // console.log(tab, event);
             },
             loadContact() {
                 this.firstLabelName = '好友'
@@ -64,7 +64,6 @@
                                 if (type == 0) {
                                     if (direction == 0) {
                                         this.$store.state.requestFriendApplications = response.data.data.relations;
-                                        console.log(response.data.data.relations)
                                     } else {
                                         this.$store.state.acceptFriendApplications = response.data.data.relations;
                                     }
@@ -105,7 +104,6 @@
             this.loadRelation(1, -1, 0);
             this.loadRelation(1, -1, 1);
 
-            console.log("Contact mount")
             // 加载创建的群组
             axios({
                 method: 'get',

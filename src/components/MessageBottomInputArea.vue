@@ -38,14 +38,15 @@
         <el-button class="extend-button" icon="el-icon-more"></el-button>
     </div>
     <textarea id="textarea" placeholder="按 Ctrl + Enter 发送"
-        v-model="content" @keyup.ctrl.enter="sendMessage(1)">
+        v-model="content" @keyup.ctrl.enter="sendMessage(0)">
     </textarea>
     <el-button id="sendBtn" type="primary" size="mini"
-        @click="sendMessage(1)">发送(S)</el-button>
+        @click="sendMessage(0)">发送(S)</el-button>
   </div>
 </template>
 
 <script>
+    import axios from 'axios'
     const emojiData = require('../assets/emoji.json')
     export default {
         name: "MessageBottomInputArea",
@@ -54,7 +55,16 @@
                 content: '',
                 emojiList: [],
                 emojiCounter: 40,
+                user: JSON.parse(window.sessionStorage.getItem("user")),
             }
+        },
+        props: {
+            'isGroup': Boolean,
+        },
+        computed: {
+            messageKey() {
+                return (this.isGroup ? "group" : "user") + this.$store.state.toId
+            },
         },
         methods: {
             loadFormerData() {
@@ -63,26 +73,33 @@
             addToMessage(item) {
                 this.content += item
             },
-            sendMessage(type, url) {
-                if (type == 1 && this.content.trim().length <= 0) {
+            sendMessage(contentType, url) {
+                if (contentType == 1 && this.content.trim().length <= 0) {
                     this.$message.error('发送信息不能为空')
                     return
                 }
 
                 // 更新消息
-                this.$store.state.privateMessages.push({
-                    id: this.$store.state.privateMessages.length,
-                    style: {
-                        right: true
-                    },
-                    fromNickname: 'rekord',
-                    userProfile: 'https://cdn.sxrekord.com/blog/logo.jpg',
-                    messageTypeId: type,
-                    content: type == 1 ? this.content : url,
+                this.$nextTick(() => {
+                    this.$store.state.messages[this.messageKey].push({
+                        id: this.$store.state.messages[this.messageKey].length + 1,
+                        fromId: this.user.id,
+                        name: 'rekord',
+                        avatarPath: 'https://cdn.sxrekord.com/blog/logo.jpg',
+                        contentType: contentType,
+                        content: this.content,
+                        url: url,
+                    })
                 })
 
+
+                // // 发送消息至后端
+                // axios({
+
+                // })
+
                 // 清空输入框
-                if (type == 1) {
+                if (contentType == 1) {
                     this.content = ''
                 }
                 // 将滚动条滑动至底部

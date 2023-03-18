@@ -11,7 +11,7 @@
       <div v-show="isChatPanel">
         <MessageTopTitle :chatObject="this.chatObject.name"/>
         <MessageArea :isGroup="this.isGroup" :toId="this.chatObject.id"/>
-        <MessageBottomInputArea/>
+        <MessageBottomInputArea :isGroup="this.isGroup"/>
       </div>
       <div v-show="!isChatPanel">
         <SearchArea/>
@@ -53,6 +53,7 @@
       openRightPanel(isChatPanel = true, isGroup, chatObject) {
         this.isChatPanel = isChatPanel
         this.isGroup = isGroup
+        this.$store.state.toId = chatObject.id;
         this.chatObject = chatObject
         this.$refs.app.style.width = 900 + 'px'
         this.$bus.$emit('scrollToBottom')

@@ -24,7 +24,7 @@
             <el-button class="extend-button" icon="el-icon-picture-outline-round"></el-button>
         </el-upload>
         <el-upload
-                action="https://jsonplaceholder.typicode.com/posts/"
+                action="/chatting/upload"
                 :before-upload="beforeFileUpload"
                 :on-success="uploadFileSuccess"
                 :on-error="uploadFileError"
@@ -72,7 +72,7 @@
             addToMessage(item) {
                 this.content += item
             },
-            sendMessage(contentType, url) {
+            sendMessage(contentType, url, size) {
                 if (contentType == 0 && this.content.trim().length <= 0) {
                     this.$message.error('发送信息不能为空')
                     return
@@ -98,6 +98,7 @@
                     toId: this.$store.state.toId,
                     ws_type: contentType + 3 + this.isGroup,
                     content: this.content,
+                    size: size,
                 })
 
                 this.$nextTick(() => {
@@ -129,8 +130,9 @@
             },
             uploadFileSuccess(res, file) {
                 this.$message.success('上传文件成功!')
-                this.sendMessage(3, 'vue.min.js')
                 console.log('success', res, file)
+                this.content = file.name
+                this.sendMessage(2, res.data.fileUrl, res.data.fileSize)
             },
             uploadFileError(res, file) {
                 this.$message.error('上传文件失败!')

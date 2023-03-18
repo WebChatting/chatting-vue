@@ -51,7 +51,6 @@
     methods: {
       openRightPanel(isChatPanel = true, chatObject) {
         this.isChatPanel = isChatPanel
-        this.$store.state.toId = chatObject.id;
         this.chatObject = chatObject
         this.$refs.app.style.width = 900 + 'px'
         this.$bus.$emit('scrollToBottom')

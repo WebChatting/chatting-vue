@@ -54,6 +54,7 @@
         methods: {
             openRightPanel(chatObject) {
                 this.$store.state.isGroup = this.isGroup;
+                this.$store.state.toId = chatObject.id;
                 this.$bus.$emit("openRightPanel", true, chatObject)
                 this.$bus.$emit("loadInitialData", this.isGroup, chatObject.id, 5)
             },

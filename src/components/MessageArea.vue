@@ -53,6 +53,7 @@
 
 <script>
     import axios from 'axios';
+    import date from '../utils/date'
     export default {
         name: "MessageArea",
         data() {
@@ -122,7 +123,7 @@
                                 type: this.isGroup ? 1 : 0,
                                 count: count,
                                 toId: this.toId,
-                                updateTime: '2023-03-28 20:01:19',
+                                updateTime: date.getCurrentTime(),
                             },
                             responseType: 'json',
                         }).then((response) => {

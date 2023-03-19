@@ -19,7 +19,7 @@
             <div v-for="item in searchResults" :key="item.id" class="single-result">
                 <el-avatar shape="circle" :size="70" :src="item.avatarPath"></el-avatar>
                 <div class="info">
-                    <p class="add-name ellipsis">{{ item.name }}</p>
+                    <p class="add-name ellipsis">{{ item.username }}</p>
                     <el-button type="primary" icon="el-icon-circle-plus" class="add-button">好友</el-button>
                 </div>
             </div>

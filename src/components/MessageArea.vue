@@ -159,8 +159,8 @@
 <style lang="scss" scoped>
     #display {
         padding:5px 0px 10px 8px;
-        max-height: 448px;
-        overflow: hidden scroll;
+        max-height: 453px;
+        overflow-y: auto;
         ul {
             list-style-type: none;
 		    padding-left: 0px;

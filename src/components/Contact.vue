@@ -1,6 +1,6 @@
 <template>
     <div id="list">
-        <div class="infinite-list-wrapper user-list" style="overflow: auto">
+        <div class="infinite-list-wrapper user-list">
             <div v-if="!isGroup">
                 <RelationList :isGroup="false"/>
             </div>

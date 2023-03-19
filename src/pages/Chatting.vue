@@ -64,7 +64,7 @@
       this.$bus.$on('closeRightPanel', this.closeRightPanel)
 
       // 连接ws
-      this.$store.state.socket.init()
+      this.$store.state.socket.init(window.location.hostname)
     },
     beforeDestroy() {
       // 解绑自定义事件

@@ -1,9 +1,12 @@
 let socket = {
     ws: null,
 
-    ws_url: "ws://localhost:3333/ws",
+    ws_url: null,
+
+    ws_port: 3333,
   
-    init: () => {
+    init: (hostname) => {
+        socket.ws_url = `ws://${hostname}:${socket.ws_port}/ws`
         if (!window.WebSocket) {
             window.WebSocket = window.MozWebSocket;
         }

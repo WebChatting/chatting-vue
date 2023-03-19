@@ -78,16 +78,14 @@
 
                 this.isGroup = this.$store.state.isGroup
                 // 更新消息
-                this.$nextTick(() => {
-                    this.$store.state.messages[this.messageKey].push({
-                        id: 10000 + this.$store.state.messages[this.messageKey].length + 1,
-                        fromId: this.user.id,
-                        name: this.user.username,
-                        avatarPath: this.user.avatarPath,
-                        contentType: contentType,
-                        content: this.content,
-                        url: url,
-                    })
+                this.$store.state.messages[this.messageKey].push({
+                    id: 10000 + this.$store.state.messages[this.messageKey].length + 1,
+                    fromId: this.user.id,
+                    name: this.user.username,
+                    avatarPath: this.user.avatarPath,
+                    contentType: contentType,
+                    content: this.content,
+                    url: url,
                 })
 
 

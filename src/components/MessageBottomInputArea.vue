@@ -82,8 +82,8 @@
                     this.$store.state.messages[this.messageKey].push({
                         id: 10000 + this.$store.state.messages[this.messageKey].length + 1,
                         fromId: this.user.id,
-                        name: 'rekord',
-                        avatarPath: 'https://cdn.sxrekord.com/blog/logo.jpg',
+                        name: this.user.username,
+                        avatarPath: this.user.avatarPath,
                         contentType: contentType,
                         content: this.content,
                         url: url,

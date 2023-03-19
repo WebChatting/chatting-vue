@@ -53,7 +53,7 @@
         <el-drawer
             title="个人信息"
             :before-close="beforeCloseEditInfo"
-            :visible.sync="drawerSwitch"
+            :visible.sync="userDrawerSwitch"
             direction="ltr"
             ref="drawer">
             <div class="drawer-content">
@@ -67,7 +67,7 @@
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload">
-                                <img v-if="imageUrl" :src="imageUrl" class="drawer-avatar">
+                                <img v-if="userInfo.avatarPath" :src="userInfo.avatarPath" class="drawer-avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
                         </el-form-item>
@@ -97,7 +97,7 @@
             ref="groupDrawer">
             <div class="drawer-content">
                 <div class="drawer-body">
-                    <el-form :model="userInfo">
+                    <el-form :model="groupInfo">
                         <!-- 头像 -->
                         <el-form-item label="头像：" label-width="60px">
                             <el-upload
@@ -106,13 +106,13 @@
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload">
-                                <img v-if="imageUrl" :src="imageUrl" class="drawer-avatar">
+                                <img v-if="groupInfo.avatarPath" :src="groupInfo.avatarPath" class="drawer-avatar">
                                 <i v-else class="el-icon-plus avatar-uploader-icon"></i>
                             </el-upload>
                         </el-form-item>
 
                         <el-form-item label="名称：" label-width="60px">
-                            <el-input v-model="userInfo.name" autocomplete="off"></el-input>
+                            <el-input v-model="groupInfo.name" autocomplete="off"></el-input>
                         </el-form-item>
                     </el-form>
                 </div>
@@ -133,16 +133,16 @@
         data() {
             return {
                 mode: false,
-                drawerSwitch: false,
+                userDrawerSwitch: false,
                 groupDrawerSwitch: false,
-                userInfo: {
-                    name: '',
-                    password: '',
-                },
                 loading: false,
                 timer: null,
-                imageUrl: '',
                 user: JSON.parse(window.sessionStorage.getItem("user")),
+                userInfo: {},
+                groupInfo: {
+                    avatarPath: '',
+                    name: '',
+                }
             }
         },
         computed: {
@@ -162,10 +162,17 @@
                 window.location.href = "/"
             },
             openEditInfo() {
+                // 自动填充数据
+                this.userInfo = {
+                    avatarPath: this.user.avatarPath,
+                    name: this.user.username,
+                    password: this.user.password,
+                }
+
                 // 关闭右侧面板
                 this.$bus.$emit('closeRightPanel')
                 // 打开左侧抽屉
-                this.drawerSwitch = true
+                this.userDrawerSwitch = true
             },
             openCreateGroup() {
                 // 关闭右侧面板
@@ -174,12 +181,14 @@
                 this.groupDrawerSwitch = true
             },
             beforeCloseEditInfo(done) {
-                this.beforeCloseDrawer(done, '/chatting/user/update')
+                this.beforeCloseDrawer(done, '/chatting/user/update', this.userInfo.avatarPath,
+                    this.userInfo.name, this.userInfo.password)
             },
             beforeCloseCreateGroup(done) {
-                this.beforeCloseDrawer(done, '/chatting/group/add')
+                this.beforeCloseDrawer(done, '/chatting/group/add',
+                    this.groupInfo.avatarPath, this.groupInfo.name)
             },
-            beforeCloseDrawer(done, url) {
+            beforeCloseDrawer(done, url, avatarPath, name, password) {
                 if (this.loading) {
                     return;
                 }
@@ -191,9 +200,9 @@
                         method: 'post',
                         url: url,
                         params: {
-                            name: this.userInfo.name,
-                            password: this.userInfo.password,
-                            avatarPath: this.imageUrl,
+                            avatarPath: avatarPath,
+                            name: name,
+                            password: password,
                         },
                         responseType: 'json',
                     }).then((resp) => {
@@ -217,14 +226,18 @@
             },
             cancelForm() {
                 this.loading = false;
-                this.drawerSwitch = false;
+                this.userDrawerSwitch = false;
                 this.groupDrawerSwitch = false;
                 clearTimeout(this.timer);
             },
 
             handleAvatarSuccess(res, file) {
                 console.log(res, file)
-                this.imageUrl = res.data.fileUrl
+                if (this.userDrawerSwitch) {
+                    this.userInfo.avatarPath = res.data.fileUrl
+                } else {
+                    this.groupInfo.avatarPath = res.data.fileUrl
+                }
             },
             beforeAvatarUpload(file) {
                 console.log('before avatar upload')

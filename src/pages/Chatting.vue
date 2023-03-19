@@ -1,7 +1,7 @@
 <template>
   <div id="app" ref="app">
     <div class="toolbar">
-      <Toolbar/>
+      <ToolBar/>
     </div>
     <div class="sidebar">
       <NavigationTopSearchBar/>
@@ -21,7 +21,7 @@
 </template>
 
 <script>
-  import Toolbar from "../components/Toolbar"
+  import ToolBar from "@/components/ToolBar/ToolBar"
   import NavigationTopSearchBar from '../components/NavigationTopSearchBar'
   import NavigationZone from '../components/NavigationZone'
   import MessageTopTitle from "../components/MessageTopTitle"
@@ -32,7 +32,7 @@
   export default {
     name: 'Chatting',
     components: {
-      Toolbar,
+      ToolBar,
       NavigationTopSearchBar,
       NavigationZone,
       MessageTopTitle,

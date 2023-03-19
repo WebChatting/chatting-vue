@@ -129,7 +129,7 @@
 <script>
     import axios from 'axios'
     export default {
-        name: 'Toolbar',
+        name: 'ToolBar',
         data() {
             return {
                 mode: false,

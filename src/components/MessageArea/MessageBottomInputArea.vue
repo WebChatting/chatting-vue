@@ -46,7 +46,7 @@
 </template>
 
 <script>
-    const emojiData = require('../assets/emoji.json')
+    const emojiData = require('@/assets/emoji.json')
     export default {
         name: "MessageBottomInputArea",
         data() {

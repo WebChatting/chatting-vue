@@ -22,12 +22,12 @@
 
 <script>
   import ToolBar from "@/components/ToolBar/ToolBar"
-  import NavigationTopSearchBar from '../components/NavigationTopSearchBar'
-  import NavigationZone from '../components/NavigationZone'
-  import MessageTopTitle from "../components/MessageTopTitle"
-  import MessageArea from '../components/MessageArea'
-  import MessageBottomInputArea from '../components/MessageBottomInputArea'
-  import SearchArea from '../components/SearchArea'
+  import NavigationTopSearchBar from '@/components/NavigationZone/NavigationTopSearchBar'
+  import NavigationZone from '@/components/NavigationZone/NavigationZone'
+  import MessageTopTitle from "@/components/MessageArea/MessageTopTitle"
+  import MessageArea from '@/components/MessageArea/MessageArea'
+  import MessageBottomInputArea from '@/components/MessageArea/MessageBottomInputArea'
+  import SearchArea from '@/components/SearchArea/SearchArea'
   
   export default {
     name: 'Chatting',

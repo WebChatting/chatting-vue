@@ -53,7 +53,7 @@
 
 <script>
     import axios from 'axios';
-    import date from '../utils/date'
+    import date from '@/utils/date'
     export default {
         name: "MessageArea",
         data() {

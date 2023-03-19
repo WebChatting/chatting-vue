@@ -128,7 +128,8 @@
                             responseType: 'json',
                         }).then((response) => {
                             if (response.data.status == 200) {
-                                this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages);
+                                this.$set(this.$store.state.messages, this.messageKey, response.data.data.messages
+                                ? response.data.data.messages : []);
                             } else {
                                 console.log("request error")
                             }

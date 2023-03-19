@@ -82,7 +82,7 @@ export default {
         display: flex;
         flex-flow: wrap;
         .single-result {
-            margin: 0 15px 15px;
+            margin: 0 30px 15px;
             width: 140px;
             height: 70px;
             display: flex;

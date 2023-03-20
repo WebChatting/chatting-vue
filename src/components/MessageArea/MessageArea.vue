@@ -98,28 +98,29 @@
             },
             loadFormerData() {
                 // 一次加载五条历史数据
-                console.log(date.convertTime(this.$store.state.messages[this.messageKey][0].updateTime))
-                axios({
-                    method: 'post',
-                    url: '/chatting/message/load',
-                    params: {
-                        type: this.isGroup ? 1 : 0,
-                        count: 5,
-                        toId: this.toId,
-                        updateTime: this.$store.state.messages[this.messageKey][0].updateTime ?
-                            date.wrapSendTime(this.$store.state.messages[this.messageKey][0].updateTime) : date.getCurrentTime(),
-                    },
-                    responseType: 'json',
-                }).then((response) => {
-                    if (response.data.status == 200) {
-                        const messages = response.data.data.messages ? response.data.data.messages : []
-                        messages.reverse().forEach((item) => {
-                            this.$store.state.messages[this.messageKey].unshift(item)
-                        })
-                    } else {
-                        console.log("request error")
-                    }
-                })
+                if (this.$store.state.messages[this.messageKey]) {
+                    axios({
+                        method: 'post',
+                        url: '/chatting/message/load',
+                        params: {
+                            type: this.isGroup ? 1 : 0,
+                            count: 5,
+                            toId: this.toId,
+                            updateTime: this.$store.state.messages[this.messageKey][0].updateTime ?
+                                date.wrapSendTime(this.$store.state.messages[this.messageKey][0].updateTime) : date.getCurrentTime(),
+                        },
+                        responseType: 'json',
+                    }).then((response) => {
+                        if (response.data.status == 200) {
+                            const messages = response.data.data.messages ? response.data.data.messages : []
+                            messages.reverse().forEach((item) => {
+                                this.$store.state.messages[this.messageKey].unshift(item)
+                            })
+                        } else {
+                            console.log("request error")
+                        }
+                    })
+                }
             },
             loadInitialData(isGroup, toId, count, updateTime) {
                 this.isGroup = isGroup;

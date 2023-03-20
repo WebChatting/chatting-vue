@@ -2,7 +2,7 @@
     <div id="display"
         ref="display" @scroll="scrollPanel">
         <ul>
-            <li v-for="entry in messages" :key="entry.id">
+            <li v-for="entry of messages" :key="entry.id">
                 <p class="time">
                     <span>{{entry.updateTime | timeFormater}}</span>
                 </p>
@@ -13,7 +13,7 @@
                     </el-avatar>
                     <div class="message-body">
                         <div><div v-if="isGroup && entry.fromId !== user.id" class="name"
-                            @click="openInfoDialog(entry.id)">{{entry.name}}</div></div>
+                            @click="openInfoDialog(entry)">{{entry.name}}</div></div>
                         <div class="message">
                             <div v-if="entry.contentType == 0" class="text">{{entry.content}}</div>
                             <el-image
@@ -44,7 +44,7 @@
                     class="priview-avatar"
                     :src="dialogAvatar"
                 ></el-image>
-                <div class="priview-username ellipsis">{{dialogname}}</div>
+                <div class="priview-username ellipsis">{{dialogName}}</div>
             </div>
             <el-button type="primary" round class="priview-button">加好友</el-button>
         </el-dialog>
@@ -60,6 +60,8 @@
             return {
                 dialogVisible: false,
                 dialogUserId: 0,
+                dialogAvatar: '',
+                dialogName: '',
                 user: JSON.parse(window.sessionStorage.getItem("user")),
                 isGroup: false,
                 toId: -1,
@@ -72,12 +74,6 @@
             messageKey() {
                 return (this.isGroup ? "group" : "user") + this.toId
             },
-            dialogAvatar() {
-                // return this.$store.state.privateMessages[this.dialogUserId].avatarPath
-            },
-            dialogname() {
-                // return this.$store.state.privateMessages[this.dialogUserId].fromname
-            },
         },
         methods: {
             scrollPanel() {
@@ -89,9 +85,11 @@
                 const display = this.$refs.display
                 display.scrollTop = display.scrollHeight - display.clientHeight
             },
-            openInfoDialog(id) {
+            openInfoDialog(message) {
                 this.dialogVisible = true
-                this.dialogUserId = id
+                this.dialogUserId = message.fromId
+                this.dialogAvatar = message.avatarPath
+                this.dialogName = message.name
             },
             downloadFile(path) {
                 window.open(path)

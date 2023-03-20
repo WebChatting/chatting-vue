@@ -19,7 +19,7 @@
             <div v-for="item in searchResults" :key="item.id" class="single-result">
                 <el-avatar shape="circle" :size="70" :src="item.avatarPath"></el-avatar>
                 <div class="info">
-                    <p class="add-name ellipsis">{{ item.username ?? item.name}}</p>
+                    <p class="add-name ellipsis">{{item.name}}</p>
                     <el-button type="primary" icon="el-icon-circle-plus" class="add-button">好友</el-button>
                 </div>
             </div>
@@ -54,7 +54,7 @@ export default {
                 responseType: 'json',
             }).then((resp) => {
                 if (resp.data.status == 200) {
-                    this.searchResults = resp.data.data[(this.isGroup ? 'group' : 'user') + 's']
+                    this.searchResults = resp.data.data.results
                 } else {
                     console.log("request error")
                 }

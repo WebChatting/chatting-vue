@@ -47,28 +47,17 @@ export default {
         },
     },
     computed: {
-        applications: function() {
-            if (this.isGroup) {
-                if (this.isRequest) {
-                    return this.$store.state.requestGroupApplications;
-                } else {
-                    return this.$store.state.acceptGroupApplications;
-                }
-            } else {
-                if (this.isRequest) {
-                    return this.$store.state.requestFriendApplications;
-                } else {
-                    return this.$store.state.acceptFriendApplications;
-                }
-            }
-        }
+        applications() {
+            return this.$store.getters.getApplications(this.isGroup, this.isRequest)
+        },
     },
     methods: {
         load() {
 
         },
-        agreeApplication(id) {
-            this.applications[id].status = 1
+        agreeApplication(index) {
+            const application = this.applications[index]
+            application.status = 1
             // 同意群组验证不加入好友列表
             if (!this.isGroup) {
                 this.$store.state.friends.push(this.applications[id])

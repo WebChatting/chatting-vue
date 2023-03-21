@@ -61,18 +61,9 @@
                         if (response.data.data !== undefined) {
                             if (status == -1) {
                                 // 加载申请
-                                if (type == 0) {
-                                    if (direction == 0) {
-                                        this.$store.state.requestFriendApplications = response.data.data.relations;
-                                    } else {
-                                        this.$store.state.acceptFriendApplications = response.data.data.relations;
-                                    }
-                                } else {
-                                    if (direction == 0) {
-                                        this.$store.state.requestGroupApplications = response.data.data.relations;
-                                    } else {
-                                        this.$store.state.acceptGroupApplications = response.data.data.relations;
-                                    }
+                                if (response.data.data.relations) {
+                                    this.$store.getters.getApplications(type, !direction)
+                                        .push(...response.data.data.relations)
                                 }
                             } else {
                                 // 加载联系人

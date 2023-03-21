@@ -20,7 +20,13 @@
                 <el-avatar shape="circle" :size="70" :src="item.avatarPath"></el-avatar>
                 <div class="info">
                     <p class="add-name ellipsis">{{item.name}}</p>
-                    <el-button type="primary" icon="el-icon-circle-plus" class="add-button">好友</el-button>
+                    <el-button type="primary" icon="el-icon-circle-plus" class="add-button"
+                        v-if="item.status == -1 || item.status == 2"
+                        @click="addRelation(item)">好友</el-button>
+                    <div v-else class="add-info">
+                        <div v-if="item.status == 0">已发出请求</div>
+                        <div v-else>已建立关系</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -46,7 +52,7 @@ export default {
         },
         search() {
             axios({
-                methods: 'get',
+                method: 'get',
                 url: '/chatting/' + (this.isGroup ? 'group' : 'user') + '/search',
                 params: {
                     name: this.input,
@@ -57,6 +63,24 @@ export default {
                     this.searchResults = resp.data.data.results
                 } else {
                     console.log("request error")
+                }
+            })
+        },
+        addRelation(rel) {
+            axios({
+                method: 'post',
+                url: '/chatting/relation/add',
+                data: {
+                    acceptId: rel.id,
+                    type: this.isGroup ? 1 : 0,
+                    status: rel.status,
+                },
+                responseType: 'json',
+            }).then((res) => {
+                if (res.data.status == 200) {
+                    rel.status = 0;
+                } else {
+                    console.log('network error')
                 }
             })
         },
@@ -95,6 +119,9 @@ export default {
                 }
                 .add-button {
                     padding: 8px 10px;
+                }
+                .add-info {
+                    font-size: 12px;
                 }
             }
         }

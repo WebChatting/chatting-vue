@@ -1,6 +1,6 @@
 <template>
     <ul class="infinite-list" v-infinite-scroll="load">
-        <li v-for="(item, index) in applications" :key="item.id">
+        <li v-for="item in applications" :key="item.id">
             <el-card class="box-card" body-style="padding: 4px 8px;">
                 <div class="card">
                     <div>
@@ -18,9 +18,9 @@
                     </div>
                     <el-button-group v-if="!isRequest && item.status == 0">
                         <el-button size="mini" class="button"
-                            @click="agreeApplication(index)">同意</el-button>
+                            @click="agreeApplication(item)">同意</el-button>
                         <el-button size="mini" class="button"
-                            @click="refuseApplication(index)">拒绝</el-button>
+                            @click="refuseApplication(item)">拒绝</el-button>
                     </el-button-group>
                     <div class="result" v-else>{{item.status == 0 ? '等待回应' : (item.status == 1 ?'已同意' : '已拒绝')}}</div>
                 </div>
@@ -52,15 +52,12 @@ export default {
         },
     },
     methods: {
-        load() {
-
-        },
-        agreeApplication(index) {
-            const application = this.applications[index]
-            application.status = 1
+        load() {},
+        agreeApplication(app) {
+            app.status = 1
             // 同意群组验证不加入好友列表
             if (!this.isGroup) {
-                this.$store.state.friends.push(this.applications[id])
+                this.$store.state.friends.push(app)
             }
         },
         refuseApplication(id) {

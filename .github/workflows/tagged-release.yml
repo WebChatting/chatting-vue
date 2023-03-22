@@ -1,0 +1,48 @@
+name: tagged-release
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  id-token: "write"
+  contents: "write"
+
+jobs:
+  build_and_release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # 追加提交的分支
+      - run: echo "VERSION=${GITHUB_REF_NAME#v}" >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Update manifest.json version
+        uses: jossef/action-set-json-field@v2.1
+        with:
+          file: package.json
+          field: version
+          value: ${{ env.VERSION }}
+
+      - name: Push files
+        continue-on-error: true
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git commit -am "build: release v${{ env.VERSION }}"
+          git push
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci
+      - run: npm run build
+      - run: zip -q -r dist.zip ./dist # compress file
+
+      - uses: marvinpinto/action-automatic-releases@v1.2.1
+        with:
+          repo_token: "${{ secrets.GITHUB_TOKEN }}"
+          prerelease: false
+          files: |
+            dist.zip

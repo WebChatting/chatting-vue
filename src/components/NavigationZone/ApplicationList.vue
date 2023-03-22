@@ -33,6 +33,7 @@
 </template>
 
 <script>
+import axios from 'axios'
 export default {
     name: "ApplicationList",
     props: {
@@ -59,9 +60,29 @@ export default {
             if (!this.isGroup) {
                 this.$store.state.friends.push(app)
             }
+            this.updateRelation(app, 1)
         },
-        refuseApplication(id) {
-            this.applications[id].status = 2
+        refuseApplication(app) {
+            app.status = 2
+            this.updateRelation(app, 2)
+        },
+        updateRelation(app, status) {
+            axios({
+                method: 'post',
+                url: '/chatting/relation/update',
+                data: {
+                    requestId: app.id,
+                    acceptId: app.acceptId,
+                    type: app.type,
+                    status: status,
+                },
+                responseType: 'json',
+            }).then(res => {
+                if (res.data.status == 200) {
+                } else {
+                    console.log("network error")
+                }
+            })
         },
     }
 }

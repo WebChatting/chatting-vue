@@ -17,13 +17,14 @@
                     </el-badge>
                     <p class="name ellipsis">{{ item.name }}</p>
                 </div>
-                <div class="delete-button" @click="deleteContact(index)"><i class="el-icon-delete"></i></div>
+                <div class="delete-button" @click="deleteContact(item, index)"><i class="el-icon-delete"></i></div>
             </div>
         </li>
     </ul>
 </template>
 
 <script>
+    import axios from 'axios'
     export default {
         name: "RelationList",
         props: {
@@ -58,17 +59,35 @@
                 this.$bus.$emit("openRightPanel", true, chatObject)
                 this.$bus.$emit("loadInitialData", this.isGroup, chatObject.id, 5)
             },
-            deleteContact(id) {
+            deleteContact(item, index) {
                 this.$confirm('此操作将永久删除该好友/群组, 是否继续?', '提示', {
                     confirmButtonText: '确定',
                     cancelButtonText: '取消',
                     type: 'warning'
                 }).then(() => {
-                    this.$store.state.friendList.splice(id, 1)
+                    this.relations.splice(index, 1)
                     this.$message({
-                    type: 'success',
-                    message: '删除成功!'
+                        type: 'success',
+                        message: '删除成功!'
                     });
+                    // 异步后端同步
+                    axios({
+                        method: 'post',
+                        url: '/chatting/relation/update',
+                        data: {
+                            requestId: 0,
+                            acceptId: item.id,
+                            type: item.type,
+                            status: 3,
+                        },
+                        responseType: 'json',
+                    }).then(res => {
+                        if (res.data.status == 200) {
+                            console.log('删除成功')
+                        } else {
+                            console.log('network error')
+                        }
+                    })
                 }).catch(() => {
                     this.$message({
                     type: 'info',

@@ -1,9 +1,7 @@
 /**
- * 
+ *
  * baseUrl:
  */
-let baseUrl = '/chatting';
+let baseUrl = "/chatting";
 
-export {
-    baseUrl,
-}
+export { baseUrl };

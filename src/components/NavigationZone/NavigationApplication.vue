@@ -6,13 +6,13 @@
                     <template slot="title">
                         <div class="title">我发起的</div>
                     </template>
-                    <ApplicationList :isGroup="isGroup"/>
+                    <ApplicationList :isGroup="isGroup" />
                 </el-collapse-item>
                 <el-collapse-item>
                     <template slot="title">
                         <div class="title">我收到的</div>
                     </template>
-                    <ApplicationList :isGroup="isGroup" :isRequest="false"/>
+                    <ApplicationList :isGroup="isGroup" :isRequest="false" />
                 </el-collapse-item>
             </el-collapse>
         </div>
@@ -31,30 +31,36 @@ export default {
         ApplicationList,
     },
     props: {
-        'isGroup': Boolean,
+        isGroup: Boolean,
     },
     methods: {
         clearProcessed() {
-            this.$confirm('此操作将清理所有已处理的好友或群组申请记录, 是否继续?', '提示', {
-                confirmButtonText: '确定',
-                cancelButtonText: '取消',
-                type: 'warning'
-            }).then(() => {
-                // 移除已处理的申请记录
-                this.users = this.users.filter(item => item.status == 0)
-                this.$message({
-                    type: 'success',
-                    message: '清理成功!'
+            this.$confirm(
+                "此操作将清理所有已处理的好友或群组申请记录, 是否继续?",
+                "提示",
+                {
+                    confirmButtonText: "确定",
+                    cancelButtonText: "取消",
+                    type: "warning",
+                }
+            )
+                .then(() => {
+                    // 移除已处理的申请记录
+                    this.users = this.users.filter((item) => item.status == 0);
+                    this.$message({
+                        type: "success",
+                        message: "清理成功!",
+                    });
+                })
+                .catch(() => {
+                    this.$message({
+                        type: "info",
+                        message: "已取消清理",
+                    });
                 });
-            }).catch(() => {
-                this.$message({
-                    type: 'info',
-                    message: '已取消清理'
-                });
-            });
         },
     },
-}
+};
 </script>
 
 <style lang="scss" scoped>
@@ -76,7 +82,7 @@ export default {
             cursor: pointer;
         }
         div:hover {
-            color: #f78989
+            color: #f78989;
         }
     }
     .collapse-item {

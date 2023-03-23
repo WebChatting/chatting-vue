@@ -1,40 +1,42 @@
 <template>
     <div class="chatTitle">
-        <span class="titleName ellipsis">{{chatObject}}</span>
-        <el-button class="moreBtn" size="small" icon="el-icon-error"
-          @click="closeRightPanel"></el-button>
+        <span class="titleName ellipsis">{{ chatObject }}</span>
+        <el-button
+            class="moreBtn"
+            size="small"
+            icon="el-icon-error"
+            @click="closeRightPanel"
+        ></el-button>
     </div>
 </template>
 
 <script>
-    export default {
-        name: "MessageTopTitle",
-        methods: {
-          closeRightPanel() {
-            this.$bus.$emit('closeRightPanel')
-          }
+export default {
+    name: "MessageTopTitle",
+    methods: {
+        closeRightPanel() {
+            this.$bus.$emit("closeRightPanel");
         },
-        props: [
-          'chatObject'
-        ],
-    }
+    },
+    props: ["chatObject"],
+};
 </script>
 
 <style scoped>
-  .chatTitle{
+.chatTitle {
     height: 50px;
     width: 100%;
     font-size: 20px;
     display: flex;
     justify-content: space-between;
     border-bottom: 0.5px solid #c7d2db;
-  }
-  .moreBtn{
+}
+.moreBtn {
     background-color: #eee;
     border: 0;
     height: 50px;
-  }
-  .titleName{
+}
+.titleName {
     margin: 15px 25px;
-  }
+}
 </style>

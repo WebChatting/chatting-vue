@@ -42,6 +42,17 @@ const getters = {
             }
         }
     },
+    getRelations: (state) => (isGroup, isCreate) => {
+        if (!isGroup) {
+            return state.friends;
+        } else {
+            if (isCreate) {
+                return state.createGroups;
+            } else {
+                return state.joinGroups;
+            }
+        }
+    }
 }
 export default new Vuex.Store({
     actions,

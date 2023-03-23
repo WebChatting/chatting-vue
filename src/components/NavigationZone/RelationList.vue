@@ -41,15 +41,7 @@
         },
         computed: {
             relations: function() {
-                if (!this.isGroup) {
-                    return this.$store.state.friends;
-                } else {
-                    if (this.isCreated) {
-                        return this.$store.state.createGroups;
-                    } else {
-                        return this.$store.state.joinGroups;
-                    }
-                }
+                return this.$store.getters.getRelations(this.isGroup, this.isCreated)
             }
         },
         methods: {

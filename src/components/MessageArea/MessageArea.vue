@@ -159,7 +159,6 @@ export default {
                             );
                         });
                     }
-                    this.scrollToBottom();
                 } else {
                     console.log("request error");
                 }

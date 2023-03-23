@@ -102,8 +102,10 @@ export default {
             }
         },
         scrollToBottom() {
-            const display = this.$refs.display;
-            display.scrollTop = display.scrollHeight - display.clientHeight;
+            this.$nextTick(() => {
+                const display = this.$refs.display;
+                display.scrollTop = display.scrollHeight - display.clientHeight;
+            })
         },
         openInfoDialog(message) {
             this.dialogVisible = true;
@@ -130,12 +132,10 @@ export default {
         loadInitialData(isGroup, toId, count, updateTime) {
             this.isGroup = isGroup;
             this.toId = toId;
-            this.$nextTick(() => {
-                console.log(this.messageKey);
-                if (!this.$store.state.messages[this.messageKey]) {
-                    this.loadMessage(count, updateTime, true);
-                }
-            });
+            console.log(this.messageKey);
+            if (!this.$store.state.messages[this.messageKey]) {
+                this.loadMessage(count, updateTime, true);
+            }
         },
         loadMessage(count, updateTime, isInitial) {
             post("/message/load", {
@@ -159,6 +159,7 @@ export default {
                             );
                         });
                     }
+                    this.scrollToBottom();
                 } else {
                     console.log("request error");
                 }

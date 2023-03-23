@@ -30,7 +30,7 @@
   import SearchArea from '@/components/SearchArea/SearchArea'
   
   export default {
-    name: 'Chatting',
+    name: 'ChattingPage',
     components: {
       ToolBar,
       NavigationTopSearchBar,

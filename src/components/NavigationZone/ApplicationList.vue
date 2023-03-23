@@ -73,8 +73,7 @@ export default {
                     type: app.type,
                     status: status,
                 }).then(res => {
-                if (res.data.status == 200) {
-                } else {
+                if (!res.data.status == 200) {
                     console.log("network error")
                 }
             })

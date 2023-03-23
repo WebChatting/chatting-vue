@@ -26,7 +26,7 @@
 <script>
 import ApplicationList from "./ApplicationList";
 export default {
-    name: "Application",
+    name: "NavigationApplication",
     components: {
         ApplicationList,
     },

@@ -192,7 +192,7 @@
                 if (this.loading) {
                     return;
                 }
-                this.$confirm('确定要提交表单吗？').then(_ => {
+                this.$confirm('确定要提交表单吗？').then(() => {
                     this.loading = true;
                     console.log('before submit form')
                     // 提交表单
@@ -215,7 +215,7 @@
                         this.loading = false;
                         }, 400);
                         }, 2000);
-                }, _ => {
+                }, () => {
                     this.cancelForm()
                 }).catch(_ => {console.log(_)});
             },
@@ -234,7 +234,7 @@
                     this.groupInfo.avatarPath = res.data.fileUrl
                 }
             },
-            beforeAvatarUpload(file) {
+            beforeAvatarUpload() {
                 console.log('before avatar upload')
             },
         },

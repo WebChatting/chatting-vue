@@ -3,26 +3,26 @@
         v-model="activeName" @tab-click="handleClick">
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-custom"></i> {{firstLabelName}}</span>
-            <Contact v-show="isContact" :isGroup="false"/>
-            <Application v-show="!isContact" :isGroup="false"/>
+            <NavigationContact v-show="isContact" :isGroup="false"/>
+            <NavigationApplication v-show="!isContact" :isGroup="false"/>
         </el-tab-pane>
         <el-tab-pane>
             <span slot="label"><i class="el-icon-s-comment"></i> {{secondLabelName}}</span>
-            <Contact v-show="isContact" :isGroup="true"/>
-            <Application v-show="!isContact" :isGroup="true"/>
+            <NavigationContact v-show="isContact" :isGroup="true"/>
+            <NavigationApplication v-show="!isContact" :isGroup="true"/>
         </el-tab-pane>
     </el-tabs>
 </template>
 
 <script>
-    import Contact from './Contact'
-    import Application from './Application'
+    import NavigationContact from './NavigationContact'
+    import NavigationApplication from './NavigationApplication'
     import { get } from '@/service/request'
     export default {
         name: "NavigationZone",
         components: {
-            Contact,
-            Application,
+            NavigationContact,
+            NavigationApplication,
         },
         data() {
             return {
@@ -33,7 +33,7 @@
             }
         },
         methods: {
-            handleClick(tab, event) {
+            handleClick() {
                 // console.log(tab, event);
             },
             loadContact() {

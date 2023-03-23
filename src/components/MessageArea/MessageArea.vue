@@ -107,8 +107,7 @@
                 this.toId = toId;
                 this.$nextTick(() => {
                     console.log(this.messageKey)
-                    if (this.$store.state.messages[this.messageKey]) {
-                    } else {
+                    if (!this.$store.state.messages[this.messageKey]) {
                         this.loadMessage(count, updateTime, true)
                     }
                 })
@@ -161,7 +160,7 @@
         overflow-y: auto;
         ul {
             list-style-type: none;
-		    padding-left: 0px;
+            padding-left: 0px;
             li {
                 margin-bottom: 10px;
                 .time {

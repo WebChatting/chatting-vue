@@ -64,7 +64,7 @@
 <script>
     import { post } from '@/service/request'
     export default {
-        name: 'Login',
+        name: 'LoginPage',
         data() {
             return {
                 isloading: false,
@@ -77,29 +77,14 @@
             }
         },
         computed: {
-            pageTitle: {
-                get(opposite = false) {
-                    return this.isLogin ? '登录' : '注册'
-                },
-                set(v) {
-
-                }
+            pageTitle() {
+              return this.isLogin ? '登录' : '注册'
             },
-            pageTitleOpposite: {
-                get() {
-                    return !this.isLogin ? '登录' : '注册'
-                },
-                set(v) {
-
-                }
+            pageTitleOpposite() {
+              return !this.isLogin ? '登录' : '注册'
             },
-            otherText: {
-                get() {
-                    return this.isLogin ? '没有账号？' : '已有账号？'
-                },
-                set(v) {
-
-                }
+            otherText() {
+              return this.isLogin ? '没有账号？' : '已有账号？'
             },
         },
         methods: {

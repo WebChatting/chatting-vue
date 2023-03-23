@@ -17,7 +17,7 @@ let socket = {
         }
   
         // 连接关闭
-        socket.ws.onclose = (e) => {
+        socket.ws.onclose = () => {
             console.log('ws连接已断开')
         }
   
@@ -26,7 +26,7 @@ let socket = {
             console.log('ws连接成功')
         }
         // 连接错误
-        socket.ws.onerror = (err) => {
+        socket.ws.onerror = () => {
             console.log('ws连接发生错误')
         }
     },
@@ -59,7 +59,7 @@ let socket = {
     },
   
     receive: (message) => {
-      var recData = JSON.parse(message.data)
+      JSON.parse(message.data)
     },
   
 

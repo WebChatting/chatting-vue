@@ -28,7 +28,7 @@
 <script>
     import RelationList from "./RelationList";
     export default {
-        name: "Contact",
+        name: "NavigationContact",
         props: {
             'isGroup': Boolean,
         },

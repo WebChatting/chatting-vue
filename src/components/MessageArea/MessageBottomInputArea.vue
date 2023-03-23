@@ -118,10 +118,10 @@
                 this.content = res.data.fileUrl
                 this.sendMessage(1)
             },
-            uploadImageError(res, file) {
+            uploadImageError() {
                 this.$message.error('上传图片失败!')
             },
-            beforeFileUpload(file) {
+            beforeFileUpload() {
 
             },
             uploadFileSuccess(res, file) {
@@ -130,7 +130,7 @@
                 this.content = file.name
                 this.sendMessage(2, res.data.fileUrl, res.data.fileSize)
             },
-            uploadFileError(res, file) {
+            uploadFileError() {
                 this.$message.error('上传文件失败!')
             },
         },

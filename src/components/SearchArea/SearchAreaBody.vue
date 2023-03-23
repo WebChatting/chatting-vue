@@ -80,7 +80,7 @@ export default {
             this.$bus.$emit("closeRightPanel");
         },
         search() {
-            get((this.isGroup ? "group" : "user") + "/search", {
+            get((this.isGroup ? "/group" : "/user") + "/search", {
                 name: this.input,
             }).then((resp) => {
                 if (resp.data.status == 200) {

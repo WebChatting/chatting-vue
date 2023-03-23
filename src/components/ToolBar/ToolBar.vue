@@ -1,50 +1,72 @@
 <template>
     <div id="toolbar">
         <div class="avatar">
-            <el-avatar :src="user.avatarPath"
-                @error="false" :size="45" alt="Avatar">
-                <img src="https://cdn.sxrekord.com/blog/logo.jpg"/>
+            <el-avatar
+                :src="user.avatarPath"
+                @error="false"
+                :size="45"
+                alt="Avatar"
+            >
+                <img src="https://cdn.sxrekord.com/blog/logo.jpg" />
             </el-avatar>
         </div>
         <div class="bar">
             <div class="top-bar">
                 <el-tooltip effect="dark" content="联系人" placement="left">
-                    <el-button class="tool-button"
-                        @click="loadContact">
+                    <el-button class="tool-button" @click="loadContact">
                         <i class="el-icon-user-solid"></i>
                     </el-button>
                 </el-tooltip>
                 <el-tooltip effect="dark" content="验证" placement="left">
-                    <el-button class="tool-button"
-                        @click="loadVerification">
+                    <el-button class="tool-button" @click="loadVerification">
                         <i class="el-icon-message-solid"></i>
                     </el-button>
                 </el-tooltip>
                 <el-tooltip effect="dark" content="ChatGPT" placement="left">
-                    <el-button class="tool-button"><i class="el-icon-s-platform"></i></el-button>
+                    <el-button class="tool-button"
+                        ><i class="el-icon-s-platform"></i
+                    ></el-button>
                 </el-tooltip>
             </div>
             <div class="bottom-bar">
-                <el-popover
-                    placement="left"
-                    trigger="hover">
+                <el-popover placement="left" trigger="hover">
                     <div>
                         <el-switch
                             v-model="mode"
                             active-color="#13ce66"
                             inactive-color="#595b5d"
-                            :active-text="currentMode">
+                            :active-text="currentMode"
+                        >
                         </el-switch>
-                        <div><el-button icon="el-icon-edit" class="pop-button"
-                            @click="openEditInfo"></el-button></div>
-                        <div><el-button icon="el-icon-s-opportunity" class="pop-button"
-                            @click="openCreateGroup"></el-button></div>
-                        <div><el-button icon="el-icon-question" class="pop-button"></el-button></div>
+                        <div>
+                            <el-button
+                                icon="el-icon-edit"
+                                class="pop-button"
+                                @click="openEditInfo"
+                            ></el-button>
+                        </div>
+                        <div>
+                            <el-button
+                                icon="el-icon-s-opportunity"
+                                class="pop-button"
+                                @click="openCreateGroup"
+                            ></el-button>
+                        </div>
+                        <div>
+                            <el-button
+                                icon="el-icon-question"
+                                class="pop-button"
+                            ></el-button>
+                        </div>
                     </div>
-                    <el-button class="tool-button" slot="reference"><i class="el-icon-s-tools"></i></el-button>
+                    <el-button class="tool-button" slot="reference"
+                        ><i class="el-icon-s-tools"></i
+                    ></el-button>
                 </el-popover>
                 <el-tooltip effect="dark" content="退出" placement="left">
-                    <el-button class="tool-button" @click="exitSystem"><i class="el-icon-s-fold"></i></el-button>
+                    <el-button class="tool-button" @click="exitSystem"
+                        ><i class="el-icon-s-fold"></i
+                    ></el-button>
                 </el-tooltip>
             </div>
         </div>
@@ -55,7 +77,8 @@
             :before-close="beforeCloseEditInfo"
             :visible.sync="userDrawerSwitch"
             direction="ltr"
-            ref="drawer">
+            ref="drawer"
+        >
             <div class="drawer-content">
                 <div class="drawer-body">
                     <el-form :model="userInfo">
@@ -66,24 +89,50 @@
                                 action="/chatting/upload"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
-                                :before-upload="beforeAvatarUpload">
-                                <img v-if="userInfo.avatarPath" :src="userInfo.avatarPath" class="drawer-avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                :before-upload="beforeAvatarUpload"
+                            >
+                                <img
+                                    v-if="userInfo.avatarPath"
+                                    :src="userInfo.avatarPath"
+                                    class="drawer-avatar"
+                                />
+                                <i
+                                    v-else
+                                    class="el-icon-plus avatar-uploader-icon"
+                                ></i>
                             </el-upload>
                         </el-form-item>
 
                         <el-form-item label="账号：" label-width="60px">
-                            <el-input v-model="userInfo.name" autocomplete="off"></el-input>
+                            <el-input
+                                v-model="userInfo.name"
+                                autocomplete="off"
+                            ></el-input>
                         </el-form-item>
-                        <el-form-item label="密码：" prop="pass" label-width="60px">
-                            <el-input type="password" v-model="userInfo.password" autocomplete="off"></el-input>
+                        <el-form-item
+                            label="密码："
+                            prop="pass"
+                            label-width="60px"
+                        >
+                            <el-input
+                                type="password"
+                                v-model="userInfo.password"
+                                autocomplete="off"
+                            ></el-input>
                         </el-form-item>
                     </el-form>
                 </div>
                 <div class="drawer-footer">
-                    <el-button @click="cancelForm" class="drawer-button">取 消</el-button>
-                    <el-button type="primary" @click="$refs.drawer.closeDrawer()" :loading="loading"
-                        class="drawer-button">{{ loading ? '提交中 ...' : '确 定' }}</el-button>
+                    <el-button @click="cancelForm" class="drawer-button"
+                        >取 消</el-button
+                    >
+                    <el-button
+                        type="primary"
+                        @click="$refs.drawer.closeDrawer()"
+                        :loading="loading"
+                        class="drawer-button"
+                        >{{ loading ? "提交中 ..." : "确 定" }}</el-button
+                    >
                 </div>
             </div>
         </el-drawer>
@@ -94,7 +143,8 @@
             :before-close="beforeCloseCreateGroup"
             :visible.sync="groupDrawerSwitch"
             direction="ltr"
-            ref="groupDrawer">
+            ref="groupDrawer"
+        >
             <div class="drawer-content">
                 <div class="drawer-body">
                     <el-form :model="groupInfo">
@@ -105,21 +155,39 @@
                                 action="/chatting/upload"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
-                                :before-upload="beforeAvatarUpload">
-                                <img v-if="groupInfo.avatarPath" :src="groupInfo.avatarPath" class="drawer-avatar">
-                                <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+                                :before-upload="beforeAvatarUpload"
+                            >
+                                <img
+                                    v-if="groupInfo.avatarPath"
+                                    :src="groupInfo.avatarPath"
+                                    class="drawer-avatar"
+                                />
+                                <i
+                                    v-else
+                                    class="el-icon-plus avatar-uploader-icon"
+                                ></i>
                             </el-upload>
                         </el-form-item>
 
                         <el-form-item label="名称：" label-width="60px">
-                            <el-input v-model="groupInfo.name" autocomplete="off"></el-input>
+                            <el-input
+                                v-model="groupInfo.name"
+                                autocomplete="off"
+                            ></el-input>
                         </el-form-item>
                     </el-form>
                 </div>
                 <div class="drawer-footer">
-                    <el-button @click="cancelForm" class="drawer-button">取 消</el-button>
-                    <el-button type="primary" @click="$refs.groupDrawer.closeDrawer()" :loading="loading"
-                        class="drawer-button">{{ loading ? '创建中 ...' : '创 建' }}</el-button>
+                    <el-button @click="cancelForm" class="drawer-button"
+                        >取 消</el-button
+                    >
+                    <el-button
+                        type="primary"
+                        @click="$refs.groupDrawer.closeDrawer()"
+                        :loading="loading"
+                        class="drawer-button"
+                        >{{ loading ? "创建中 ..." : "创 建" }}</el-button
+                    >
                 </div>
             </div>
         </el-drawer>
@@ -127,127 +195,138 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    export default {
-        name: 'ToolBar',
-        data() {
-            return {
-                mode: false,
-                userDrawerSwitch: false,
-                groupDrawerSwitch: false,
-                loading: false,
-                timer: null,
-                user: JSON.parse(window.sessionStorage.getItem("user")),
-                userInfo: {},
-                groupInfo: {
-                    avatarPath: '',
-                    name: '',
-                }
-            }
+import { post } from "@/service/request";
+export default {
+    name: "ToolBar",
+    data() {
+        return {
+            mode: false,
+            userDrawerSwitch: false,
+            groupDrawerSwitch: false,
+            loading: false,
+            timer: null,
+            user: JSON.parse(window.sessionStorage.getItem("user")),
+            userInfo: {},
+            groupInfo: {
+                avatarPath: "",
+                name: "",
+            },
+        };
+    },
+    computed: {
+        currentMode() {
+            return this.mode ? "dark" : "light";
         },
-        computed: {
-            currentMode() {
-                return this.mode ? 'dark' : 'light'
-            },
+    },
+    methods: {
+        loadContact() {
+            this.$bus.$emit("loadContact");
         },
-        methods: {
-            loadContact() {
-                this.$bus.$emit('loadContact')
-            },
-            loadVerification() {
-                this.$bus.$emit('loadVerification')
-            },
-            // 退出系统
-            exitSystem() {
-                window.location.href = "/"
-            },
-            openEditInfo() {
-                // 自动填充数据
-                this.userInfo = {
-                    avatarPath: this.user.avatarPath,
-                    name: this.user.username,
-                    password: this.user.password,
-                }
+        loadVerification() {
+            this.$bus.$emit("loadVerification");
+        },
+        // 退出系统
+        exitSystem() {
+            window.location.href = "/";
+        },
+        openEditInfo() {
+            // 自动填充数据
+            this.userInfo = {
+                avatarPath: this.user.avatarPath,
+                name: this.user.username,
+                password: this.user.password,
+            };
 
-                // 关闭右侧面板
-                this.$bus.$emit('closeRightPanel')
-                // 打开左侧抽屉
-                this.userDrawerSwitch = true
-            },
-            openCreateGroup() {
-                // 关闭右侧面板
-                this.$bus.$emit('closeRightPanel')
-                // 打开左侧抽屉
-                this.groupDrawerSwitch = true
-            },
-            beforeCloseEditInfo(done) {
-                this.beforeCloseDrawer(done, '/chatting/user/update', this.userInfo.avatarPath,
-                    this.userInfo.name, this.userInfo.password)
-            },
-            beforeCloseCreateGroup(done) {
-                this.beforeCloseDrawer(done, '/chatting/group/add',
-                    this.groupInfo.avatarPath, this.groupInfo.name)
-            },
-            beforeCloseDrawer(done, url, avatarPath, name, password) {
-                if (this.loading) {
-                    return;
-                }
-                this.$confirm('确定要提交表单吗？').then(_ => {
-                    this.loading = true;
-                    console.log('before submit form')
-                    // 提交表单
-                    axios({
-                        method: 'post',
-                        url: url,
-                        params: {
+            // 关闭右侧面板
+            this.$bus.$emit("closeRightPanel");
+            // 打开左侧抽屉
+            this.userDrawerSwitch = true;
+        },
+        openCreateGroup() {
+            // 关闭右侧面板
+            this.$bus.$emit("closeRightPanel");
+            // 打开左侧抽屉
+            this.groupDrawerSwitch = true;
+        },
+        beforeCloseEditInfo(done) {
+            this.beforeCloseDrawer(
+                done,
+                "/chatting/user/update",
+                this.userInfo.avatarPath,
+                this.userInfo.name,
+                this.userInfo.password
+            );
+        },
+        beforeCloseCreateGroup(done) {
+            this.beforeCloseDrawer(
+                done,
+                "/chatting/group/add",
+                this.groupInfo.avatarPath,
+                this.groupInfo.name
+            );
+        },
+        beforeCloseDrawer(done, url, avatarPath, name, password) {
+            if (this.loading) {
+                return;
+            }
+            this.$confirm("确定要提交表单吗？")
+                .then(
+                    () => {
+                        this.loading = true;
+                        console.log("before submit form");
+                        // 提交表单
+                        post(url, {
                             avatarPath: avatarPath,
                             name: name,
                             password: password,
-                        },
-                        responseType: 'json',
-                    }).then((resp) => {
-                        if (resp.data.status == 200) {
-                            console.log(resp.data)
-                        } else {
-                            console.log("request error")
-                        }
-                    })
+                        }).then((resp) => {
+                            if (resp.data.status == 200) {
+                                console.log(resp.data);
+                            } else {
+                                console.log("request error");
+                            }
+                        });
 
-                    this.timer = setTimeout(() => {
-                        done();
-                        // 动画关闭需要一定的时间
-                        setTimeout(() => {
-                        this.loading = false;
-                        }, 400);
+                        this.timer = setTimeout(() => {
+                            done();
+                            // 动画关闭需要一定的时间
+                            setTimeout(() => {
+                                this.loading = false;
+                            }, 400);
                         }, 2000);
-                }, _ => {
-                    this.cancelForm()
-                }).catch(_ => {console.log(_)});
-            },
-            cancelForm() {
-                this.loading = false;
-                this.userDrawerSwitch = false;
-                this.groupDrawerSwitch = false;
-                clearTimeout(this.timer);
-            },
-
-            handleAvatarSuccess(res, file) {
-                console.log(res, file)
-                if (this.userDrawerSwitch) {
-                    this.userInfo.avatarPath = res.data.fileUrl
-                } else {
-                    this.groupInfo.avatarPath = res.data.fileUrl
-                }
-            },
-            beforeAvatarUpload(file) {
-                console.log('before avatar upload')
-            },
+                    },
+                    () => {
+                        this.cancelForm();
+                    }
+                )
+                .catch((_) => {
+                    console.log(_);
+                });
         },
-    }
+        cancelForm() {
+            this.loading = false;
+            this.userDrawerSwitch = false;
+            this.groupDrawerSwitch = false;
+            clearTimeout(this.timer);
+        },
+
+        handleAvatarSuccess(res, file) {
+            console.log(res, file);
+            if (this.userDrawerSwitch) {
+                this.userInfo.avatarPath = res.data.fileUrl;
+            } else {
+                this.groupInfo.avatarPath = res.data.fileUrl;
+            }
+        },
+        beforeAvatarUpload() {
+            console.log("before avatar upload");
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-  #toolbar {
+#toolbar {
     height: 100%;
     background-color: #2e3238;
     .avatar {
@@ -269,7 +348,7 @@
             margin: 5px 0;
         }
     }
-  }
+}
 .pop-button {
     border: none;
     padding: 0;
@@ -304,7 +383,7 @@
             }
         }
         .avatar-uploader:hover {
-            border-color: #409EFF;
+            border-color: #409eff;
         }
     }
     .drawer-footer {

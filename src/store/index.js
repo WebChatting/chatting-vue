@@ -1,16 +1,12 @@
-import { socket } from '@/utils/socket'
-import Vue from 'vue'
-import  Vuex from 'vuex'
+import { socket } from "@/utils/socket";
+import Vue from "vue";
+import Vuex from "vuex";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
-const actions = {
+const actions = {};
 
-}
-
-const mutations = {
-
-}
+const mutations = {};
 
 const state = {
     messages: {},
@@ -24,7 +20,7 @@ const state = {
     socket: socket,
     toId: -1,
     isGroup: false,
-}
+};
 
 const getters = {
     getApplications: (state) => (isGroup, isRequest) => {
@@ -42,10 +38,21 @@ const getters = {
             }
         }
     },
-}
+    getRelations: (state) => (isGroup, isCreate) => {
+        if (!isGroup) {
+            return state.friends;
+        } else {
+            if (isCreate) {
+                return state.createGroups;
+            } else {
+                return state.joinGroups;
+            }
+        }
+    },
+};
 export default new Vuex.Store({
     actions,
     mutations,
     state,
     getters,
-})
+});

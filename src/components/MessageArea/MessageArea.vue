@@ -52,7 +52,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import { post } from '@/service/request';
     import date from '@/utils/date'
     export default {
         name: "MessageArea",
@@ -114,17 +114,12 @@
                 })
             },
             loadMessage(count, updateTime, isInitial) {
-                axios({
-                    method: 'post',
-                    url: '/chatting/message/load',
-                    params: {
+                post('/message/load', {
                         type: this.isGroup ? 1 : 0,
                         count: count,
                         toId: this.toId,
                         updateTime: updateTime ? updateTime : date.getCurrentTime(),
-                    },
-                    responseType: 'json',
-                }).then((response) => {
+                    }).then(response => {
                     if (response.data.status == 200) {
                         const messages = response.data.data.messages ?? []
                         if (isInitial) {

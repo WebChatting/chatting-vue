@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { get, post} from '@/service/request'
 export default {
     name: 'SearchAreaBody',
     data() {
@@ -51,14 +51,9 @@ export default {
             this.$bus.$emit('closeRightPanel')
         },
         search() {
-            axios({
-                method: 'get',
-                url: '/chatting/' + (this.isGroup ? 'group' : 'user') + '/search',
-                params: {
+            get((this.isGroup ? 'group' : 'user') + '/search', {
                     name: this.input,
-                },
-                responseType: 'json',
-            }).then((resp) => {
+                }).then(resp => {
                 if (resp.data.status == 200) {
                     this.searchResults = resp.data.data.results
                 } else {
@@ -67,16 +62,11 @@ export default {
             })
         },
         addRelation(rel) {
-            axios({
-                method: 'post',
-                url: '/chatting/relation/add',
-                data: {
+            post('/relation/add', null, {
                     acceptId: rel.id,
                     type: this.isGroup ? 1 : 0,
                     status: rel.status,
-                },
-                responseType: 'json',
-            }).then((res) => {
+                }).then(res => {
                 if (res.data.status == 200) {
                     rel.status = 0;
                 } else {

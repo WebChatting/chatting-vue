@@ -127,7 +127,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import { post } from '@/service/request'
     export default {
         name: 'ToolBar',
         data() {
@@ -196,16 +196,11 @@
                     this.loading = true;
                     console.log('before submit form')
                     // 提交表单
-                    axios({
-                        method: 'post',
-                        url: url,
-                        params: {
+                    post(url, {
                             avatarPath: avatarPath,
                             name: name,
                             password: password,
-                        },
-                        responseType: 'json',
-                    }).then((resp) => {
+                        }).then(resp => {
                         if (resp.data.status == 200) {
                             console.log(resp.data)
                         } else {

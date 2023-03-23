@@ -62,7 +62,7 @@
 </template>
 
 <script>
-    import axios from 'axios';
+    import { post } from '@/service/request'
     export default {
         name: 'Login',
         data() {
@@ -135,15 +135,10 @@
               this.loginText = "登录中..."
 
               // 发送后端请求
-              axios({
-                method: 'post',
-                url: '/chatting/user/login',
-                params: {
+              post('/user/login', {
                   username: this.$refs.accountInput.value.trim(),
                   password: this.$refs.passwordInput.value.trim()
-                },
-                responseType: 'json',
-              }).then((response) => {
+                }).then(response => {
                 this.restore("登录")
                 if (response.data.status == 200) {
                   window.sessionStorage.setItem("user", JSON.stringify(response.data.data));
@@ -156,16 +151,10 @@
             register() {
               this.loginText = "注册中..."
 
-              // 发送后端请求
-              axios({
-                method: 'post',
-                url: '/chatting/user/register',
-                params: {
+              post('/user/register', {
                   username: this.$refs.accountInput.value.trim(),
                   password: this.$refs.passwordInput.value.trim(),
-                },
-                responseType: 'json',
-              }).then((response) => {
+                }).then(response => {
                 this.restore("注册")
                 if (response.data.status == 200) {
                   this.$notify({

@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import axios from 'axios'
+    import { post } from '@/service/request'
     export default {
         name: "RelationList",
         props: {
@@ -63,17 +63,12 @@
                         message: '删除成功!'
                     });
                     // 异步后端同步
-                    axios({
-                        method: 'post',
-                        url: '/chatting/relation/update',
-                        data: {
+                    post('/relation/update', null, {
                             requestId: 0,
                             acceptId: item.id,
                             type: item.type,
                             status: 3,
-                        },
-                        responseType: 'json',
-                    }).then(res => {
+                        }).then(res => {
                         if (res.data.status == 200) {
                             console.log('删除成功')
                         } else {

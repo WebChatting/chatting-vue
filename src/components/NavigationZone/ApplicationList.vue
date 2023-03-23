@@ -33,7 +33,7 @@
 </template>
 
 <script>
-import axios from 'axios'
+import { post } from '@/service/request'
 export default {
     name: "ApplicationList",
     props: {
@@ -67,17 +67,12 @@ export default {
             this.updateRelation(app, 2)
         },
         updateRelation(app, status) {
-            axios({
-                method: 'post',
-                url: '/chatting/relation/update',
-                data: {
+            post('/relation/update', null, {
                     requestId: app.id,
                     acceptId: app.acceptId,
                     type: app.type,
                     status: status,
-                },
-                responseType: 'json',
-            }).then(res => {
+                }).then(res => {
                 if (res.data.status == 200) {
                 } else {
                     console.log("network error")

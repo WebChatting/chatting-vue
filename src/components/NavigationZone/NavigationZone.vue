@@ -17,7 +17,7 @@
 <script>
     import Contact from './Contact'
     import Application from './Application'
-    import axios from 'axios'
+    import { get } from '@/service/request'
     export default {
         name: "NavigationZone",
         components: {
@@ -47,16 +47,11 @@
                 this.isContact = false
             },
             loadRelation(type, status, direction) {
-                axios({
-                    method: 'get',
-                    url: '/chatting/relation/list',
-                    params: {
+                get('/relation/list', {
                         type: type,
                         status: status,
                         direction: direction,
-                    },
-                    responseType: 'json',
-                }).then((response) => {
+                    }).then(response => {
                     if (response.data.status == 200) {
                         if (response.data.data !== undefined) {
                             if (status == -1) {
@@ -96,11 +91,7 @@
             this.loadRelation(1, -1, 1);
 
             // 加载创建的群组
-            axios({
-                method: 'get',
-                url: '/chatting/group/list',
-                responseType: 'json',
-            }).then((response) => {
+            get('/group/list').then(response => {
                 if (response.data.status == 200) {
                     this.$store.state.createGroups = response.data.data.relations;
                 } else {

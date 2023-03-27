@@ -245,6 +245,12 @@ export default {
                         }).then((resp) => {
                             if (resp.data.status == 200) {
                                 console.log(resp.data);
+                                if (password) {
+                                    this.user.avatarPath = avatarPath;
+                                    this.user.username = name;
+                                    this.user.password = password;
+                                    window.sessionStorage.setItem("user", JSON.stringify(this.user))
+                                }
                             } else {
                                 console.log("request error");
                             }

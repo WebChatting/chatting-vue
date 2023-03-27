@@ -1,6 +1,8 @@
 <template>
     <div class="chatTitle">
-        <span class="titleName ellipsis">{{ chatObject }}</span>
+        <span class="titleName ellipsis" :title="chatObject">{{
+            chatObject
+        }}</span>
         <el-button
             class="moreBtn"
             size="small"

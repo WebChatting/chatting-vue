@@ -43,7 +43,9 @@
                     :src="item.avatarPath"
                 ></el-avatar>
                 <div class="info">
-                    <p class="add-name ellipsis">{{ item.name }}</p>
+                    <p class="add-name ellipsis" :title="item.name">
+                        {{ item.name }}
+                    </p>
                     <el-button
                         type="primary"
                         icon="el-icon-circle-plus"

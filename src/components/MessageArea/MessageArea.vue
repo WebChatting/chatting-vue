@@ -50,7 +50,10 @@
                                 <div class="file-icon">
                                     <i class="el-icon-folder"></i>
                                 </div>
-                                <div class="file-info ellipsis">
+                                <div
+                                    class="file-info ellipsis"
+                                    :title="entry.content"
+                                >
                                     {{ entry.content }}
                                 </div>
                             </div>
@@ -62,7 +65,9 @@
         <el-dialog title="基本信息" :visible.sync="dialogVisible" width="300px">
             <div class="priview-info">
                 <el-image class="priview-avatar" :src="dialogAvatar"></el-image>
-                <div class="priview-username ellipsis">{{ dialogName }}</div>
+                <div class="priview-username ellipsis" :title="dialogName">
+                    {{ dialogName }}
+                </div>
             </div>
             <el-button type="primary" round class="priview-button"
                 >加好友</el-button
@@ -105,7 +110,7 @@ export default {
             this.$nextTick(() => {
                 const display = this.$refs.display;
                 display.scrollTop = display.scrollHeight - display.clientHeight;
-            })
+            });
         },
         openInfoDialog(message) {
             this.dialogVisible = true;

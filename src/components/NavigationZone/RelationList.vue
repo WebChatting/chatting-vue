@@ -20,7 +20,9 @@
                             </div>
                         </el-image>
                     </el-badge>
-                    <p class="name ellipsis">{{ item.name }}</p>
+                    <p class="name ellipsis" :title="item.name">
+                        {{ item.name }}
+                    </p>
                 </div>
                 <div class="delete-button" @click="deleteContact(item, index)">
                     <i class="el-icon-delete"></i>

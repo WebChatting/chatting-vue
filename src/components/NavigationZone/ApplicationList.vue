@@ -14,7 +14,9 @@
                                 <i class="el-icon-picture-outline"></i>
                             </div>
                         </el-image>
-                        <p class="name ellipsis">{{ item.name }}</p>
+                        <p class="name ellipsis" :title="item.name">
+                            {{ item.name }}
+                        </p>
                     </div>
                     <el-button-group v-if="!isRequest && item.status == 0">
                         <el-button

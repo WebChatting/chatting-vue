@@ -189,6 +189,7 @@ export default {
     },
     methods: {
         exitSystem() {
+            window.sessionStorage.removeItem("user");
             window.location.href = "/";
         },
         openEditInfo() {

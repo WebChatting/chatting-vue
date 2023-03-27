@@ -64,9 +64,6 @@ export default {
     mounted() {
         this.$bus.$on("openRightPanel", this.openRightPanel);
         this.$bus.$on("closeRightPanel", this.closeRightPanel);
-
-        // 连接ws
-        this.$store.state.socket.init(window.location.hostname);
     },
     beforeDestroy() {
         // 解绑自定义事件

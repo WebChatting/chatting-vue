@@ -69,6 +69,7 @@
 
 <script>
 const emojiData = require("@/assets/emoji.json");
+import { mapState } from "vuex";
 export default {
     name: "MessageBottomInputArea",
     data() {
@@ -84,6 +85,7 @@ export default {
         messageKey() {
             return (this.isGroup ? "group" : "user") + this.$store.state.toId;
         },
+        ...mapState(['socket']),
     },
     methods: {
         loadFormerData() {
@@ -114,7 +116,7 @@ export default {
             });
 
             // 发送消息至后端
-            this.$store.state.socket.send({
+            this.socket.send({
                 fromId: this.user.id,
                 toId: this.$store.state.toId,
                 ws_type: contentType * 2 + 3 + this.isGroup,

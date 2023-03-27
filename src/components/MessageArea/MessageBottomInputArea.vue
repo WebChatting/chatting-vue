@@ -78,14 +78,13 @@ export default {
             emojiList: [],
             emojiCounter: 40,
             user: JSON.parse(window.sessionStorage.getItem("user")),
-            isGroup: false,
         };
     },
     computed: {
+        ...mapState(['socket', 'isGroup', 'toId', 'messages']),
         messageKey() {
-            return (this.isGroup ? "group" : "user") + this.$store.state.toId;
+            return (this.isGroup ? "group" : "user") + this.toId;
         },
-        ...mapState(['socket']),
     },
     methods: {
         loadFormerData() {
@@ -100,12 +99,11 @@ export default {
                 return;
             }
 
-            this.isGroup = this.$store.state.isGroup;
             // 更新消息
-            this.$store.state.messages[this.messageKey].push({
+            this.messages[this.messageKey].push({
                 id:
                     10000 +
-                    this.$store.state.messages[this.messageKey].length +
+                    this.messages[this.messageKey].length +
                     1,
                 fromId: this.user.id,
                 name: this.user.username,
@@ -118,7 +116,7 @@ export default {
             // 发送消息至后端
             this.socket.send({
                 fromId: this.user.id,
-                toId: this.$store.state.toId,
+                toId: this.toId,
                 ws_type: contentType * 2 + 3 + this.isGroup,
                 content: this.content,
                 url: url,

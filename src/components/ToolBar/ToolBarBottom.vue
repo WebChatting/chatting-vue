@@ -214,7 +214,7 @@ export default {
         beforeCloseEditInfo(done) {
             this.beforeCloseDrawer(
                 done,
-                "/chatting/user/update",
+                "/user/update",
                 this.userInfo.avatarPath,
                 this.userInfo.name,
                 this.userInfo.password
@@ -223,7 +223,7 @@ export default {
         beforeCloseCreateGroup(done) {
             this.beforeCloseDrawer(
                 done,
-                "/chatting/group/add",
+                "/group/add",
                 this.groupInfo.avatarPath,
                 this.groupInfo.name
             );

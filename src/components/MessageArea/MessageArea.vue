@@ -127,9 +127,7 @@ export default {
             if (messages && messages[0]) {
                 this.loadMessage(
                     5,
-                    messages[0].updateTime
-                        ? date.wrapSendTime(messages[0].updateTime)
-                        : date.getCurrentTime(),
+                    date.wrapSendTime(messages[0].updateTime),
                     false
                 );
             }

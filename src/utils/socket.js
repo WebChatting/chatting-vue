@@ -13,9 +13,7 @@ let socket = {
         }
 
         socket.ws = new WebSocket(socket.ws_url);
-        socket.ws.onmessage = (e) => {
-            socket.receive(e);
-        };
+        socket.ws.onmessage = socket.receive;
 
         // 连接关闭
         socket.ws.onclose = () => {

@@ -87,15 +87,6 @@ let socket = {
             ws_type: 1,
         })
     },
-
-    offline: () => {
-        if (socket.ws) {
-            socket.send({
-                ws_type: 2,
-            })
-            socket.close()
-        }
-    },
 };
 
 export { socket };

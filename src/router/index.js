@@ -26,7 +26,6 @@ const routes = [
                 });
             } else {
                 // 连接ws
-                socket.offline()
                 socket.online(window.location.hostname, JSON.parse(user).id)
                 next();
             }

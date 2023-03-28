@@ -65,7 +65,9 @@ let socket = {
      * 关闭连接
      */
     close: () => {
-        socket.ws.close();
+        if (socket.ws) {
+            socket.ws.close();
+        }
     },
 
     /**

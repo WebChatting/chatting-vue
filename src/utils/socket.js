@@ -6,6 +6,7 @@ let socket = {
     ws_port: 3333,
 
     init: (hostname) => {
+        socket.close();
         socket.ws_url = `ws://${hostname}:${socket.ws_port}`;
         if (!window.WebSocket) {
             window.WebSocket = window.MozWebSocket;

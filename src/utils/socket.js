@@ -81,6 +81,11 @@ let socket = {
         socket.init();
     },
 
+    /**
+     * 用户上线
+     * @param {*} hostname
+     * @param {*} id
+     */
     online: (hostname, id) => {
         socket.init(hostname)
         socket.send({

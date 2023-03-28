@@ -1,8 +1,10 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 
-import Login from "../pages/LoginPage";
-import Chatting from "../pages/ChattingPage";
+import Login from "@/pages/LoginPage";
+import Chatting from "@/pages/ChattingPage";
+
+import { socket } from "@/utils/socket"
 
 Vue.use(VueRouter);
 
@@ -17,11 +19,15 @@ const routes = [
         name: "chatting",
         component: Chatting,
         beforeEnter: (to, from, next) => {
-            if (window.sessionStorage.getItem("user") == null) {
+            let user = window.sessionStorage.getItem("user")
+            if (user == null) {
                 next({
                     path: "/",
                 });
             } else {
+                // 连接ws
+                socket.offline()
+                socket.online(window.location.hostname, JSON.parse(user).id)
                 next();
             }
         },

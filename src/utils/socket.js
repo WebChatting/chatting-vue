@@ -6,7 +6,7 @@ let socket = {
     ws_port: 3333,
 
     init: (hostname) => {
-        socket.ws_url = `ws://${hostname}:${socket.ws_port}/ws`;
+        socket.ws_url = `ws://${hostname}:${socket.ws_port}`;
         if (!window.WebSocket) {
             window.WebSocket = window.MozWebSocket;
         }
@@ -78,6 +78,23 @@ let socket = {
             socket.close();
         }
         socket.init();
+    },
+
+    online: (hostname, id) => {
+        socket.init(hostname)
+        socket.send({
+            id,
+            ws_type: 1,
+        })
+    },
+
+    offline: () => {
+        if (socket.ws) {
+            socket.send({
+                ws_type: 2,
+            })
+            socket.close()
+        }
     },
 };
 

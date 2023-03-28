@@ -190,11 +190,6 @@ export default {
     methods: {
         exitSystem() {
             window.sessionStorage.removeItem("user");
-            this.$store.state.socket.send({
-                ws_type: 2,
-            });
-            this.$store.state.socket.close()
-            
             window.location.href = "/";
         },
         openEditInfo() {

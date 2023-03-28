@@ -182,12 +182,6 @@ export default {
                         JSON.stringify(response.data.data)
                     );
                     this.$router.replace("chatting");
-                    // 连接ws
-                    this.$store.state.socket.init(window.location.hostname);
-                    this.$store.state.socket.send({
-                        id: response.data.data.id,
-                        ws_type: 1,
-                    });
                 } else {
                     this.errorText = response.data.msg;
                 }

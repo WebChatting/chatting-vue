@@ -18,7 +18,7 @@ let socket = {
 
         // 连接关闭
         socket.ws.onclose = () => {
-            console.log("ws连接已断开");
+            console.log("ws连接断开");
         };
 
         // 连接成功
@@ -27,7 +27,7 @@ let socket = {
         };
         // 连接错误
         socket.ws.onerror = () => {
-            console.log("ws连接发生错误");
+            console.log("ws连接错误");
         };
     },
 
@@ -62,10 +62,9 @@ let socket = {
     },
 
     /**
-     * 主动关闭连接
+     * 关闭连接
      */
     close: () => {
-        console.log("主动断开连接");
         socket.ws.close();
     },
 
@@ -73,7 +72,6 @@ let socket = {
      * 重新连接
      */
     reconnect: () => {
-        console.log("重新发起ws连接");
         if (socket.ws) {
             socket.close();
         }

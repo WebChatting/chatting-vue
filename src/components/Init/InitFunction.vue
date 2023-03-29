@@ -16,8 +16,8 @@ export default {
                 })
                 m["contentType"] = wsType2messageType(m.ws_type);
                 this.$store.state.messages["user" + m.fromId].push(m)
+                this.$bus.$emit("scrollToBottom");
             }
-            console.log(m)
         }
     },
 }

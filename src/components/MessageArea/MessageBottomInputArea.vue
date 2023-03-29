@@ -70,6 +70,7 @@
 <script>
 const emojiData = require("@/assets/emoji.json");
 import { mapState } from "vuex";
+import { messageType2wsType } from "@/utils/common";
 export default {
     name: "MessageBottomInputArea",
     data() {
@@ -117,7 +118,9 @@ export default {
             this.socket.send({
                 fromId: this.user.id,
                 toId: this.toId,
-                ws_type: contentType * 2 + 3 + this.isGroup,
+                name: this.user.username,
+                avatarPath: this.user.avatarPath,
+                ws_type: messageType2wsType(contentType, this.isGroup),
                 content: this.content,
                 url: url,
                 size: size,

@@ -19,6 +19,7 @@
                 <SearchArea />
             </div>
         </div>
+        <InitFunction />
     </div>
 </template>
 
@@ -30,6 +31,7 @@ import MessageTopTitle from "@/components/MessageArea/MessageTopTitle";
 import MessageArea from "@/components/MessageArea/MessageArea";
 import MessageBottomInputArea from "@/components/MessageArea/MessageBottomInputArea";
 import SearchArea from "@/components/SearchArea/SearchArea";
+import InitFunction from '@/components/Init/InitFunction';
 
 export default {
     name: "ChattingPage",
@@ -41,6 +43,7 @@ export default {
         MessageArea,
         MessageBottomInputArea,
         SearchArea,
+        InitFunction,
     },
     data() {
         return {

@@ -13,8 +13,9 @@ let socket = {
         }
 
         socket.ws = new WebSocket(socket.ws_url);
-        socket.ws.onmessage = socket.receive;
-
+        socket.ws.onmessage = (m) => {
+            socket.receive(m);
+        };
         // 连接关闭
         socket.ws.onclose = () => {
             console.log("ws连接断开");
@@ -56,9 +57,7 @@ let socket = {
         }
     },
 
-    receive: (message) => {
-        JSON.parse(message.data);
-    },
+    receive: () => {},
 
     /**
      * 关闭连接
@@ -85,11 +84,11 @@ let socket = {
      * @param {*} id
      */
     online: (hostname, id) => {
-        socket.init(hostname)
+        socket.init(hostname);
         socket.send({
             id,
             ws_type: 1,
-        })
+        });
     },
 };
 

@@ -100,31 +100,26 @@ export default {
                 return;
             }
 
-            // 更新消息
-            this.messages[this.messageKey].push({
+            let new_message = {
                 id:
                     10000 +
                     this.messages[this.messageKey].length +
                     1,
                 fromId: this.user.id,
-                name: this.user.username,
+                toId: this.toId,
                 avatarPath: this.user.avatarPath,
+                name: this.user.username,
+                ws_type: messageType2wsType(contentType, this.isGroup),
                 contentType: contentType,
                 content: this.content,
                 url: url,
-            });
+                size: size,
+            }
+            // 更新消息
+            this.messages[this.messageKey].push(new_message);
 
             // 发送消息至后端
-            this.socket.send({
-                fromId: this.user.id,
-                toId: this.toId,
-                name: this.user.username,
-                avatarPath: this.user.avatarPath,
-                ws_type: messageType2wsType(contentType, this.isGroup),
-                content: this.content,
-                url: url,
-                size: size,
-            });
+            this.socket.send(new_message);
 
             this.$nextTick(() => {
                 // 清空输入框

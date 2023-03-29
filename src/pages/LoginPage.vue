@@ -1,6 +1,5 @@
 <template>
     <div class="login" @keyup.enter="submit">
-        <link rel="stylesheet" href="css/common.css?v=65" />
         <div v-show="isloading" class="loading">
             <img src="img/loading.gif" />
         </div>

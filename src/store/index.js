@@ -2,11 +2,15 @@ import { socket } from "@/utils/socket";
 import Vue from "vue";
 import Vuex from "vuex";
 
+import actions from "@/store/actions"
+
 Vue.use(Vuex);
 
-const actions = {};
-
-const mutations = {};
+const mutations = {
+    UNSHIFT_MESSAGES(state, mk, m) {
+        state.messages[mk].unshift(m)
+    }
+};
 
 const state = {
     messages: {},

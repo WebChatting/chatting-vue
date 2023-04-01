@@ -77,8 +77,8 @@
 </template>
 
 <script>
-import { post } from "@/service/request";
 import date from "@/utils/date";
+import { mapActions, mapMutations } from "vuex";
 export default {
     name: "MessageArea",
     data() {
@@ -101,6 +101,8 @@ export default {
         },
     },
     methods: {
+        ...mapActions({ loadMessageAction: "loadMessage" }),
+        ...mapMutations(["UNSHIFT_MESSAGES"]),
         scrollPanel() {
             if (this.$refs.display.scrollTop == 0) {
                 this.loadFormerData();
@@ -141,9 +143,9 @@ export default {
             }
         },
         loadMessage(count, updateTime, isInitial) {
-            post("/message/load", {
+            this.loadMessageAction({
                 type: this.isGroup ? 1 : 0,
-                count: count,
+                count,
                 toId: this.toId,
                 updateTime: updateTime ? updateTime : date.getCurrentTime(),
             }).then((response) => {
@@ -157,9 +159,7 @@ export default {
                         );
                     } else {
                         messages.reverse().forEach((item) => {
-                            this.$store.state.messages[this.messageKey].unshift(
-                                item
-                            );
+                            this.UNSHIFT_MESSAGES(this.messageKey, item);
                         });
                     }
                 } else {

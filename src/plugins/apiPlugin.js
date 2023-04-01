@@ -1,12 +1,14 @@
 // apiPlugin.js
-import { post } from "@/service/request";
+import { post, get } from "@/service/request";
 import {
     USER_LOGIN_URL,
     USER_REGISTER_URL,
     USER_UPDATE_URL,
+    USER_SEARCH_URL,
     RELATION_UPDATE_URL,
     RELATION_ADD_URL,
     GROUP_ADD_URL,
+    GROUP_SEARCH_URL,
 } from "@/config/api";
 
 export default {
@@ -55,6 +57,11 @@ export default {
                     avatarPath,
                     name,
                     password,
+                })
+            },
+            searchUserOrSearchGroup(isGroup, name) {
+                return get(isGroup ? GROUP_SEARCH_URL : USER_SEARCH_URL, {
+                    name,
                 })
             },
         };

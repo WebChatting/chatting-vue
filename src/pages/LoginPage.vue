@@ -112,7 +112,6 @@
 </template>
 
 <script>
-import { post } from "@/service/request";
 export default {
     name: "LoginPage",
     data() {
@@ -169,11 +168,11 @@ export default {
         login() {
             this.loginText = "登录中...";
 
-            // 发送后端请求
-            post("/user/login", {
-                username: this.$refs.accountInput.value.trim(),
-                password: this.$refs.passwordInput.value.trim(),
-            }).then((response) => {
+            this.$api
+            .loginUser(
+                this.$refs.accountInput.value.trim(),
+                this.$refs.passwordInput.value.trim()
+            ).then((response) => {
                 this.restore("登录");
                 if (response.data.status == 200) {
                     window.sessionStorage.setItem(
@@ -189,23 +188,25 @@ export default {
         register() {
             this.loginText = "注册中...";
 
-            post("/user/register", {
-                username: this.$refs.accountInput.value.trim(),
-                password: this.$refs.passwordInput.value.trim(),
-            }).then((response) => {
-                this.restore("注册");
-                if (response.data.status == 200) {
-                    this.$notify({
-                        title: "成功",
-                        message: "注册成功",
-                        type: "success",
-                    });
-                    this.errorText = "";
-                    this.toggle();
-                } else {
-                    this.errorText = response.data.msg;
-                }
-            });
+            this.$api
+                .registerUser(
+                    this.$refs.accountInput.value.trim(),
+                    this.$refs.passwordInput.value.trim()
+                )
+                .then((response) => {
+                    this.restore("注册");
+                    if (response.data.status == 200) {
+                        this.$notify({
+                            title: "成功",
+                            message: "注册成功",
+                            type: "success",
+                        });
+                        this.errorText = "";
+                        this.toggle();
+                    } else {
+                        this.errorText = response.data.msg;
+                    }
+                });
         },
         toggle() {
             this.isLogin = !this.isLogin;

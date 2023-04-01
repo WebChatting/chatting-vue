@@ -4,9 +4,8 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-const actions = {};
-
-const mutations = {};
+import actions from "@/store/actions"
+import mutations from "@/store/mutations";
 
 const state = {
     messages: {},

@@ -65,7 +65,6 @@
 </template>
 
 <script>
-import { get, post } from "@/service/request";
 export default {
     name: "SearchAreaBody",
     data() {
@@ -82,28 +81,18 @@ export default {
             this.$bus.$emit("closeRightPanel");
         },
         search() {
-            get((this.isGroup ? "/group" : "/user") + "/search", {
-                name: this.input,
-            }).then((resp) => {
-                if (resp.data.status == 200) {
-                    this.searchResults = resp.data.data.results;
-                } else {
-                    console.log("request error");
-                }
-            });
+            this.$api
+                .searchUserOrSearchGroup(this.isGroup, this.input)
+                .then((resp) => {
+                    if (resp.data.status == 200) {
+                        this.searchResults = resp.data.data.results;
+                    } else {
+                        console.log("request error");
+                    }
+                });
         },
         addRelation(rel) {
-            post("/relation/add", null, {
-                acceptId: rel.id,
-                type: this.isGroup ? 1 : 0,
-                status: rel.status,
-            }).then((res) => {
-                if (res.data.status == 200) {
-                    rel.status = 0;
-                } else {
-                    console.log("network error");
-                }
-            });
+            this.$api.addRelation(rel, this.isGroup ? 1 : 0);
         },
     },
 };

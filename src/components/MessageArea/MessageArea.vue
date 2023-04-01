@@ -77,8 +77,8 @@
 </template>
 
 <script>
-import { post } from "@/service/request";
 import date from "@/utils/date";
+import { mapActions } from "vuex";
 export default {
     name: "MessageArea",
     data() {
@@ -101,6 +101,7 @@ export default {
         },
     },
     methods: {
+        ...mapActions({ loadMessageAction: "loadMessage" }),
         scrollPanel() {
             if (this.$refs.display.scrollTop == 0) {
                 this.loadFormerData();
@@ -141,30 +142,13 @@ export default {
             }
         },
         loadMessage(count, updateTime, isInitial) {
-            post("/message/load", {
+            this.loadMessageAction({
                 type: this.isGroup ? 1 : 0,
-                count: count,
+                count,
                 toId: this.toId,
                 updateTime: updateTime ? updateTime : date.getCurrentTime(),
-            }).then((response) => {
-                if (response.data.status == 200) {
-                    const messages = response.data.data.messages ?? [];
-                    if (isInitial) {
-                        this.$set(
-                            this.$store.state.messages,
-                            this.messageKey,
-                            messages
-                        );
-                    } else {
-                        messages.reverse().forEach((item) => {
-                            this.$store.state.messages[this.messageKey].unshift(
-                                item
-                            );
-                        });
-                    }
-                } else {
-                    console.log("request error");
-                }
+                isInitial,
+                mk: this.messageKey,
             });
         },
     },

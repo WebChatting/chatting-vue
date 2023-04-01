@@ -25,7 +25,7 @@
 <script>
 import NavigationContact from "./NavigationContact";
 import NavigationApplication from "./NavigationApplication";
-import { get } from "@/service/request";
+import { mapActions } from "vuex";
 export default {
     name: "NavigationZone",
     components: {
@@ -41,6 +41,7 @@ export default {
         };
     },
     methods: {
+        ...mapActions(["listRelation"]),
         handleClick() {
             // console.log(tab, event);
         },
@@ -55,37 +56,7 @@ export default {
             this.isContact = false;
         },
         loadRelation(type, status, direction) {
-            get("/relation/list", {
-                type: type,
-                status: status,
-                direction: direction,
-            }).then((response) => {
-                if (response.data.status == 200) {
-                    if (response.data.data !== undefined) {
-                        if (status == -1) {
-                            // 加载申请
-                            if (response.data.data.relations) {
-                                this.$store.getters
-                                    .getApplications(type, !direction)
-                                    .push(...response.data.data.relations);
-                            }
-                        } else {
-                            // 加载联系人
-                            if (direction == -1) {
-                                // 好友关系
-                                this.$store.state.friends =
-                                    response.data.data.relations;
-                            } else if (direction == 0) {
-                                // 加入群组关系
-                                this.$store.state.joinGroups =
-                                    response.data.data.relations;
-                            }
-                        }
-                    }
-                } else {
-                    console.log("request error");
-                }
-            });
+            this.listRelation({type, status, direction});
         },
     },
     mounted() {
@@ -102,13 +73,7 @@ export default {
         this.loadRelation(1, -1, 1);
 
         // 加载创建的群组
-        get("/group/list").then((response) => {
-            if (response.data.status == 200) {
-                this.$store.state.createGroups = response.data.data.relations;
-            } else {
-                console.log("request error");
-            }
-        });
+        this.$store.dispatch("listGroup");
     },
     beforeDestroy() {
         // 解绑自定义事件

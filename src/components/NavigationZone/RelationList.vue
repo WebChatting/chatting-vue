@@ -33,7 +33,6 @@
 </template>
 
 <script>
-import { post } from "@/service/request";
 export default {
     name: "RelationList",
     props: {
@@ -76,18 +75,7 @@ export default {
                         message: "删除成功!",
                     });
                     // 异步后端同步
-                    post("/relation/update", null, {
-                        requestId: 0,
-                        acceptId: item.id,
-                        type: item.type,
-                        status: 3,
-                    }).then((res) => {
-                        if (res.data.status == 200) {
-                            console.log("删除成功");
-                        } else {
-                            console.log("network error");
-                        }
-                    });
+                    this.$api.updateRelation(0, item.id, item.type, 3);
                 })
                 .catch(() => {
                     this.$message({

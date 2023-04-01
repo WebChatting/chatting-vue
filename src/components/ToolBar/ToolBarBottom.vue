@@ -164,7 +164,6 @@
 </template>
 
 <script>
-import { post } from "@/service/request";
 export default {
     name: "ToolBarBottom",
     data() {
@@ -214,7 +213,7 @@ export default {
         beforeCloseEditInfo(done) {
             this.beforeCloseDrawer(
                 done,
-                "/user/update",
+                0,
                 this.userInfo.avatarPath,
                 this.userInfo.name,
                 this.userInfo.password
@@ -223,12 +222,12 @@ export default {
         beforeCloseCreateGroup(done) {
             this.beforeCloseDrawer(
                 done,
-                "/group/add",
+                1,
                 this.groupInfo.avatarPath,
                 this.groupInfo.name
             );
         },
-        beforeCloseDrawer(done, url, avatarPath, name, password) {
+        beforeCloseDrawer(done, type, avatarPath, name, password) {
             if (this.loading) {
                 return;
             }
@@ -237,24 +236,30 @@ export default {
                     () => {
                         this.loading = true;
                         console.log("before submit form");
-                        // 提交表单
-                        post(url, {
-                            avatarPath: avatarPath,
-                            name: name,
-                            password: password,
-                        }).then((resp) => {
-                            if (resp.data.status == 200) {
-                                console.log(resp.data);
-                                if (password) {
-                                    this.user.avatarPath = avatarPath;
-                                    this.user.username = name;
-                                    this.user.password = password;
-                                    window.sessionStorage.setItem("user", JSON.stringify(this.user))
+
+                        this.$api
+                            .updateUserOrAddGroup(
+                                type,
+                                avatarPath,
+                                name,
+                                password
+                            )
+                            .then((res) => {
+                                if (res.data.status == 200) {
+                                    console.log(res.data);
+                                    if (password) {
+                                        this.user.avatarPath = avatarPath;
+                                        this.user.username = name;
+                                        this.user.password = password;
+                                        window.sessionStorage.setItem(
+                                            "user",
+                                            JSON.stringify(this.user)
+                                        );
+                                    }
+                                } else {
+                                    console.log("request error");
                                 }
-                            } else {
-                                console.log("request error");
-                            }
-                        });
+                            });
 
                         this.timer = setTimeout(() => {
                             done();

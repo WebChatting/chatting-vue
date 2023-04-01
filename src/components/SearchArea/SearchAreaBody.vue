@@ -65,7 +65,7 @@
 </template>
 
 <script>
-import { get, post } from "@/service/request";
+import { get } from "@/service/request";
 export default {
     name: "SearchAreaBody",
     data() {
@@ -93,17 +93,7 @@ export default {
             });
         },
         addRelation(rel) {
-            post("/relation/add", null, {
-                acceptId: rel.id,
-                type: this.isGroup ? 1 : 0,
-                status: rel.status,
-            }).then((res) => {
-                if (res.data.status == 200) {
-                    rel.status = 0;
-                } else {
-                    console.log("network error");
-                }
-            });
+            this.$api.addRelation(rel, this.isGroup ? 1 : 0);
         },
     },
 };

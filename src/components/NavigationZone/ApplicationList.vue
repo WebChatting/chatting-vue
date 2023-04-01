@@ -51,7 +51,6 @@
 </template>
 
 <script>
-import { post } from "@/service/request";
 export default {
     name: "ApplicationList",
     props: {
@@ -88,16 +87,7 @@ export default {
             this.updateRelation(app, 2);
         },
         updateRelation(app, status) {
-            post("/relation/update", null, {
-                requestId: app.id,
-                acceptId: app.acceptId,
-                type: app.type,
-                status: status,
-            }).then((res) => {
-                if (!res.data.status == 200) {
-                    console.log("network error");
-                }
-            });
+            this.$api.updateRelation(app.id, app.acceptId, app.type, status);
         },
     },
 };

@@ -19,7 +19,6 @@
                 <SearchArea />
             </div>
         </div>
-        <InitFunction />
     </div>
 </template>
 
@@ -31,10 +30,11 @@ import MessageTopTitle from "@/components/MessageArea/MessageTopTitle";
 import MessageArea from "@/components/MessageArea/MessageArea";
 import MessageBottomInputArea from "@/components/MessageArea/MessageBottomInputArea";
 import SearchArea from "@/components/SearchArea/SearchArea";
-import InitFunction from '@/components/Init/InitFunction';
 
+import socketMixin from "@/mixins/socketMixin";
 export default {
     name: "ChattingPage",
+    mixins: [socketMixin],
     components: {
         ToolBar,
         NavigationTopSearchBar,
@@ -43,7 +43,6 @@ export default {
         MessageArea,
         MessageBottomInputArea,
         SearchArea,
-        InitFunction,
     },
     data() {
         return {

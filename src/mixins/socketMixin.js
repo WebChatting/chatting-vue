@@ -1,11 +1,6 @@
-<template>
-    <div></div>
-</template>
-
-<script>
 import { wsType2messageType } from "@/utils/common";
+
 export default {
-    name: "InitFunction",
     mounted() {
         this.$store.state.socket.receive = (message) => {
             let m = JSON.parse(message.data);
@@ -21,4 +16,3 @@ export default {
         };
     },
 };
-</script>

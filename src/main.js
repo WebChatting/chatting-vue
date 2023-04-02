@@ -11,9 +11,9 @@ import store from "@/store";
 import "@/styles/common.css";
 
 import apiPlugin from "@/plugins/apiPlugin";
+Vue.use(apiPlugin);
 
 Vue.config.productionTip = false;
-Vue.use(apiPlugin);
 
 new Vue({
     router,

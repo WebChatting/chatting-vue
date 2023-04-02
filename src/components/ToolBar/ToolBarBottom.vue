@@ -55,7 +55,7 @@
                         <el-form-item label="头像：" label-width="60px">
                             <el-upload
                                 class="avatar-uploader"
-                                action="/chatting/upload"
+                                :action="file_upload_url"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload"
@@ -121,7 +121,7 @@
                         <el-form-item label="头像：" label-width="60px">
                             <el-upload
                                 class="avatar-uploader"
-                                action="/chatting/upload"
+                                :action="file_upload_url"
                                 :show-file-list="false"
                                 :on-success="handleAvatarSuccess"
                                 :before-upload="beforeAvatarUpload"
@@ -164,10 +164,12 @@
 </template>
 
 <script>
+import { API_BASE_URL, FILE_UPLOAD_API_URL } from "@/config/api";
 export default {
     name: "ToolBarBottom",
     data() {
         return {
+            file_upload_url: API_BASE_URL + FILE_UPLOAD_API_URL,
             userInfo: {},
             groupInfo: {
                 avatarPath: "",

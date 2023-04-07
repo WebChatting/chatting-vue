@@ -94,33 +94,41 @@ export default {
         addToMessage(item) {
             this.content += item;
         },
-        sendMessage(contentType, url, size) {
+        async sendMessage(contentType, url, size) {
             if (contentType == 0 && this.content.trim().length <= 0) {
                 this.$message.error("发送信息不能为空");
                 return;
             }
 
+            this.buildAndPushMessage(this.user.id, this.toId, this.user.avatarPath,
+                this.user.username, contentType, this.content, url, size, this.messageKey, false);
+            const replay = await this.$api.generateResponse(this.content);
+            this.buildAndPushMessage(0, this.user.id, this.user.avatarPath, 'ChatGPT', 0,
+                replay, '', '', 'user503', false)
+        },
+        buildAndPushMessage(fromId, toId, avatarPath, name, contentType, content, url, size, mk, isSendToBackend) {
             let new_message = {
                 id:
                     10000 +
-                    this.messages[this.messageKey].length +
+                    this.messages[mk].length +
                     1,
-                fromId: this.user.id,
-                toId: this.toId,
-                avatarPath: this.user.avatarPath,
-                name: this.user.username,
+                fromId,
+                toId,
+                avatarPath,
+                name,
                 ws_type: messageType2wsType(contentType, this.isGroup),
-                contentType: contentType,
-                content: this.content,
-                url: url,
-                size: size,
+                contentType,
+                content,
+                url,
+                size,
             }
             // 更新消息
-            this.messages[this.messageKey].push(new_message);
+            this.messages[mk].push(new_message);
 
-            // 发送消息至后端
-            this.socket.send(new_message);
-
+            if (isSendToBackend) {
+                // 发送消息至后端
+                this.socket.send(new_message);
+            }
             this.$nextTick(() => {
                 // 清空输入框
                 this.content = "";

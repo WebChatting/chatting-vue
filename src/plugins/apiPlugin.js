@@ -1,6 +1,5 @@
 // apiPlugin.js
-import { post, get } from "@/service/request";
-import axios from 'axios';
+import { post, get, asyncPost } from "@/service/request";
 import {
     USER_LOGIN_URL,
     USER_REGISTER_URL,
@@ -11,6 +10,7 @@ import {
     GROUP_ADD_URL,
     GROUP_SEARCH_URL,
 } from "@/config/api";
+import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
 
 export default {
     install(Vue) {
@@ -44,7 +44,7 @@ export default {
                     acceptId: rel.id,
                     type,
                     status: rel.status,
-                }).then(res => {
+                }).then((res) => {
                     if (res.data.status == 200) {
                         rel.status = 0;
                     } else {
@@ -58,30 +58,34 @@ export default {
                     avatarPath,
                     name,
                     password,
-                })
+                });
             },
             searchUserOrSearchGroup(isGroup, name) {
                 return get(isGroup ? GROUP_SEARCH_URL : USER_SEARCH_URL, {
                     name,
-                })
+                });
             },
             async generateResponse(content) {
-                let openaiApiKey = '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'
                 const headers = {
-                    'Content-Type': 'application/json',
-                    'Authorization': `Bearer ${openaiApiKey}`
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${OPENAI_API_KEY}`,
                 };
 
                 const data = {
-                    model: 'gpt-3.5-turbo',
-                    messages: [{ role: 'user', content}],
+                    model: "gpt-3.5-turbo",
+                    messages: [{ role: "user", content }],
                     temperature: 0.7,
                 };
 
                 try {
-                    console.log("Waiting for chatgpt answer...")
-                    const response = await axios.post('https://api.openai.com/v1/chat/completions', data, { headers });
-                    console.log("show chatgpt response...")
+                    console.log("Waiting for chatgpt answer...");
+                    const response = await asyncPost(
+                        OPENAI_MAKING_REQUEST,
+                        {},
+                        data,
+                        { headers }
+                    );
+                    console.log("show chatgpt response...");
                     return response.data.choices[0].message.content;
                 } catch (error) {
                     console.error(error);

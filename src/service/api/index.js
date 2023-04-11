@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { API_BASE_URL } from '@/config/api';
+import api from '@/service/api/api';
 
 // 创建axios实例
 const instance = axios.create({
@@ -34,11 +35,14 @@ instance.interceptors.response.use(
     }
     return response;
   },
-  error => {
+  async error => {
     // 处理响应错误
-    if (error.response) {
-      // 如果有响应错误，则根据实际情况返回自定义的错误响应
-      return Promise.reject(error.response.data);
+    if (error.response.status === 401 && error.response.data.status === 402) {
+      const user = JSON.parse(sessionStorage.getItem("user"));
+      // 发送登录请求以获取新的 token
+      await api.loginUser(user.username, user.password);
+      // 重新发送原始请求
+      return instance(error.config);
     } else {
       // 如果没有响应错误，则抛出原始异常
       return Promise.reject(error);

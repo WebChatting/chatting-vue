@@ -11,16 +11,12 @@ import {
     GROUP_SEARCH_URL,
 } from "@/config/api";
 import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
+import api from "@/service/api/api";
 
 export default {
     install(Vue) {
         Vue.prototype.$api = {
-            loginUser(username, password) {
-                return post(USER_LOGIN_URL, {
-                    username,
-                    password,
-                });
-            },
+            loginUser: api.loginUser,
             registerUser(username, password) {
                 return post(USER_REGISTER_URL, {
                     username,

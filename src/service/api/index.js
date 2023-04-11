@@ -11,6 +11,11 @@ const instance = axios.create({
 instance.interceptors.request.use(
   config => {
     // 在请求发送之前做些什么
+    const token = localStorage.getItem('jwt')
+    if (token) {
+      // 设置Authorization头部
+      config.headers.authorization = token
+    }
     return config;
   },
   error => {
@@ -23,6 +28,10 @@ instance.interceptors.request.use(
 instance.interceptors.response.use(
   response => {
     // 对响应数据做些什么
+    const token = response.headers.authorization
+    if (token) {
+      localStorage.setItem("jwt", token)
+    }
     return response;
   },
   error => {

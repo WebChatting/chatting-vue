@@ -11,7 +11,7 @@
             </el-button>
         </el-tooltip>
         <el-tooltip effect="dark" content="ChatGPT" placement="left">
-            <el-button class="tool-button"
+            <el-button class="tool-button" @click="openRightPanel"
                 ><i class="el-icon-s-platform"></i
             ></el-button>
         </el-tooltip>
@@ -22,7 +22,12 @@
 export default {
     name: "ToolBarTop",
     data() {
-        return {};
+        return {
+            ChatGPT: {
+                id: 0,
+                name: "ChatGPT",
+            },
+        };
     },
     methods: {
         loadContact() {
@@ -30,6 +35,10 @@ export default {
         },
         loadVerification() {
             this.$bus.$emit("loadVerification");
+        },
+        openRightPanel() {
+            this.$store.state.toId = "ChatGPT";
+            this.$bus.$emit("openRightPanel", true, this.ChatGPT, true);
         },
     },
 };

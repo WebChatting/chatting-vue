@@ -8,7 +8,9 @@ import actions from "@/store/actions"
 import mutations from "@/store/mutations";
 
 const state = {
-    messages: {},
+    messages: {
+        "ChatGPT": [],
+    },
     friends: [],
     createGroups: [],
     joinGroups: [],
@@ -19,11 +21,12 @@ const state = {
     socket: socket,
     toId: -1,
     isGroup: false,
+    isChatGPT: false,
 };
 
 const getters = {
     messageKey(state) {
-        return (state.isGroup ? "group" : "user") + state.toId;
+        return state.isChatGPT ? "ChatGPT" : ((state.isGroup ? "group" : "user") + state.toId);
     },
     getApplications: (state) => (isGroup, isRequest) => {
         if (isGroup) {

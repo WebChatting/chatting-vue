@@ -3,6 +3,6 @@
  */
 
 export const OPENAI_API_KEY =
-    "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";
+    "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";
 export const OPENAI_MAKING_REQUEST =
     "https://api.openai.com/v1/chat/completions";

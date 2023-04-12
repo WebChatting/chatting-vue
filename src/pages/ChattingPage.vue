@@ -53,9 +53,10 @@ export default {
         };
     },
     methods: {
-        openRightPanel(isChatPanel = true, chatObject) {
+        openRightPanel(isChatPanel = true, chatObject, isChatGPT = false) {
             this.isChatPanel = isChatPanel;
             this.chatObject = chatObject;
+            this.$store.state.isChatGPT = isChatGPT;
             this.$refs.app.style.width = 900 + "px";
             this.$bus.$emit("scrollToBottom");
         },

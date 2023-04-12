@@ -99,10 +99,12 @@ export default {
             }
 
             this.buildAndPushMessage(this.user.id, this.toId, this.user.avatarPath,
-                this.user.username, contentType, this.content, url, size, this.messageKey, false);
-            const replay = await this.$api.generateResponse(this.content);
-            this.buildAndPushMessage(0, this.user.id, this.user.avatarPath, 'ChatGPT', 0,
-                replay, '', '', 'user503', false)
+                this.user.username, contentType, this.content, url, size, this.messageKey, this.messageKey != "ChatGPT");
+            if (this.messageKey === "ChatGPT") {
+                const replay = await this.$api.generateResponse(this.content);
+                this.buildAndPushMessage(0, this.user.id, 'avatar/openai.png', 'ChatGPT', contentType,
+                    replay, '', '', this.messageKey, false);
+            }
         },
         buildAndPushMessage(fromId, toId, avatarPath, name, contentType, content, url, size, mk, isSendToBackend) {
             let new_message = {

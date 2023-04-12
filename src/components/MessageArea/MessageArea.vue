@@ -78,7 +78,7 @@
 
 <script>
 import date from "@/utils/date";
-import { mapActions } from "vuex";
+import { mapActions, mapGetters, mapState } from "vuex";
 export default {
     name: "MessageArea",
     data() {
@@ -88,16 +88,13 @@ export default {
             dialogAvatar: "",
             dialogName: "",
             user: JSON.parse(window.sessionStorage.getItem("user")),
-            isGroup: false,
-            toId: -1,
         };
     },
     computed: {
+        ...mapState(['isGroup', 'toId']),
+        ...mapGetters(['messageKey']),
         messages() {
             return this.$store.state.messages[this.messageKey];
-        },
-        messageKey() {
-            return (this.isGroup ? "group" : "user") + this.toId;
         },
     },
     methods: {
@@ -133,9 +130,7 @@ export default {
                 );
             }
         },
-        loadInitialData(isGroup, toId, count, updateTime) {
-            this.isGroup = isGroup;
-            this.toId = toId;
+        loadInitialData(count, updateTime) {
             console.log(this.messageKey);
             if (!this.$store.state.messages[this.messageKey]) {
                 this.loadMessage(count, updateTime, true);

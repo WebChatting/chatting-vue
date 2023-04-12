@@ -60,7 +60,7 @@ export default {
             this.$store.state.isGroup = this.isGroup;
             this.$store.state.toId = chatObject.id;
             this.$bus.$emit("openRightPanel", true, chatObject);
-            this.$bus.$emit("loadInitialData", this.isGroup, chatObject.id, 5);
+            this.$bus.$emit("loadInitialData", 5);
         },
         deleteContact(item, index) {
             this.$confirm("此操作将永久删除该好友/群组, 是否继续?", "提示", {

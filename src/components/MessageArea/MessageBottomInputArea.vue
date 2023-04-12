@@ -69,7 +69,7 @@
 
 <script>
 const emojiData = require("@/assets/emoji.json");
-import { mapState } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import { messageType2wsType } from "@/utils/common";
 export default {
     name: "MessageBottomInputArea",
@@ -83,9 +83,7 @@ export default {
     },
     computed: {
         ...mapState(['socket', 'isGroup', 'toId', 'messages']),
-        messageKey() {
-            return (this.isGroup ? "group" : "user") + this.toId;
-        },
+        ...mapGetters(['messageKey']),
     },
     methods: {
         loadFormerData() {

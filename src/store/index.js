@@ -22,6 +22,9 @@ const state = {
 };
 
 const getters = {
+    messageKey(state) {
+        return (state.isGroup ? "group" : "user") + state.toId;
+    },
     getApplications: (state) => (isGroup, isRequest) => {
         if (isGroup) {
             if (isRequest) {

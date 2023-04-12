@@ -1,4 +1,4 @@
-import { post, get, asyncPost } from "@/service/request";
+import { post, get, asyncPost } from "@/services/request";
 import {
     USER_LOGIN_URL,
     USER_REGISTER_URL,

@@ -1,5 +1,5 @@
 // apiPlugin.js
-import api from "@/service/api/api";
+import api from "@/services/api/api";
 
 export default {
     install(Vue) {

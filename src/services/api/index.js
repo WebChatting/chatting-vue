@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL } from "@/config/api";
-import api from "@/service/api/api";
+import api from "@/services/api/api";
 
 // 创建axios实例
 const instance = axios.create({

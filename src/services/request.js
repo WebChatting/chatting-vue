@@ -1,4 +1,4 @@
-import instance from "@/service/api";
+import instance from "@/services/api";
 
 function get(url, params, data) {
     return request("get", url, params, data);

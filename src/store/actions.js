@@ -1,4 +1,4 @@
-import { post, get } from "@/service/request";
+import { post, get } from "@/services/request";
 import {
     MESSAGE_LOAD_URL,
     GROUP_LIST_URL,

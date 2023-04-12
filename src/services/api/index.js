@@ -28,12 +28,14 @@ function processRequestQueue() {
     requestQueue = [];
 }
 
+const ABSOLUTE_PATH_PREFIX = "http";
+
 // 请求拦截器
 instance.interceptors.request.use(
     (config) => {
         // 在请求发送之前做些什么
         const token = localStorage.getItem("jwt");
-        if (token) {
+        if (token && !config.url.startsWith(ABSOLUTE_PATH_PREFIX)) {
             // 设置Authorization头部
             config.headers.authorization = token;
         }

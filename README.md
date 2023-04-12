@@ -1,5 +1,5 @@
 # chatting-vue
-项目介绍请前往[后端仓库](https://github.com/WebChatting/chatting)。
+项目演示见[demo](https://cdn.sxrekord.com/project/demo.gif)，项目介绍请前往[后端仓库](https://github.com/WebChatting/chatting)。
 
 ## Components
 - [Vue2](https://v2.cn.vuejs.org/v2/guide/)

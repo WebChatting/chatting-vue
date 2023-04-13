@@ -36,7 +36,7 @@
                                     ref="accountInput"
                                 />
                             </div>
-                            <div class="list" v-show="!isLogin">
+                            <div class="list">
                                 <input
                                     type="password"
                                     class="input-text the-signin-password"
@@ -50,18 +50,17 @@
                                     ref="passwordInput"
                                 />
                             </div>
-                            <div class="list">
+                            <div class="list" v-show="!isLogin">
                                 <input
                                     type="password"
                                     class="input-text the-signin-password"
-                                    placeholder="密码"
+                                    placeholder="确认密码"
                                     data-errortext="密码长度为6-20"
                                     data-type="password"
                                     oninput="javascript:void(0)"
                                     onpropertychange="javascript:void(0)"
                                     data-index="1"
                                     autocomplete="on"
-                                    ref="passwordInput"
                                 />
                                 <a
                                     href="#"
@@ -169,21 +168,22 @@ export default {
             this.loginText = "登录中...";
 
             this.$api
-            .loginUser(
-                this.$refs.accountInput.value.trim(),
-                this.$refs.passwordInput.value.trim()
-            ).then((response) => {
-                this.restore("登录");
-                if (response.data.status == 200) {
-                    window.sessionStorage.setItem(
-                        "user",
-                        JSON.stringify(response.data.data)
-                    );
-                    this.$router.replace("chatting");
-                } else {
-                    this.errorText = response.data.msg;
-                }
-            });
+                .loginUser(
+                    this.$refs.accountInput.value.trim(),
+                    this.$refs.passwordInput.value.trim()
+                )
+                .then((res) => {
+                    this.restore("登录");
+                    if (res.data.status == 200) {
+                        window.sessionStorage.setItem(
+                            "user",
+                            JSON.stringify(res.data.data)
+                        );
+                        this.$router.replace("chatting");
+                    } else {
+                        this.errorText = res.data.msg;
+                    }
+                });
         },
         register() {
             this.loginText = "注册中...";
@@ -215,6 +215,17 @@ export default {
     },
     mounted() {
         this.$refs.accountInput.focus();
+        const that = this;
+        this.$refs.accountInput.addEventListener("input", function () {
+            const inputValue = this.value;
+            const regex = /[_%:-]/g;
+            if (regex.test(inputValue)) {
+                // 包含非法字符，给出提示
+                that.errorText = "账号中不能包含 _ % : -";
+            } else {
+                that.errorText = "";
+            }
+        });
     },
 };
 </script>

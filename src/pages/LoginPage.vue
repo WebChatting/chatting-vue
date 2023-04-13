@@ -36,7 +36,7 @@
                                     ref="accountInput"
                                 />
                             </div>
-                            <div class="list" v-show="!isLogin">
+                            <div class="list">
                                 <input
                                     type="password"
                                     class="input-text the-signin-password"
@@ -50,7 +50,7 @@
                                     ref="passwordInput"
                                 />
                             </div>
-                            <div class="list">
+                            <div class="list" v-show="!isLogin">
                                 <input
                                     type="password"
                                     class="input-text the-signin-password"
@@ -61,7 +61,6 @@
                                     onpropertychange="javascript:void(0)"
                                     data-index="1"
                                     autocomplete="on"
-                                    ref="passwordInput"
                                 />
                                 <a
                                     href="#"

@@ -54,7 +54,7 @@
                                 <input
                                     type="password"
                                     class="input-text the-signin-password"
-                                    placeholder="密码"
+                                    placeholder="确认密码"
                                     data-errortext="密码长度为6-20"
                                     data-type="password"
                                     oninput="javascript:void(0)"

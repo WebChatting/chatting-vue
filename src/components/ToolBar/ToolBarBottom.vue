@@ -29,6 +29,17 @@
                         class="pop-button"
                     ></el-button>
                 </div>
+                <div>
+                    <el-dropdown @command="handleCommand" trigger="click">
+                        <span class="el-dropdown-link">
+                            中文<i class="el-icon-arrow-down el-icon--right"></i>
+                        </span>
+                        <el-dropdown-menu slot="dropdown">
+                            <el-dropdown-item command = "zh">简体中文</el-dropdown-item>
+                            <el-dropdown-item command = "en">English</el-dropdown-item>
+                        </el-dropdown-menu>
+                    </el-dropdown>
+                </div>
             </div>
             <el-button class="tool-button" slot="reference"
                 ><i class="el-icon-s-tools"></i
@@ -189,6 +200,9 @@ export default {
         },
     },
     methods: {
+        handleCommand(lang) {
+            this.$i18n.locale = lang;
+        },
         exitSystem() {
             window.sessionStorage.removeItem("user");
             window.location.href = "/";

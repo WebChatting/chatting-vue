@@ -5,7 +5,7 @@
             type="text"
             size="mini"
             v-model="input"
-            placeholder="搜索"
+            :placeholder="$t('navigationZone.search')"
             prefix-icon="el-icon-search"
         ></el-input>
         <el-button class="searchBtn" size="mini" @click="openRightPanel"

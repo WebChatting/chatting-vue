@@ -17,16 +17,18 @@ import VueI18n from "vue-i18n";
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-    locale: "zh", // 设置默认语言为英语
+    locale: localStorage.getItem('locale') || 'zh-CN', // 设置默认语言为中文
     messages: {
-        zh: require("@/lang/zh").default,
-        en: require("@/lang/en").default,
+        "zh-CN": require("@/locales/zh-CN").default,
+        "en-US": require("@/locales/en-US").default,
     },
 });
 
 Vue.config.productionTip = false;
 
+import i18nMixin from "@/mixins/i18nMixin";
 new Vue({
+    mixins: [i18nMixin],
     i18n,
     router,
     store,

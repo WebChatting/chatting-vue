@@ -6,7 +6,7 @@
 - [VueRouter3](https://v3.router.vuejs.org/zh/guide/)
 - [Vuex3](https://v3.vuex.vuejs.org/zh/)
 - [Element](https://element.eleme.io/#/zh-CN/component/installation)
-- [Vue-i18n8]
+- [Vue-i18n@8]
 
 ## Usage
 ### Project setup

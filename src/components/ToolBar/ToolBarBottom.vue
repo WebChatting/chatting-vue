@@ -32,11 +32,11 @@
                 <div>
                     <el-dropdown @command="handleCommand" trigger="click">
                         <span class="el-dropdown-link">
-                            中文<i class="el-icon-arrow-down el-icon--right"></i>
+                            简体中文<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command = "zh">简体中文</el-dropdown-item>
-                            <el-dropdown-item command = "en">English</el-dropdown-item>
+                            <el-dropdown-item command = "zh-CN">简体中文</el-dropdown-item>
+                            <el-dropdown-item command = "en-US">English</el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -202,6 +202,7 @@ export default {
     methods: {
         handleCommand(lang) {
             this.$i18n.locale = lang;
+            this.$router.go(0);
         },
         exitSystem() {
             window.sessionStorage.removeItem("user");

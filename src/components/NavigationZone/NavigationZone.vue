@@ -35,8 +35,8 @@ export default {
     data() {
         return {
             activeName: "",
-            firstLabelName: "好友",
-            secondLabelName: "群聊",
+            firstLabelName: "",
+            secondLabelName: "",
             isContact: true,
         };
     },
@@ -46,22 +46,24 @@ export default {
             // console.log(tab, event);
         },
         loadContact() {
-            this.firstLabelName = "好友";
-            this.secondLabelName = "群聊";
+            this.firstLabelName = this.$t("navigationZone.friends");
+            this.secondLabelName = this.$t("navigationZone.groups");
             this.isContact = true;
         },
         loadVerification() {
-            this.firstLabelName = "好友验证";
-            this.secondLabelName = "群组验证";
+            this.firstLabelName = this.$t("navigationZone.friendValidation");
+            this.secondLabelName = this.$t("navigationZone.groupValidation");
             this.isContact = false;
         },
         loadRelation(type, status, direction) {
-            this.listRelation({type, status, direction});
+            this.listRelation({ type, status, direction });
         },
     },
     mounted() {
         this.$bus.$on("loadContact", this.loadContact);
         this.$bus.$on("loadVerification", this.loadVerification);
+
+        this.loadContact();
 
         // 加载好友与加入的群组
         this.loadRelation(0, 1, -1);

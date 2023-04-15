@@ -8,6 +8,7 @@ export default {
         currentLocale(newVal, oldVal) {
             console.log(`Language changed from ${oldVal} to ${newVal}`);
             localStorage.setItem("locale", newVal);
+            this.$router.go(0);
         },
     },
 };

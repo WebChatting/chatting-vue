@@ -205,7 +205,6 @@ export default {
     methods: {
         handleCommand(lang) {
             this.$i18n.locale = lang;
-            this.$router.go(0);
         },
         exitSystem() {
             window.sessionStorage.removeItem("user");

@@ -35,8 +35,9 @@
                             简体中文<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
-                            <el-dropdown-item command = "zh-CN">简体中文</el-dropdown-item>
-                            <el-dropdown-item command = "en-US">English</el-dropdown-item>
+                            <el-dropdown-item v-for="(locale, index) in locales" :key="index" :command="locale.code">
+                                {{ locale.name }}
+                            </el-dropdown-item>
                         </el-dropdown-menu>
                     </el-dropdown>
                 </div>
@@ -176,6 +177,7 @@
 
 <script>
 import { API_BASE_URL, FILE_UPLOAD_API_URL } from "@/config/api";
+import locales from "@/locales";
 export default {
     name: "ToolBarBottom",
     data() {
@@ -192,6 +194,7 @@ export default {
             loading: false,
             timer: null,
             user: JSON.parse(window.sessionStorage.getItem("user")),
+            locales,
         };
     },
     computed: {

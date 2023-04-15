@@ -18,10 +18,10 @@
                 </el-button>
             </el-popover>
             <el-upload
-                action="/chatting/upload"
-                :before-upload="beforeAvatarUpload"
+                :action="file_upload_url"
+                :before-upload="beforeImageUpload"
                 :on-success="uploadImageSuccess"
-                :on-error="uploadImageError"
+                :on-error="uploadError"
                 :show-file-list="false"
                 accept=".jpg,.jpeg,.png,.JPG,JPEG,.PNG,.gif,.GIF"
             >
@@ -31,10 +31,9 @@
                 ></el-button>
             </el-upload>
             <el-upload
-                action="/chatting/upload"
-                :before-upload="beforeFileUpload"
+                :action="file_upload_url"
                 :on-success="uploadFileSuccess"
-                :on-error="uploadFileError"
+                :on-error="uploadError"
                 :show-file-list="false"
                 :multiple="false"
             >
@@ -71,6 +70,7 @@
 const emojiData = require("@/assets/emoji.json");
 import { mapGetters, mapState } from "vuex";
 import { messageType2wsType } from "@/utils/common";
+import { API_BASE_URL, FILE_UPLOAD_API_URL } from "@/config/api";
 export default {
     name: "MessageBottomInputArea",
     data() {
@@ -79,6 +79,7 @@ export default {
             emojiList: [],
             emojiCounter: 40,
             user: JSON.parse(window.sessionStorage.getItem("user")),
+            file_upload_url: API_BASE_URL + FILE_UPLOAD_API_URL,
         };
     },
     computed: {
@@ -138,7 +139,7 @@ export default {
                 this.$bus.$emit("scrollToBottom");
             });
         },
-        beforeAvatarUpload(file) {
+        beforeImageUpload(file) {
             const isLt2M = file.size / 1024 / 1024 < 2;
             if (!isLt2M) {
                 this.$message.error("上传图片大小不能超过 2MB!");
@@ -150,18 +151,14 @@ export default {
             this.content = res.data.fileUrl;
             this.sendMessage(1);
         },
-        uploadImageError() {
-            this.$message.error("上传图片失败!");
-        },
-        beforeFileUpload() {},
         uploadFileSuccess(res, file) {
             this.$message.success("上传文件成功!");
             console.log("success", res, file);
             this.content = file.name;
             this.sendMessage(2, res.data.fileUrl, res.data.fileSize);
         },
-        uploadFileError() {
-            this.$message.error("上传文件失败!");
+        uploadError() {
+            this.$message.error("上传失败!");
         },
     },
     mounted() {

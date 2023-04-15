@@ -81,8 +81,9 @@ export default {
             });
             console.log("show chatgpt response...");
             return response.data.choices[0].message.content;
-        } catch (error) {
-            console.error(error);
+        } catch (err) {
+            console.error(err);
+            return err.message;
         }
     },
 };

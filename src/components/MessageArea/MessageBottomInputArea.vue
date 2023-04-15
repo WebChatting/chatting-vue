@@ -130,8 +130,10 @@ export default {
                 this.socket.send(new_message);
             }
             this.$nextTick(() => {
-                // 清空输入框
-                this.content = "";
+                if (fromId === this.user.id) {
+                    // 清空输入框
+                    this.content = "";
+                }
                 // 将滚动条滑动至底部
                 this.$bus.$emit("scrollToBottom");
             });

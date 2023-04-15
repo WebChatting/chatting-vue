@@ -60,6 +60,7 @@ instance.interceptors.response.use(
     async (error) => {
         // 处理响应错误
         if (
+            error.response &&
             error.response.status &&
             error.response.status === 401 &&
             error.response.data.status === 402

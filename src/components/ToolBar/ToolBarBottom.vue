@@ -32,7 +32,7 @@
                 <div>
                     <el-dropdown @command="handleCommand" trigger="click">
                         <span class="el-dropdown-link">
-                            简体中文<i class="el-icon-arrow-down el-icon--right"></i>
+                            {{ locales[currentLocale].name }}<i class="el-icon-arrow-down el-icon--right"></i>
                         </span>
                         <el-dropdown-menu slot="dropdown">
                             <el-dropdown-item v-for="(locale, index) in locales" :key="index" :command="locale.code">
@@ -178,8 +178,10 @@
 <script>
 import { API_BASE_URL, FILE_UPLOAD_API_URL } from "@/config/api";
 import locales from "@/locales";
+import i18nMixin from "@/mixins/i18nMixin";
 export default {
     name: "ToolBarBottom",
+    mixins: [i18nMixin],
     data() {
         return {
             file_upload_url: API_BASE_URL + FILE_UPLOAD_API_URL,

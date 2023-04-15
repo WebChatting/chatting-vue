@@ -26,9 +26,7 @@ const i18n = new VueI18n({
 
 Vue.config.productionTip = false;
 
-import i18nMixin from "@/mixins/i18nMixin";
 new Vue({
-    mixins: [i18nMixin],
     i18n,
     router,
     store,

@@ -13,13 +13,13 @@ import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
 
 export default {
     loginUser: (username, password) => {
-        return post(USER_LOGIN_URL, {
+        return post(USER_LOGIN_URL, null, {
             username,
             password,
         });
     },
     registerUser: (username, password) => {
-        return post(USER_REGISTER_URL, {
+        return post(USER_REGISTER_URL, null, {
             username,
             password,
         });

@@ -32,5 +32,24 @@ npm run lint
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
 
+### Nginx proxy template
+
+```conf
+server {
+    listen 8000;
+    listen [::]:8000;
+    server_name localhost;
+    root /srv/http/chatting;
+
+    location / {
+        index index.php index.html index.htm;
+    }
+
+    location /chatting/ {
+        proxy_pass http://localhost:8088;
+    }
+}
+```
+
 ## Reference
 - 聊天室界面——[https://github.com/JustCoding-Hai/subtlechat-vue/](https://github.com/JustCoding-Hai/subtlechat-vue)

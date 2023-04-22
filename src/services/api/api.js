@@ -8,14 +8,25 @@ import {
     RELATION_ADD_URL,
     GROUP_ADD_URL,
     GROUP_SEARCH_URL,
+    COMMON_PUBLIC_KEY_URL,
 } from "@/config/api";
 import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
+import encrypt from "@/utils/crypto";
 
 export default {
-    loginUser: (username, password) => {
+    loginUser: async (username, password) => {
+        let publicKey;
+        await get(COMMON_PUBLIC_KEY_URL)
+            .then((res) => {
+                publicKey = res.data.data["public-key"];
+            })
+            .catch((err) => {
+                console.log("Error: " + err);
+            });
+
         return post(USER_LOGIN_URL, null, {
-            username,
-            password,
+            username: encrypt(publicKey, username),
+            password: encrypt(publicKey, password),
         });
     },
     registerUser: (username, password) => {

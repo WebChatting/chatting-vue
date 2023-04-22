@@ -35,3 +35,7 @@ const GROUP_API_URL = "/group";
 export const GROUP_ADD_URL = `${GROUP_API_URL}/add`;
 export const GROUP_LIST_URL = `${GROUP_API_URL}/list`;
 export const GROUP_SEARCH_URL = `${GROUP_API_URL}/search`;
+
+// 通用API
+const COMMON_API_URL = "/common";
+export const COMMON_PUBLIC_KEY_URL = `${COMMON_API_URL}/public-key`

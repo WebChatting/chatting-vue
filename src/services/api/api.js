@@ -14,7 +14,7 @@ import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
 import encrypt from "@/utils/crypto";
 
 export default {
-    loginUser: async (username, password) => {
+    loginUser: async (username, password, isEncrypt = true) => {
         let publicKey = sessionStorage.getItem("public-key");
         if (publicKey === null) {
             await get(COMMON_PUBLIC_KEY_URL)
@@ -27,11 +27,13 @@ export default {
                 });
         }
         const userInfo = {
-            username: encrypt(publicKey, username),
-            password: encrypt(publicKey, password),
+            username: isEncrypt ? encrypt(publicKey, username) : username,
+            password: isEncrypt ? encrypt(publicKey, password) : password,
         };
         return post(USER_LOGIN_URL, null, userInfo).then((res) => {
-            sessionStorage.setItem("user", JSON.stringify(userInfo));
+            if (isEncrypt) {
+                sessionStorage.setItem("user", JSON.stringify(userInfo));
+            }
             return Promise.resolve(res);
         });
     },

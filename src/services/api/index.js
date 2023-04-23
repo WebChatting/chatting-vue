@@ -69,7 +69,7 @@ instance.interceptors.response.use(
                 isRefreshing = true;
                 const user = JSON.parse(sessionStorage.getItem("user"));
                 // 发送登录请求以获取新的 token
-                await api.loginUser(user.username, user.password);
+                await api.loginUser(user.username, user.password, false);
                 isRefreshing = false;
                 processRequestQueue();
             }

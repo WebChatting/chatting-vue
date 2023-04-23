@@ -1,7 +1,7 @@
 <template>
     <el-drawer
         :before-close="beforeClose"
-        :visible.sync="drawerSwitch.val"
+        :visible.sync="swt.val"
         direction="ltr"
         ref="drawer"
     >
@@ -94,10 +94,11 @@ export default {
             timer: null,
             user: JSON.parse(window.sessionStorage.getItem("user")),
             formData: {},
+            swt: this.drawerSwitch
         };
     },
     watch: {
-        "drawerSwitch.val": function (newVal, oldVal) {
+        "drawerSwitch.val": function (newVal) {
             if (newVal === true) {
                 this.formData = this.isUser
                     ? {
@@ -174,7 +175,7 @@ export default {
         },
         cancelForm() {
             this.loading = false;
-            this.drawerSwitch.val = false;
+            this.swt.val = false;
             clearTimeout(this.timer);
         },
         handleAvatarSuccess(res, file) {

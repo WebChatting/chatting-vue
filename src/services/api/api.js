@@ -26,10 +26,13 @@ export default {
                     console.log("Error: " + err);
                 });
         }
-
-        return post(USER_LOGIN_URL, null, {
+        const userInfo = {
             username: encrypt(publicKey, username),
             password: encrypt(publicKey, password),
+        };
+        return post(USER_LOGIN_URL, null, userInfo).then((res) => {
+            sessionStorage.setItem("user", JSON.stringify(userInfo));
+            return Promise.resolve(res);
         });
     },
     registerUser: (username, password) => {

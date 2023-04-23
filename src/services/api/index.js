@@ -34,7 +34,7 @@ const ABSOLUTE_PATH_PREFIX = "http";
 instance.interceptors.request.use(
     (config) => {
         // 在请求发送之前做些什么
-        const token = localStorage.getItem("jwt");
+        const token = sessionStorage.getItem("jwt");
         if (token && !config.url.startsWith(ABSOLUTE_PATH_PREFIX)) {
             // 设置Authorization头部
             config.headers.authorization = token;
@@ -53,7 +53,7 @@ instance.interceptors.response.use(
         // 对响应数据做些什么
         const token = response.headers.authorization;
         if (token) {
-            localStorage.setItem("jwt", token);
+            sessionStorage.setItem("jwt", token);
         }
         return response;
     },

@@ -15,14 +15,17 @@ import encrypt from "@/utils/crypto";
 
 export default {
     loginUser: async (username, password) => {
-        let publicKey;
-        await get(COMMON_PUBLIC_KEY_URL)
-            .then((res) => {
-                publicKey = res.data.data["public-key"];
-            })
-            .catch((err) => {
-                console.log("Error: " + err);
-            });
+        let publicKey = sessionStorage.getItem("public-key");
+        if (publicKey === null) {
+            await get(COMMON_PUBLIC_KEY_URL)
+                .then((res) => {
+                    publicKey = res.data.data["public-key"];
+                    sessionStorage.setItem("public-key", publicKey);
+                })
+                .catch((err) => {
+                    console.log("Error: " + err);
+                });
+        }
 
         return post(USER_LOGIN_URL, null, {
             username: encrypt(publicKey, username),

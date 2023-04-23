@@ -108,17 +108,3 @@ export default {
     }
 }
 </style>
-
-<style>
-.ellipsis {
-    vertical-align: middle;
-    height: 26px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-.grayscale {
-    -webkit-filter: grayscale(100%); /* Chrome, Safari, Opera */
-    filter: grayscale(100%);
-}
-</style>

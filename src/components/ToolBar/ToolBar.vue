@@ -38,7 +38,7 @@ export default {
 <style lang="scss" scoped>
 #toolbar {
     height: 100%;
-    background-color: #2e3238;
+    background-color: var(--toolbar-bg-color);
     .avatar {
         text-align: center;
         height: 45px;

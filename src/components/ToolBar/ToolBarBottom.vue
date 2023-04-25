@@ -69,6 +69,7 @@
 import EditDrawer from "@/components/common/EditDrawer";
 import locales from "@/locales";
 import i18nMixin from "@/mixins/i18nMixin";
+import switchTheme from "@/utils/theme";
 export default {
     name: "ToolBarBottom",
     mixins: [i18nMixin],
@@ -82,6 +83,11 @@ export default {
             userDrawerSwitch: { val: false },
             groupDrawerSwitch: { val: false },
         };
+    },
+    watch: {
+        mode: function () {
+            switchTheme(this.currentMode);
+        },
     },
     computed: {
         currentMode() {

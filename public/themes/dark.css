@@ -1,0 +1,10 @@
+/* dark.css */
+/*
+ * :root is a CSS pseudo-class selector that represents the root element of the document,
+ * which in HTML is the html element.
+ * When you declare a property on the :root selector,
+ * it defines a global CSS variable or custom property that can be used throughout your CSS stylesheets.
+ */
+:root {
+    --toolbar-bg-color: #2e3238;
+}

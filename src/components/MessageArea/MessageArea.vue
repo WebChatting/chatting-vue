@@ -32,10 +32,23 @@
                             </div>
                         </div>
                         <div class="message">
-                            <text-message :message="entry" />
-                            <image-message :message="entry" />
-                            <file-message :message="entry" />
-                            <audio-message :message="entry" />
+                            <text-message
+                                v-if="entry.contentType == 0"
+                                :message="entry"
+                            />
+                            <image-message
+                                v-else-if="entry.contentType == 1"
+                                :message="entry"
+                            />
+                            <audio-message
+                                v-else-if="getContentType(entry.content) == 3"
+                                :message="entry"
+                            />
+                            <video-message
+                                v-else-if="getContentType(entry.content) == 4"
+                                :message="entry"
+                            />
+                            <file-message v-else :message="entry" />
                         </div>
                     </div>
                 </div>
@@ -57,12 +70,13 @@
 
 <script>
 import date from "@/utils/date";
+import { getFileSpecificType } from "@/utils/common";
 import { mapActions, mapGetters, mapState } from "vuex";
 import FileMessage from "@/components/common/message/FileMessage";
 import ImageMessage from "@/components/common/message/ImageMessage";
 import TextMessage from "@/components/common/message/TextMessage";
 import AudioMessage from "@/components/common/message/AudioMessage";
-
+import VideoMessage from "@/components/common/message/VideoMessage";
 export default {
     name: "MessageArea",
     components: {
@@ -70,6 +84,7 @@ export default {
         ImageMessage,
         TextMessage,
         AudioMessage,
+        VideoMessage,
     },
     data() {
         return {
@@ -132,6 +147,9 @@ export default {
                 isInitial,
                 mk: this.messageKey,
             });
+        },
+        getContentType(fileName) {
+            return getFileSpecificType(fileName);
         },
     },
     filters: {

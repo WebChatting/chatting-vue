@@ -6,11 +6,19 @@ export function messageType2wsType(messageType, isGroup) {
     return messageType * 2 + 3 + isGroup;
 }
 
-export function isAudioFile(fileName) {
-    const audioExtensions = [".mp3", ".wav", ".aac", ".ogg"];
+import { audioExtensions, videoExtensions } from "@/config/file-extensions";
+export function getFileSpecificType(fileName) {
+    if (isIncludeExtension(audioExtensions, fileName)) {
+        return 3;
+    } else if (isIncludeExtension(videoExtensions, fileName)) {
+        return 4;
+    } else {
+        return 2;
+    }
+}
+
+function isIncludeExtension(extensions, fileName) {
     return fileName
-        ? audioExtensions.includes(
-              fileName.substring(fileName.lastIndexOf("."))
-          )
+        ? extensions.includes(fileName.substring(fileName.lastIndexOf(".")))
         : false;
 }

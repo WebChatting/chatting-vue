@@ -1,9 +1,5 @@
 <template>
-    <div
-        class="file"
-        v-if="message.contentType == 2 && !isAudioFile(message.url)"
-        @click="downloadFile(message.url)"
-    >
+    <div class="file" @click="downloadFile(message.url)">
         <div class="file-icon">
             <i class="el-icon-folder"></i>
         </div>
@@ -14,7 +10,6 @@
 </template>
 
 <script>
-import { isAudioFile } from "@/utils/common";
 export default {
     name: "FileMessage",
     props: {
@@ -24,9 +19,6 @@ export default {
         downloadFile(path) {
             window.open(path);
         },
-        isAudioFile(fileName) {
-            return isAudioFile(fileName);
-        }
     },
 };
 </script>

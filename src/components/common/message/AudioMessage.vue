@@ -1,8 +1,5 @@
 <template>
-    <div
-        class="audio"
-        v-if="message.contentType == 2 && isAudioFile(message.url)"
-    >
+    <div class="audio">
         <div class="head">
             <span class="file-name ellipsis">{{ message.content }}</span>
             <img
@@ -17,7 +14,6 @@
 </template>
 
 <script>
-import { isAudioFile } from "@/utils/common";
 export default {
     name: "AudioMessage",
     props: {
@@ -36,9 +32,6 @@ export default {
             this.$refs.audio.loop = !this.$refs.audio.loop;
             this.$refs["loop-control"].src =
                 this.loop[this.$refs.audio.loop ? 1 : 0];
-        },
-        isAudioFile(fileName) {
-            return isAudioFile(fileName);
         },
     },
 };

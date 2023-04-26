@@ -1,5 +1,5 @@
 <template>
-    <div v-if="message.contentType == 0" class="text">
+    <div class="text">
         {{ message.content }}
     </div>
 </template>

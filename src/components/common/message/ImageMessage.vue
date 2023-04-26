@@ -1,6 +1,5 @@
 <template>
     <el-image
-        v-if="message.contentType == 1"
         class="image"
         :src="message.content"
         :preview-src-list="[message.content]"

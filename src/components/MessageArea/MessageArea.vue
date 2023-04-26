@@ -32,31 +32,9 @@
                             </div>
                         </div>
                         <div class="message">
-                            <div v-if="entry.contentType == 0" class="text">
-                                {{ entry.content }}
-                            </div>
-                            <el-image
-                                v-if="entry.contentType == 1"
-                                class="image"
-                                :src="entry.content"
-                                :preview-src-list="[entry.content]"
-                            >
-                            </el-image>
-                            <div
-                                class="file"
-                                v-if="entry.contentType == 2"
-                                @click="downloadFile(entry.url)"
-                            >
-                                <div class="file-icon">
-                                    <i class="el-icon-folder"></i>
-                                </div>
-                                <div
-                                    class="file-info ellipsis"
-                                    :title="entry.content"
-                                >
-                                    {{ entry.content }}
-                                </div>
-                            </div>
+                            <text-message :message="entry" />
+                            <image-message :message="entry" />
+                            <file-message :message="entry" />
                         </div>
                     </div>
                 </div>
@@ -79,8 +57,17 @@
 <script>
 import date from "@/utils/date";
 import { mapActions, mapGetters, mapState } from "vuex";
+import FileMessage from "@/components/common/message/FileMessage";
+import ImageMessage from "@/components/common/message/ImageMessage";
+import TextMessage from "@/components/common/message/TextMessage";
+
 export default {
     name: "MessageArea",
+    components: {
+        FileMessage,
+        ImageMessage,
+        TextMessage,
+    },
     data() {
         return {
             dialogVisible: false,
@@ -91,8 +78,8 @@ export default {
         };
     },
     computed: {
-        ...mapState(['isGroup', 'toId']),
-        ...mapGetters(['messageKey']),
+        ...mapState(["isGroup", "toId"]),
+        ...mapGetters(["messageKey"]),
         messages() {
             return this.$store.state.messages[this.messageKey];
         },
@@ -115,9 +102,6 @@ export default {
             this.dialogUserId = message.fromId;
             this.dialogAvatar = message.avatarPath;
             this.dialogName = message.name;
-        },
-        downloadFile(path) {
-            window.open(path);
         },
         loadFormerData() {
             // 一次加载五条历史数据
@@ -205,38 +189,6 @@ export default {
                         color: grey;
                         cursor: pointer;
                         display: inline-block;
-                    }
-                    .message {
-                        .text {
-                            margin: 0px;
-                            display: inline-block;
-                            padding: 0 10px;
-                            background-color: #fafafa;
-                            border-radius: 8px;
-                            line-height: 30px;
-                        }
-                        .image {
-                            width: 150px;
-                            height: 150px;
-                            border-radius: 8px;
-                        }
-                        .file {
-                            width: 180px;
-                            height: 60px;
-                            display: flex;
-                            line-height: 60px;
-                            border: solid #b4b4b4;
-                            border-radius: 5px;
-                            cursor: pointer;
-                            .file-icon {
-                                font-size: 300%;
-                                margin: 0px 5px;
-                            }
-                            .file-info {
-                                width: 120px;
-                                height: 60px;
-                            }
-                        }
                     }
                 }
             }

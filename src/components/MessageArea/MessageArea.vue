@@ -35,6 +35,7 @@
                             <text-message :message="entry" />
                             <image-message :message="entry" />
                             <file-message :message="entry" />
+                            <audio-message :message="entry" />
                         </div>
                     </div>
                 </div>
@@ -60,6 +61,7 @@ import { mapActions, mapGetters, mapState } from "vuex";
 import FileMessage from "@/components/common/message/FileMessage";
 import ImageMessage from "@/components/common/message/ImageMessage";
 import TextMessage from "@/components/common/message/TextMessage";
+import AudioMessage from "@/components/common/message/AudioMessage";
 
 export default {
     name: "MessageArea",
@@ -67,6 +69,7 @@ export default {
         FileMessage,
         ImageMessage,
         TextMessage,
+        AudioMessage,
     },
     data() {
         return {

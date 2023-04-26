@@ -4,7 +4,7 @@
         v-if="message.contentType == 2 && isAudioFile(message.url)"
     >
         <div class="head">
-            <span class="file-name">{{ message.content }}</span>
+            <span class="file-name ellipsis">{{ message.content }}</span>
             <img
                 class="loop-control"
                 @click="toggleLoop"
@@ -54,6 +54,9 @@ export default {
         justify-content: center;
         align-items: center;
         width: 100%;
+        .file-name {
+            width: 200px;
+        }
         .loop-control {
             margin-left: 10px;
             width: 20px;

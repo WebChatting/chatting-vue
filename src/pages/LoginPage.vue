@@ -175,14 +175,9 @@ export default {
                 .then((res) => {
                     this.restore("登录");
                     if (res.data.status == 200) {
-                        const user = JSON.parse(
-                            window.sessionStorage.getItem("user")
-                        );
-                        user["id"] = res.data.data.id;
-                        user["avatarPath"] = res.data.data.avatarPath;
                         window.sessionStorage.setItem(
                             "user",
-                            JSON.stringify(user),
+                            JSON.stringify(res.data.data),
                         );
                         this.$router.replace("chatting");
                     } else {

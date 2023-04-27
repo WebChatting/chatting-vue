@@ -59,28 +59,32 @@ instance.interceptors.response.use(
     },
     async (error) => {
         // 处理响应错误
-        if (
-            error.response &&
-            error.response.status &&
-            error.response.status === 401 &&
-            error.response.data.status === 402
-        ) {
-            if (!isRefreshing) {
-                isRefreshing = true;
-                const user = JSON.parse(sessionStorage.getItem("user"));
-                // 发送登录请求以获取新的 token
-                await api.loginUser(user.username, user.password);
-                isRefreshing = false;
-                processRequestQueue();
-            }
+        if (error.response && error.response.status)
+            if (
+                error.response.status === 401 &&
+                error.response.data.status === 402
+            ) {
+                if (!isRefreshing) {
+                    isRefreshing = true;
+                    const user = JSON.parse(sessionStorage.getItem("user"));
+                    // 发送登录请求以获取新的 token
+                    await api.loginUser(user.username, user.password);
+                    isRefreshing = false;
+                    processRequestQueue();
+                }
 
-            return new Promise((resolve, reject) => {
-                addRequestToQueue(error.config, resolve, reject);
-            });
-        } else {
-            // 如果没有响应错误，则抛出原始异常
-            return Promise.reject(error);
-        }
+                return new Promise((resolve, reject) => {
+                    addRequestToQueue(error.config, resolve, reject);
+                });
+            } else if (
+                error.response.status === 400 &&
+                error.response.data.status === 422
+            ) {
+                sessionStorage.removeItem("public-key");
+            } else {
+                // 如果没有响应错误，则抛出原始异常
+                return Promise.reject(error);
+            }
     }
 );
 

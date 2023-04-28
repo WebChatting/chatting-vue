@@ -10,7 +10,8 @@
 export const API_BASE_URL = "/chatting";
 
 // 文件上传API路径
-export const FILE_UPLOAD_API_URL = "/upload"
+const FILE_API_URL = "/file";
+export const FILE_UPLOAD_API_URL = `${FILE_API_URL}/upload`;
 
 // 用户相关API
 const USER_API_URL = "/user";

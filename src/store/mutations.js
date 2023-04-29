@@ -8,12 +8,12 @@ export default {
         Vue.set(state.messages, mk, ms)
     },
     SET_CREATE_GROUPS(state, groups) {
-        state.createGroups = groups;
+        state.createGroups = groups ?? [];
     },
     SET_JOIN_GROUPS(state, groups) {
-        state.joinGroups = groups;
+        state.joinGroups = groups ?? [];
     },
     SET_FRIENDS(state, friends) {
-        state.friends = friends;
+        state.friends = friends ?? [];
     },
 };

@@ -1,4 +1,4 @@
-import { wsType2messageType } from "@/utils/common";
+import { wsType2messageType, wsType2type } from "@/utils/common";
 
 export default {
     mounted() {
@@ -10,7 +10,7 @@ export default {
                     message: m.content,
                 });
                 m["contentType"] = wsType2messageType(m.ws_type);
-                this.$store.state.messages["user" + m.fromId].push(m);
+                this.$store.state.messages[wsType2type(m)].push(m);
                 this.$bus.$emit("scrollToBottom");
             }
         };

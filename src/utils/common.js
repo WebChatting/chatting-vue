@@ -1,9 +1,13 @@
 export function wsType2messageType(wsType) {
-    return (wsType - 3) / 2;
+    return parseInt((wsType - 3) / 2);
 }
 
 export function messageType2wsType(messageType, isGroup) {
     return messageType * 2 + 3 + isGroup;
+}
+
+export function wsType2type(m) {
+    return m.ws_type % 2 === 0 ? "group" + m.toId : "user" + m.fromId;
 }
 
 import { audioExtensions, videoExtensions } from "@/config/file-extensions";

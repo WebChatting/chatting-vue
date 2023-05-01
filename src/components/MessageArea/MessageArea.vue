@@ -154,7 +154,7 @@ export default {
     },
     filters: {
         timeFormater(time) {
-            return date.convertTime(time);
+            return date.wrapSendTime(time);
         },
     },
     mounted() {

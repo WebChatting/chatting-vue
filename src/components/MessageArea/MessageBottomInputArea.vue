@@ -71,6 +71,7 @@ const emojiData = require("@/assets/emoji.json");
 import { mapGetters, mapState } from "vuex";
 import { messageType2wsType } from "@/utils/common";
 import { API_BASE_URL, FILE_UPLOAD_API_URL } from "@/config/api";
+import date from "@/utils/date";
 export default {
     name: "MessageBottomInputArea",
     data() {
@@ -119,6 +120,7 @@ export default {
                 name,
                 ws_type: messageType2wsType(contentType, this.isGroup),
                 contentType,
+                updateTime: date.getCurrentTime(),
                 content,
                 url,
                 size,

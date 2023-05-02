@@ -183,6 +183,9 @@ export default {
                     } else {
                         this.errorText = res.data.msg;
                     }
+                }).catch(() => {
+                    this.restore("登录");
+                    this.errorText = "网络错误";
                 });
         },
         register() {

@@ -1,6 +1,6 @@
 <template>
     <el-drawer
-        :title="isUser ? '个人信息' : '创建群组'"
+        :title="isUser ? $t('toolBar.userDrawerTitle') : $t('toolBar.groupDrawerTitle')"
         :before-close="beforeClose"
         :visible.sync="swt.val"
         direction="ltr"

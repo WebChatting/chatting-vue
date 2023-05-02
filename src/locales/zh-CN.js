@@ -1,6 +1,7 @@
 export default {
     toolBar: {
-
+        userDrawerTitle: "个人信息",
+        groupDrawerTitle: "群组创建",
     },
     navigationZone: {
         search: "搜索",

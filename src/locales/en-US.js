@@ -1,6 +1,7 @@
 export default {
     toolBar: {
-
+        userDrawerTitle: "Personal Information",
+        groupDrawerTitle: "Group Creation",
     },
     navigationZone: {
         search: "search",

@@ -1,5 +1,6 @@
 <template>
     <el-drawer
+        :title="isUser ? '个人信息' : '创建群组'"
         :before-close="beforeClose"
         :visible.sync="swt.val"
         direction="ltr"

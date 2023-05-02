@@ -7,13 +7,13 @@
             <el-collapse v-else class="collapse-item">
                 <el-collapse-item>
                     <template slot="title">
-                        <div class="title">我创建的群聊</div>
+                        <div class="title">{{ $t('navigationZone.createdGroup') }}</div>
                     </template>
                     <RelationList :isCreated="true" />
                 </el-collapse-item>
                 <el-collapse-item>
                     <template slot="title">
-                        <div class="title">我加入的群聊</div>
+                        <div class="title">{{ $t('navigationZone.joinedGroup') }}</div>
                     </template>
                     <RelationList />
                 </el-collapse-item>

@@ -4,13 +4,13 @@
             <el-collapse class="collapse-item">
                 <el-collapse-item>
                     <template slot="title">
-                        <div class="title">我发起的</div>
+                        <div class="title">{{ $t('navigationZone.iInitiated') }}</div>
                     </template>
                     <ApplicationList :isGroup="isGroup" />
                 </el-collapse-item>
                 <el-collapse-item>
                     <template slot="title">
-                        <div class="title">我收到的</div>
+                        <div class="title">{{ $t('navigationZone.iReceived') }}</div>
                     </template>
                     <ApplicationList :isGroup="isGroup" :isRequest="false" />
                 </el-collapse-item>

@@ -51,7 +51,7 @@
         </div>
         <textarea
             id="textarea"
-            placeholder="按 Ctrl + Enter 发送"
+            :placeholder="$t('messageArea.sendPrompt')"
             v-model="content"
             @keyup.ctrl.enter="sendMessage(0)"
         >
@@ -61,7 +61,7 @@
             type="primary"
             size="mini"
             @click="sendMessage(0)"
-            >发送(S)</el-button
+            >{{ $t('messageArea.sendButton') }}</el-button
         >
     </div>
 </template>

@@ -1,11 +1,11 @@
 <template>
     <div class="top-bar">
-        <el-tooltip effect="dark" content="联系人" placement="left">
+        <el-tooltip effect="dark" :content="$t('toolBar.contact')" placement="left">
             <el-button class="tool-button" @click="loadContact">
                 <i class="el-icon-user-solid"></i>
             </el-button>
         </el-tooltip>
-        <el-tooltip effect="dark" content="验证" placement="left">
+        <el-tooltip effect="dark" :content="$t('toolBar.application')" placement="left">
             <el-button class="tool-button" @click="loadVerification">
                 <i class="el-icon-message-solid"></i>
             </el-button>

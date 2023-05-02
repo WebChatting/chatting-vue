@@ -5,7 +5,7 @@
                 class="search-input"
                 type="text"
                 size="medium"
-                placeholder="搜索"
+                :placeholder="$t('navigationZone.search')"
                 prefix-icon="el-icon-search"
                 maxlength="20"
                 autocomplete
@@ -19,7 +19,7 @@
                 type="primary"
                 @click="search"
             >
-                查找
+                {{ $t('searchArea.findButton') }}
             </el-button>
             <el-button
                 class="search-button"
@@ -27,7 +27,7 @@
                 type="danger"
                 @click="closeRightPanel"
             >
-                关闭
+                {{ $t('searchArea.closeButton') }}
             </el-button>
         </div>
         <el-divider></el-divider>

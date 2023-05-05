@@ -17,7 +17,11 @@ import VueI18n from "vue-i18n";
 Vue.use(VueI18n);
 
 const i18n = new VueI18n({
-    locale: localStorage.getItem('locale') || 'zh-CN', // 设置默认语言为中文
+    locale:
+        localStorage.getItem("locale") ||
+        navigator.language ||
+        navigator.userLanguage, // 设置默认语言为浏览器首选语言
+    fallbackLocale: "zh-CN",
     messages: {
         "zh-CN": require("@/locales/zh-CN").default,
         "en-US": require("@/locales/en-US").default,

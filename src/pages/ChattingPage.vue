@@ -1,24 +1,27 @@
 <template>
-    <div id="app" ref="app">
-        <div class="toolbar">
-            <ToolBar />
-        </div>
-        <div class="sidebar">
-            <NavigationTopSearchBar />
-            <NavigationZone />
-        </div>
-        <div class="main">
-            <div v-show="isChatPanel">
-                <MessageTopTitle
-                    :chatObject="chatObject ? chatObject.name : ''"
-                />
-                <MessageArea />
-                <MessageBottomInputArea />
+    <div>
+        <div id="app" ref="app">
+            <div class="toolbar">
+                <ToolBar />
             </div>
-            <div v-show="!isChatPanel">
-                <SearchArea />
+            <div class="sidebar">
+                <NavigationTopSearchBar />
+                <NavigationZone />
+            </div>
+            <div class="main">
+                <div v-show="isChatPanel">
+                    <MessageTopTitle
+                        :chatObject="chatObject ? chatObject.name : ''"
+                    />
+                    <MessageArea />
+                    <MessageBottomInputArea />
+                </div>
+                <div v-show="!isChatPanel">
+                    <SearchArea />
+                </div>
             </div>
         </div>
+        <HelpWidget />
     </div>
 </template>
 
@@ -30,6 +33,7 @@ import MessageTopTitle from "@/components/MessageArea/MessageTopTitle";
 import MessageArea from "@/components/MessageArea/MessageArea";
 import MessageBottomInputArea from "@/components/MessageArea/MessageBottomInputArea";
 import SearchArea from "@/components/SearchArea/SearchArea";
+import HelpWidget from '@/components/common/HelpWidget';
 
 import socketMixin from "@/mixins/socketMixin";
 export default {
@@ -43,6 +47,7 @@ export default {
         MessageArea,
         MessageBottomInputArea,
         SearchArea,
+        HelpWidget,
     },
     data() {
         return {

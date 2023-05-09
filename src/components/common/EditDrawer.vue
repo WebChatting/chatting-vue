@@ -84,6 +84,7 @@
 <script>
 import { API_BASE_URL, FILE_UPLOAD_API_URL } from "@/config/api";
 export default {
+    name: "EditDrawer",
     props: {
         isUser: Boolean,
         drawerSwitch: Object,

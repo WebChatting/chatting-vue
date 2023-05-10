@@ -8,6 +8,8 @@
 
 // 基本API路径
 export const API_BASE_URL = "/chatting";
+export const API_BASE_PORT = "8088";
+export const API_DOC_URL = "/swagger-ui/index.html";
 
 // 文件上传API路径
 const FILE_API_URL = "/file";

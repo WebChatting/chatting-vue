@@ -10,7 +10,6 @@ import {
     GROUP_SEARCH_URL,
     COMMON_PUBLIC_KEY_URL,
 } from "@/config/api";
-import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
 import encrypt from "@/utils/crypto";
 
 export default {
@@ -77,6 +76,8 @@ export default {
         });
     },
     generateResponse: async (content) => {
+        const OPENAI_API_KEY = window.localStorage.getItem("openai-key");
+        const OPENAI_MAKING_REQUEST = window.localStorage.getItem("openai-api");
         const headers = {
             "Content-Type": "application/json",
             Authorization: `Bearer ${OPENAI_API_KEY}`,

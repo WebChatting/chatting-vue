@@ -36,6 +36,7 @@ import SearchArea from "@/components/SearchArea/SearchArea";
 import HelpWidget from '@/components/common/HelpWidget';
 
 import socketMixin from "@/mixins/socketMixin";
+import { loadConfig } from '@/utils/common';
 export default {
     name: "ChattingPage",
     mixins: [socketMixin],
@@ -68,6 +69,9 @@ export default {
         closeRightPanel() {
             this.$refs.app.style.width = 300 + "px";
         },
+    },
+    created() {
+        loadConfig();
     },
     mounted() {
         this.$bus.$on("openRightPanel", this.openRightPanel);

@@ -26,3 +26,19 @@ function isIncludeExtension(extensions, fileName) {
         ? extensions.includes(fileName.substring(fileName.lastIndexOf(".")))
         : false;
 }
+
+import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
+
+export function loadConfig(force = false) {
+    if (force || !window.localStorage.getItem("openai-key")) {
+        window.localStorage.setItem("openai-key", OPENAI_API_KEY);
+    }
+    if (force || !window.localStorage.getItem("openai-api")) {
+        window.localStorage.setItem("openai-api", OPENAI_MAKING_REQUEST);
+    }
+}
+
+export function saveConfig(openaiAPI, openaiKEY) {
+    window.localStorage.setItem("openai-api", openaiAPI);
+    window.localStorage.setItem("openai-key", openaiKEY);
+}

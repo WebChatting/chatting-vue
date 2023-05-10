@@ -1,18 +1,18 @@
 <template>
-    <el-dialog title="设置" :visible.sync="swt.val" width="50%">
+    <el-dialog title="设置" :visible.sync="swt.val" width="50%" :before-close="saveConfig">
         <el-tabs v-model="activeTab">
             <el-tab-pane label="通用设置" name="general">
                 <div class="setting-list">
                     <div class="setting-item">
-                        <div class="item-key">openai-url</div>
+                        <div class="item-key">openai-api</div>
                         <div class="item-value">
-
+                            <el-input class="input" size="small" v-model="openaiAPI"></el-input>
                         </div>
                     </div>
                     <div class="setting-item">
                         <div class="item-key">openai-key</div>
                         <div class="item-value">
-
+                            <el-input class="input" size="small" v-model="openaiKEY" show-password></el-input>
                         </div>
                     </div>
                     <div class="setting-item">
@@ -83,6 +83,7 @@
 
 <script>
 import {API_BASE_PORT, API_BASE_URL, API_DOC_URL} from "@/config/api";
+import { saveConfig } from '@/utils/common';
 export default {
     name: "SettingPanel",
     props: {
@@ -92,11 +93,17 @@ export default {
         return {
             swt: this.settingPanelSwitch,
             activeTab: "general",
+            openaiAPI: window.localStorage.getItem("openai-api"),
+            openaiKEY: window.localStorage.getItem("openai-key"),
         };
     },
     methods: {
         showAPI() {
             window.open(window.location.protocol + "//" + window.location.hostname + ":" + API_BASE_PORT + API_BASE_URL + API_DOC_URL)
+        },
+        saveConfig(done) {
+            saveConfig(this.openaiAPI, this.openaiKEY)
+            done();
         },
     },
 };
@@ -124,9 +131,6 @@ export default {
                 margin-right: 10px;
                 padding: 0 10px;
                 height: 30px;
-            }
-            .h-link:hover {
-                cursor: pointer;
             }
         }
     }

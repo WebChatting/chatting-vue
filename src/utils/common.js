@@ -29,11 +29,11 @@ function isIncludeExtension(extensions, fileName) {
 
 import { OPENAI_API_KEY, OPENAI_MAKING_REQUEST } from "@/config/openai";
 
-export function loadConfig() {
-    if (!window.localStorage.getItem("openai-key")) {
+export function loadConfig(force = false) {
+    if (force || !window.localStorage.getItem("openai-key")) {
         window.localStorage.setItem("openai-key", OPENAI_API_KEY);
     }
-    if (!window.localStorage.getItem("openai-api")) {
+    if (force || !window.localStorage.getItem("openai-api")) {
         window.localStorage.setItem("openai-api", OPENAI_MAKING_REQUEST);
     }
 }

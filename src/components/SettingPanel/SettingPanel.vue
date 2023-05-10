@@ -26,7 +26,7 @@
                     <div class="setting-item">
                         <div class="item-key">重置设置</div>
                         <div class="item-value">
-                            <el-button class="button">重置</el-button>
+                            <el-button class="button" @click="resetConfig">重置</el-button>
                         </div>
                     </div>
                 </div>
@@ -83,7 +83,7 @@
 
 <script>
 import {API_BASE_PORT, API_BASE_URL, API_DOC_URL} from "@/config/api";
-import { saveConfig } from '@/utils/common';
+import { saveConfig, loadConfig } from '@/utils/common';
 export default {
     name: "SettingPanel",
     props: {
@@ -104,6 +104,11 @@ export default {
         saveConfig(done) {
             saveConfig(this.openaiAPI, this.openaiKEY)
             done();
+        },
+        resetConfig() {
+            loadConfig(true);
+            this.openaiAPI = window.localStorage.getItem("openai-api");
+            this.openaiKEY = window.localStorage.getItem("openai-key");
         },
     },
 };

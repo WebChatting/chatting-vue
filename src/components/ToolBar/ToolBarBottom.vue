@@ -25,8 +25,11 @@
                 </div>
                 <div>
                     <el-button
-                        icon="el-icon-question"
+                        icon="el-icon-s-tools"
                         class="pop-button"
+                        @click="
+                            settingPanelSwitch.val = !settingPanelSwitch.val
+                        "
                     ></el-button>
                 </div>
                 <div>
@@ -48,7 +51,7 @@
                 </div>
             </div>
             <el-button class="tool-button" slot="reference"
-                ><i class="el-icon-s-tools"></i
+                ><i class="el-icon-more"></i
             ></el-button>
         </el-popover>
         <el-tooltip effect="dark" content="退出" placement="left">
@@ -62,11 +65,15 @@
 
         <!-- 创建群组抽屉 -->
         <edit-drawer :isUser="false" :drawerSwitch="groupDrawerSwitch" />
+
+        <!-- 设置面板 -->
+        <setting-panel :settingPanelSwitch="settingPanelSwitch" />
     </div>
 </template>
 
 <script>
 import EditDrawer from "@/components/common/EditDrawer";
+import SettingPanel from "@/components/SettingPanel/SettingPanel";
 import locales from "@/locales";
 import i18nMixin from "@/mixins/i18nMixin";
 import switchTheme from "@/utils/theme";
@@ -75,6 +82,7 @@ export default {
     mixins: [i18nMixin],
     components: {
         EditDrawer,
+        SettingPanel,
     },
     data() {
         return {
@@ -82,6 +90,7 @@ export default {
             locales,
             userDrawerSwitch: { val: false },
             groupDrawerSwitch: { val: false },
+            settingPanelSwitch: { val: false },
         };
     },
     watch: {

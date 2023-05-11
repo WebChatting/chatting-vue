@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import {API_BASE_PORT, API_BASE_URL, API_DOC_URL} from "@/config/api";
+import { API_BASE_URL, API_DOC_URL } from "@/config/api";
 import { saveConfig, loadConfig } from '@/utils/common';
 export default {
     name: "SettingPanel",
@@ -99,7 +99,7 @@ export default {
     },
     methods: {
         showAPI() {
-            window.open(window.location.protocol + "//" + window.location.hostname + ":" + API_BASE_PORT + API_BASE_URL + API_DOC_URL)
+            window.open(API_BASE_URL + API_DOC_URL)
         },
         saveConfig(done) {
             saveConfig(this.openaiAPI, this.openaiKEY)

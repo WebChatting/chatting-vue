@@ -8,11 +8,11 @@ function post(url, params, data) {
     return request("post", url, params, data);
 }
 
-function asyncPost(url, params, data, { headers }) {
-    return asyncRequest("post", url, params, data, { headers })
+function asyncPost(url, params, data, { headers }, timeout = 0) {
+    return asyncRequest("post", url, params, data, { headers }, timeout)
 }
 
-async function asyncRequest(method, url, params, data, { headers }) {
+async function asyncRequest(method, url, params, data, { headers }, timeout) {
     return await instance({
         method,
         url,
@@ -20,6 +20,7 @@ async function asyncRequest(method, url, params, data, { headers }) {
         data,
         headers,
         responseType: "json",
+        timeout,
     });
 }
 

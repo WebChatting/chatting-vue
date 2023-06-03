@@ -10,6 +10,7 @@ import {
     GROUP_SEARCH_URL,
     COMMON_PUBLIC_KEY_URL,
 } from "@/config/api";
+import { OPENAI_TIMEOUT } from "@/config/openai";
 import encrypt from "@/utils/crypto";
 
 export default {
@@ -93,7 +94,7 @@ export default {
             console.log("Waiting for chatgpt answer...");
             const response = await asyncPost(OPENAI_MAKING_REQUEST, {}, data, {
                 headers,
-            });
+            }, OPENAI_TIMEOUT);
             console.log("show chatgpt response...");
             return response == null ? "request timeout!" : response.data.choices[0].message.content;
         } catch (err) {

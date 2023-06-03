@@ -95,7 +95,7 @@ export default {
                 headers,
             });
             console.log("show chatgpt response...");
-            return response.data.choices[0].message.content;
+            return response == null ? "request timeout!" : response.data.choices[0].message.content;
         } catch (err) {
             console.error(err);
             return err.message;
